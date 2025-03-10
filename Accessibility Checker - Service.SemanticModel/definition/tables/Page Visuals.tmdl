@@ -1,0 +1,382 @@
+table 'Page Visuals'
+	lineageTag: 22f470c9-88c3-48c4-bf59-3477192f5c8a
+
+	column PageID
+		dataType: int64
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: 9d2423e2-dcb1-40e4-bb4c-71a03b1f058a
+		summarizeBy: none
+		sourceColumn: PageID
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VisualID
+		dataType: int64
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: abb0198f-1a9c-4d57-8ec2-867a94c8745b
+		summarizeBy: none
+		sourceColumn: VisualID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Visual Type'
+		dataType: string
+		lineageTag: 4b91a94f-ee73-4f5b-aa53-2d92675c803d
+		summarizeBy: none
+		sourceColumn: Visual Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'AltText Type'
+		dataType: string
+		lineageTag: d066ee2a-cb6b-4f7b-a7fe-f54420719040
+		summarizeBy: none
+		sourceColumn: AltText Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'AltText Value'
+		dataType: string
+		lineageTag: a51256f2-c219-4424-a796-eda4947b0acf
+		summarizeBy: none
+		sourceColumn: AltText Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tab Order'
+		dataType: string
+		lineageTag: d8fcc64d-4f58-4901-a796-bfc364c0610c
+		summarizeBy: none
+		sourceColumn: Tab Order
+		sortByColumn: 'Tab Order Sort'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tab Order Sort'
+		dataType: string
+		isHidden
+		lineageTag: 5e12a645-a00d-450a-83fc-8b388444ea2c
+		summarizeBy: none
+		sourceColumn: Tab Order Sort
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column x
+		dataType: double
+		lineageTag: b0130afb-5af6-4a40-b5f3-09824462413d
+		summarizeBy: sum
+		sourceColumn: x
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column y
+		dataType: double
+		lineageTag: 37be47ad-b2b1-47eb-ba11-c6424c23f3aa
+		summarizeBy: sum
+		sourceColumn: y
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column z
+		dataType: double
+		lineageTag: f7c8f469-50cf-46da-a74a-644516d1e331
+		summarizeBy: sum
+		sourceColumn: z
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column width
+		dataType: double
+		lineageTag: de5c9600-0b2c-49ec-8c1a-0b1f7170e921
+		summarizeBy: sum
+		sourceColumn: width
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column height
+		dataType: double
+		lineageTag: 364679b4-0562-4e0d-9f38-46ce1089261a
+		summarizeBy: sum
+		sourceColumn: height
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Title Show Type'
+		dataType: string
+		lineageTag: 00423e00-82cf-442d-a04c-0a5b59c97046
+		summarizeBy: none
+		sourceColumn: Title Show Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Title Show Value'
+		dataType: string
+		lineageTag: 4275c95a-9021-4a85-a261-4b48e9867097
+		summarizeBy: none
+		sourceColumn: Title Show Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Title Text Type'
+		dataType: string
+		lineageTag: 5e60ed53-d690-43fc-b877-d45f82401494
+		summarizeBy: none
+		sourceColumn: Title Text Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report Key'
+		dataType: double
+		lineageTag: 84cd0cb4-1370-4470-a09e-a286a85055b1
+		summarizeBy: count
+		sourceColumn: Report Key
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Page Name'
+		dataType: string
+		lineageTag: 487afcf2-63c8-41a1-9bfa-6d4db5b53f3e
+		summarizeBy: none
+		sourceColumn: Page Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column pageWidth
+		dataType: double
+		lineageTag: 114c9bfc-c3df-4b98-a246-5b0023116415
+		summarizeBy: sum
+		sourceColumn: pageWidth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pageHeight
+		dataType: double
+		lineageTag: 981ae604-96a8-423c-8fc8-b6ce8202525b
+		summarizeBy: sum
+		sourceColumn: pageHeight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tabOrder
+		dataType: double
+		lineageTag: 61f5d029-2f67-4cd0-9a2f-e54b0ca7f676
+		summarizeBy: sum
+		sourceColumn: tabOrder
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column name
+		dataType: string
+		lineageTag: 65de5733-99ab-457e-ae91-0fc46ce950dd
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column parentName
+		dataType: string
+		lineageTag: 43122303-693f-4d56-a94a-f2c89d5dc67e
+		summarizeBy: none
+		sourceColumn: parentName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Visual Group Name'
+		dataType: string
+		lineageTag: 6ac4fad0-5b43-426f-80a4-961d5a5e8eb6
+		summarizeBy: none
+		sourceColumn: Visual Group Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'layouts.position.tabOrder'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b8a123e-078f-46ef-9d27-5518bbddf120
+		summarizeBy: sum
+		sourceColumn: layouts.position.tabOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'actual tabOrder'
+		dataType: string
+		lineageTag: 0e0aa3b4-8c69-48ca-b6d6-1c36f94be7b2
+		summarizeBy: none
+		sourceColumn: actual tabOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'actual x'
+		dataType: double
+		lineageTag: 01de2ff2-43b1-4c53-80e5-e0c4e96fbf3a
+		summarizeBy: sum
+		sourceColumn: actual x
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'actual y'
+		dataType: double
+		lineageTag: b78f80b2-da47-4fac-828e-479d75b28e3c
+		summarizeBy: sum
+		sourceColumn: actual y
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Layer Order'
+		dataType: string
+		lineageTag: bd0c3c33-c4bd-47da-ba06-c3a7f04e4195
+		summarizeBy: none
+		sourceColumn: Layer Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tab Order 1'
+		dataType: int64
+		formatString: 0
+		lineageTag: d0bc0fbe-1a1a-4699-813e-b596d694ec48
+		summarizeBy: sum
+		sourceColumn: Tab Order 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tab Order 2'
+		dataType: int64
+		formatString: 0
+		lineageTag: 7923ad0a-e878-4ea6-b11d-da38b0818d81
+		summarizeBy: sum
+		sourceColumn: Tab Order 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tab Order 3'
+		dataType: int64
+		formatString: 0
+		lineageTag: 63395581-aeff-4e92-bb92-ccc2859ddcf4
+		summarizeBy: sum
+		sourceColumn: Tab Order 3
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tab Order 4'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3885c3ce-77a7-47f0-84f8-2dff04011bee
+		summarizeBy: sum
+		sourceColumn: Tab Order 4
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tab Order 5'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b7bbb67-6386-4dd7-9c29-6ff68894b988
+		summarizeBy: sum
+		sourceColumn: Tab Order 5
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Title Text Value'
+		dataType: string
+		lineageTag: 0787c32e-0d50-48d2-a20f-3eec03ef43ac
+		summarizeBy: none
+		sourceColumn: Title Text Value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Page Visuals-67fd3af8-298c-4c6e-bf86-b58e5cf6cd4a' = m
+		mode: import
+		queryGroup: 'Page Visuals'
+		source =
+				// Load the initial data from the 'Page Visuals Starter' table
+				let
+					#"Loaded Page Visuals Starter" = #"Page Visuals Starter",
+				
+				// Rename the 'singleVisual.visualType' column to 'Visual Type'
+					#"Rename Visual Type" = Table.RenameColumns(#"Loaded Page Visuals Starter", {{"singleVisual.visualType", "Visual Type"}}),
+				
+				// Expand the 'singleVisualGroup' column to include 'displayName' and 'groupMode'
+					#"Expanded Single Visual Group" = Table.ExpandRecordColumn(#"Rename Visual Type", "singleVisualGroup", {"displayName", "groupMode"}, {"Visual Group Name", "Visual Group Type"}),
+				
+				// Replace null values in 'Visual Type' with 'visual group' if 'Visual Group Name' is not null
+					#"Replaced Visual Type Values" = Table.ReplaceValue(#"Expanded Single Visual Group", each [Visual Type], each if ([Visual Type] = null and [Visual Group Name] <> null) then "visual group" else [Visual Type], Replacer.ReplaceValue, {"Visual Type"}),
+				
+				// Change the data type of the 'Visual Type' column to text
+					#"Changed Visual Type Column Type" = Table.TransformColumnTypes(#"Replaced Visual Type Values", {{"Visual Type", type text}}),
+				
+				// Merge with 'Page Visual Actual Coordinates' table based on 'PageIDname'
+					#"Merged with Actual Coordinates" = Table.NestedJoin(#"Changed Visual Type Column Type", {"PageIDname"}, #"Page Visual Actual Coordinates", {"PageIDname"}, "Page Visual Actual Coordinates", JoinKind.LeftOuter),
+				
+				// Expand the merged 'Page Visual Actual Coordinates' table to include specific fields
+					#"Expanded Actual Coordinates" = Table.ExpandTableColumn(#"Merged with Actual Coordinates", "Page Visual Actual Coordinates", {"tabOrder", "x", "y", "z"}, {"actual tabOrder", "actual x", "actual y", "Layer Order"}),
+				
+				// Merge with 'Page Visual Tab Order' table based on 'PageIDname'
+					#"Merged with Tab Order" = Table.NestedJoin(#"Expanded Actual Coordinates", {"PageIDname"}, #"Page Visual Tab Order", {"PageIDname"}, "Page Visual Tab Order", JoinKind.LeftOuter),
+				
+				// Expand the merged 'Page Visual Tab Order' table to include specific fields
+					#"Expanded Tab Order" = Table.ExpandTableColumn(#"Merged with Tab Order", "Page Visual Tab Order", {"Tab Order", "Tab Order 1", "Tab Order 2", "Tab Order 3", "Tab Order 4", "Tab Order 5", "Tab Order Sort"}, {"Tab Order", "Tab Order 1", "Tab Order 2", "Tab Order 3", "Tab Order 4", "Tab Order 5", "Tab Order Sort"}),
+				
+				// Select specific columns from the expanded table
+					#"Selected Relevant Columns" = Table.SelectColumns(#"Expanded Tab Order", {"Report Key", "PageID", "Page Name", "VisualID", "pageWidth", "pageHeight", "x", "y", "z", "width", "height", "tabOrder", "name", "parentName", "Visual Type", "Visual Group Name", "layouts.position.tabOrder", "actual tabOrder", "actual x", "actual y", "Layer Order", "Tab Order", "Tab Order 1", "Tab Order 2", "Tab Order 3", "Tab Order 4", "Tab Order 5", "Tab Order Sort"}),
+				
+				// Merge with 'Page Visuals Alt Text' table based on 'VisualID'
+					#"Merged with Alt Text" = Table.NestedJoin(#"Selected Relevant Columns", {"VisualID"}, #"Page Visuals Alt Text", {"VisualID"}, "Page Visuals Alt Text", JoinKind.LeftOuter),
+				
+				// Expand the merged 'Page Visuals Alt Text' table to include 'AltText Type' and 'AltText Value'
+					#"Expanded Alt Text" = Table.ExpandTableColumn(#"Merged with Alt Text", "Page Visuals Alt Text", {"AltText Type", "AltText Value"}, {"AltText Type", "AltText Value"}),
+				
+				// Merge with 'Page Visual Titles' table based on 'VisualID'
+					#"Merged with Visual Titles" = Table.NestedJoin(#"Expanded Alt Text", {"VisualID"}, #"Page Visual Titles", {"VisualID"}, "Page Visual Titles", JoinKind.LeftOuter),
+				
+				// Expand the merged 'Page Visual Titles' table to include specific fields
+					#"Expanded Visual Titles" = Table.ExpandTableColumn(#"Merged with Visual Titles", "Page Visual Titles", {"Title Show Type", "Title Show Value", "Title Text Type", "Title Text Value"}, {"Title Show Type", "Title Show Value", "Title Text Type", "Title Text Value"}),
+				
+				// Sort rows by 'actual tabOrder' in descending order
+					#"Sorted Rows" = Table.Sort(#"Expanded Visual Titles", {{"actual tabOrder", Order.Descending}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Sorted Rows",{"Report Key", "PageID", "Page Name", "VisualID", "pageWidth", "pageHeight", "x", "y", "z", "width", "height", "tabOrder", "name", "parentName", "Visual Type", "Visual Group Name", "layouts.position.tabOrder", "actual tabOrder", "actual x", "actual y", "Layer Order", "Tab Order", "Tab Order 1", "Tab Order 2", "Tab Order 3", "Tab Order 4", "Tab Order 5", "Tab Order Sort", "AltText Type", "AltText Value", "Title Show Type", "Title Show Value", "Title Text Type", "Title Text Value"})
+				in
+					#"Removed Other Columns"
+
+	annotation PBI_QueryRelationships = {"columnCount":25,"keyColumnNames":[],"queryRelationships":[{"keyColumnCount":1,"keyColumn":21,"otherKeyColumnIdentity":"Section1/Page Visual actual coordinates/Changed Type3.{PageIDname,0}","KeyColumnCount":1}],"columnIdentities":["Section1/Page Visuals/Replaced Value1.{PageID,0}","Section1/Page Visuals/Replaced Value1.{Page Name,1}","Section1/Page Visuals/Replaced Value1.{VisualID,2}","Section1/Page Visuals/Replaced Value1.{pageHeight,3}","Section1/Page Visuals/Replaced Value1.{pageWidth,4}","Section1/Page Visuals/Replaced Value1.{x,5}","Section1/Page Visuals/Replaced Value1.{y,6}","Section1/Page Visuals/Replaced Value1.{z,7}","Section1/Page Visuals/Replaced Value1.{width,8}","Section1/Page Visuals/Replaced Value1.{height,9}","Section1/Page Visuals/Replaced Value1.{config,10}","Section1/Page Visuals/Replaced Value1.{filters,11}","Section1/Page Visuals/Replaced Value1.{tabOrder,12}","Section1/Page Visuals/Replaced Value1.{query,13}","Section1/Page Visuals/Replaced Value1.{dataTransforms,14}","Section1/Page Visuals/Replaced Value1.{name,15}","Section1/Page Visuals/Replaced Value1.{parentName,16}","Section1/Page Visuals/Changed Type4.{Visual Type,17}","Section1/Page Visuals/Replaced Value1.{Selection Pane Name,18}","Section1/Page Visuals/Replaced Value1.{Visual Group Name,19}","Section1/Page Visuals/Replaced Value1.{Visual Group Type,20}","Section1/Page Visuals/Replaced Value1.{PageIDname,21}","Section1/Page Visuals/Replaced Value1.{PageIDparentName,22}","Section1/Page Visual actual coordinates/Grouped Rows1.{x,3}","Section1/Page Visual actual coordinates/Grouped Rows1.{y,4}"],"ColumnCount":25,"KeyColumnNames":[],"ColumnIdentities":["Section1/Page Visuals/Replaced Value1.{PageID,0}","Section1/Page Visuals/Replaced Value1.{Page Name,1}","Section1/Page Visuals/Replaced Value1.{VisualID,2}","Section1/Page Visuals/Replaced Value1.{pageHeight,3}","Section1/Page Visuals/Replaced Value1.{pageWidth,4}","Section1/Page Visuals/Replaced Value1.{x,5}","Section1/Page Visuals/Replaced Value1.{y,6}","Section1/Page Visuals/Replaced Value1.{z,7}","Section1/Page Visuals/Replaced Value1.{width,8}","Section1/Page Visuals/Replaced Value1.{height,9}","Section1/Page Visuals/Replaced Value1.{config,10}","Section1/Page Visuals/Replaced Value1.{filters,11}","Section1/Page Visuals/Replaced Value1.{tabOrder,12}","Section1/Page Visuals/Replaced Value1.{query,13}","Section1/Page Visuals/Replaced Value1.{dataTransforms,14}","Section1/Page Visuals/Replaced Value1.{name,15}","Section1/Page Visuals/Replaced Value1.{parentName,16}","Section1/Page Visuals/Changed Type4.{Visual Type,17}","Section1/Page Visuals/Replaced Value1.{Selection Pane Name,18}","Section1/Page Visuals/Replaced Value1.{Visual Group Name,19}","Section1/Page Visuals/Replaced Value1.{Visual Group Type,20}","Section1/Page Visuals/Replaced Value1.{PageIDname,21}","Section1/Page Visuals/Replaced Value1.{PageIDparentName,22}","Section1/Page Visual actual coordinates/Grouped Rows1.{x,3}","Section1/Page Visual actual coordinates/Grouped Rows1.{y,4}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":21,"otherKeyColumnIdentity":"Section1/Page Visual actual coordinates/Changed Type3.{PageIDname,0}","KeyColumnCount":1}]}
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

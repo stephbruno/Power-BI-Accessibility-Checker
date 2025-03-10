@@ -1,0 +1,38 @@
+relationship 6eb2f8a4-3b6c-4481-8538-cdf97571dc54
+	fromColumn: 'Page Visuals'.PageID
+	toColumn: Pages.PageID
+
+relationship 04786979-68b9-4a7a-8bd3-d2e0b1207737
+	fromColumn: 'Page Visuals'.'Visual Type'
+	toColumn: 'Page Visual Types'.'Visual Type'
+
+relationship 789ce56c-40a8-40d1-8ff4-ccb02e46841e
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Page Visual Titles'.VisualID
+	toColumn: 'Page Visuals'.VisualID
+
+relationship c660783b-434c-4cfe-9920-8e58bb4c0c17
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Page Visuals Alt Text'.VisualID
+	toColumn: 'Page Visuals'.VisualID
+
+relationship 363056cf-7216-44a6-a4f3-21433dc20c83
+	fromColumn: 'Page Visual Colors'.VisualID
+	toColumn: 'Page Visuals'.VisualID
+
+relationship cd4e95a0-652d-a2b4-cb2d-4dbf21c574a8
+	fromColumn: Pages.'Report Key'
+	toColumn: Reports.'Report Key'
+
+relationship 2a9c2d86-ec2c-cc6b-f5c3-1a78414c8778
+	isActive: false
+	fromColumn: 'Page Visual Titles'.PageID
+	toColumn: Pages.PageID
+
+relationship c193b4f1-296e-631f-7fa3-766c3a576300
+	isActive: false
+	fromColumn: 'Page Visual Colors'.PageID
+	toColumn: Pages.PageID
+

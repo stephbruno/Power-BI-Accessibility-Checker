@@ -1,0 +1,787 @@
+expression 'Report Layout' = ```
+		let
+		    //2019-09-01:  Marco Russo replaced "Source" line with the first 4 lines (https://twitter.com/marcorus/status/1167486794990084096)
+		    //Source = Table.FromColumns({Lines.FromBinary(File.Contents(#"Extracted zip file top level folder" & "\Report\Layout"), null, null, TextEncoding.Utf16)}),
+		    /*
+		    FileContents = File.Contents(#"PBIX filepath"),
+		    ZipContents = OpenZipFile(FileContents),
+		    ReportLayoutFile = Table.SelectRows(ZipContents,each ([FileName] = "Report/Layout")),
+		    Source = Table.FromColumns({Lines.FromBinary(ReportLayoutFile{0}[Content], null, null, TextEncoding.Utf16)}),    
+		    #"Added Custom2" = Table.AddColumn(Source, "json", each Json.Document([Column1])),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom2",{"json"}),
+		    */
+		    Source = #"Report Contents",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([FileName] = "Report/Layout")),
+		    #"Added Custom0" = Table.AddColumn(#"Filtered Rows", "Custom", each Table.FromColumns({Lines.FromBinary([Content], null, null, TextEncoding.Utf16)})),
+		    #"Expanded Custom" = Table.ExpandTableColumn(#"Added Custom0", "Custom", {"Column1"}, {"Column1"}),
+		    #"Added Custom1" = Table.AddColumn(#"Expanded Custom", "json", each Json.Document([Column1])),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom1",{"Report Key", "json"}),
+		    #"Expanded Custom.2" = Table.ExpandRecordColumn(#"Removed Other Columns", "json", {"id", "reportId", "theme", "filters", "resourcePackages", "sections", "config", "layoutOptimization", "pods"}, {"id", "reportId", "theme", "filters", "resourcePackages", "sections", "config", "layoutOptimization", "pods"})
+		in
+		    #"Expanded Custom.2"
+		```
+	lineageTag: e1ddd3ea-fc0a-4443-a768-9bdbd7f0379a
+	queryGroup: 'Report Layout'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Page Config' =
+		let
+		    Source = Pages,
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"PageID", "config"}),
+		    #"Added Custom" = Table.AddColumn(#"Removed Other Columns", "config json", each Json.Document([config])),
+		    #"Expanded config json" = Table.ExpandRecordColumn(#"Added Custom", "config json", {"objects"}, {"objects"}),
+		    #"Expanded objects" = Table.ExpandRecordColumn(#"Expanded config json", "objects", {"background"}, {"background"}),
+		    #"Expanded background" = Table.ExpandListColumn(#"Expanded objects", "background"),
+		    #"Expanded background1" = Table.ExpandRecordColumn(#"Expanded background", "background", {"properties"}, {"properties"}),
+		    #"Expanded properties" = Table.ExpandRecordColumn(#"Expanded background1", "properties", {"image"}, {"image"}),
+		    #"Expanded image" = Table.ExpandRecordColumn(#"Expanded properties", "image", {"image"}, {"image.1"}),
+		    #"Expanded image.1" = Table.ExpandRecordColumn(#"Expanded image", "image.1", {"name", "url", "scaling"}, {"name", "url", "scaling"}),
+		    #"Expanded name" = Table.ExpandRecordColumn(#"Expanded image.1", "name", {"expr"}, {"expr"}),
+		    #"Expanded expr" = Table.ExpandRecordColumn(#"Expanded name", "expr", {"Literal"}, {"Literal"}),
+		    #"Expanded Literal" = Table.ExpandRecordColumn(#"Expanded expr", "Literal", {"Value"}, {"Value"}),
+		    #"Expanded url" = Table.ExpandRecordColumn(#"Expanded Literal", "url", {"expr"}, {"expr"}),
+		    #"Expanded expr1" = Table.ExpandRecordColumn(#"Expanded url", "expr", {"ResourcePackageItem"}, {"ResourcePackageItem"}),
+		    #"Expanded ResourcePackageItem" = Table.ExpandRecordColumn(#"Expanded expr1", "ResourcePackageItem", {"PackageName", "PackageType", "ItemName"}, {"PackageName", "PackageType", "ItemName"}),
+		    #"Expanded scaling" = Table.ExpandRecordColumn(#"Expanded ResourcePackageItem", "scaling", {"expr"}, {"expr"}),
+		    #"Expanded expr2" = Table.ExpandRecordColumn(#"Expanded scaling", "expr", {"Literal"}, {"Literal"}),
+		    #"Expanded Literal1" = Table.ExpandRecordColumn(#"Expanded expr2", "Literal", {"Value"}, {"Value.1"}),
+		    #"Added Conditional Column" = Table.AddColumn(#"Expanded Literal1", "Page Visibility", each if Text.Contains([config], """visibility"":1") then "hidden" else "visible", type text),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Conditional Column",{{"config", type text}, {"Value", type text}, {"PackageName", type text}, {"PackageType", type text}, {"ItemName", type text}, {"Value.1", type text}})
+		in
+		    #"Changed Type"
+	lineageTag: 705ff260-da08-484c-935a-d73495585c82
+	queryGroup: 'Report Layout'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Page Visual Type Colors' =
+		let
+		    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("TZLNbsMgEITfxb3mwIKN4Whjp5emiapeqigHlKDIKrUj8qe8fdnduCpcPN/A7o7t7baAYlE0pzTsp0t+ehGgnOqK3WJbyKzbMBwDcgBdak1cZb0aRjreOtyEy6w/g4+I+84q3RCusn7ztzAeQkJLOlUpIEtn/REOSDvbCsN16qzXyY/cd7l0reVKJuuvEON0J0M6AzyQxRbDD513YDvBGEQGrymEEQ1tait7NjCze3jiFnAzp8TxSoXEssqLOSbeXNMpkqM6A+Z5A0Ov/DGMF0/FKiedZKvi7g/kjSmdfHJMvRnGb+RVA04I5jWVStNEY4EVZnYweJumO89r6nY2MPg6Djcaq7RqNiQmf/c36i2thJlj8P58SuF8njiK+PMw/CqkyP+B1pAXO+rf+8XPjTd2vw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Index = _t, ColorName = _t, hexColor = _t]),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Index", Int64.Type}, {"ColorName", type text}}),
+		    #"Invoked Custom Function" = Table.AddColumn(#"Changed Type", "rgbVals", each fnHexToRGB([hexColor])),
+		    #"Expanded rgbVals" = Table.ExpandTableColumn(#"Invoked Custom Function", "rgbVals", {"r", "g", "b"}, {"r", "g", "b"}),
+		    #"Added Custom1" = Table.AddColumn(#"Expanded rgbVals", "foreColor", each if [r]*0.299 + [g]*0.587 + [b]*0.114 > 186 then "#000000" else "#ffffff", type text)
+		in
+		    #"Added Custom1"
+	lineageTag: 0a27c8a8-2025-4268-885a-81dbacd5d41b
+	queryGroup: 'Page Visuals'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Page Visual Actual Coordinates' = ```
+		// Adapted from thebiccountant.com:
+		// https://www.thebiccountant.com/2017/02/14/dynamically-flatten-parent-child-hierarchies-in-dax-and-powerbi/
+		
+		let
+		//Debug Parameters
+		ParChTable = #"Page Visuals Starter",
+		    #"Removed Columns2" = Table.RemoveColumns(ParChTable,{"tabOrder"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns2",{{"layouts.position.tabOrder", "tabOrder"}}),
+		ChildKey = "PageIDname",
+		ParentKey = "PageIDparentName",
+		LevelColumnName = "x",
+		LevelColumnName2 = "y",
+		LevelColumnName3 = "tabOrder",
+		LevelColumnName4 = "z",
+		    SelectRelevantColumns = Table.SelectColumns(#"Renamed Columns1", {ChildKey, ParentKey, LevelColumnName, LevelColumnName2, LevelColumnName3, LevelColumnName4}),
+		    //*/
+		
+		    #"Changed Type" = Table.TransformColumnTypes(SelectRelevantColumns,{{ChildKey, type text}, {ParentKey, type text}, {LevelColumnName, type text}, {LevelColumnName2, type text}, {LevelColumnName4, type text}}),
+		    ReplaceNulls = Table.ReplaceValue(#"Changed Type",null,"",Replacer.ReplaceValue,{ParentKey}),
+		    //    CleanParChTable = Table.Distinct(ReplaceNulls , {ChildKey, ParentKey}),
+		    MissingParents = List.Buffer(List.Select(List.Difference(List.Distinct(Table.Column(ReplaceNulls , ParentKey)), List.Distinct(Table.Column(ReplaceNulls , ChildKey))), each _ <> "")),
+		    CleanTable = Table.Buffer(Table.Combine({ReplaceNulls , #table({ChildKey, LevelColumnName, LevelColumnName2, LevelColumnName3, LevelColumnName4, ParentKey}, List.Transform(MissingParents, each {_, "Unknown TopLevel"& Text.From(List.PositionOf(MissingParents, _)), ""}))})),
+		    #"Renamed Columns" = Table.RenameColumns(CleanTable,{{"tabOrder", "tabOrderOrig"}}),
+		    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "tabOrder", each Number.ToText([tabOrderOrig], "D5"), type text),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"tabOrderOrig"}),
+		    #"Merged Queries0" = Table.NestedJoin(#"Removed Columns1",{ChildKey},#"Removed Columns1",{ParentKey},"SelectRelevantColumns",JoinKind.LeftOuter),
+		    CheckIfIsLeaf = Table.AddColumn(#"Merged Queries0", "IsLeaf", each if Table.IsEmpty([SelectRelevantColumns]) then "yes" else "no"),
+		    #"Replaced Value1" = Table.ReplaceValue(CheckIfIsLeaf,null,"",Replacer.ReplaceValue,{ParentKey, LevelColumnName, LevelColumnName2, LevelColumnName3, LevelColumnName4}),
+		    AddStartPath = Table.AddColumn(#"Replaced Value1", "Path", each Text.Trim(Record.Field(_, ChildKey)&"|"&Record.Field(_,ParentKey), "|")),
+		    #"Duplicated Column" = Table.DuplicateColumn(AddStartPath, LevelColumnName, "First_x"),
+		    #"Duplicated Column1" = Table.DuplicateColumn(#"Duplicated Column", "y", "First_y"),
+		    #"Duplicated Column3" = Table.DuplicateColumn(#"Duplicated Column1", "tabOrder", "First_tabOrder"),
+		    #"Duplicated Column4" = Table.DuplicateColumn(#"Duplicated Column1", "z", "First_z"),
+		    Feed = Table.DuplicateColumn(#"Duplicated Column4", ParentKey, "FirstParentKey"),
+		
+		// Retrieve all parents per row
+		    fnAllParents = List.Generate(()=>
+		    [Result= Feed, Level=1],
+		    each Table.RowCount([Result]) > 0,
+		    each [ Result= let
+		            #"Merged Queries" = Table.NestedJoin([Result],{ParentKey},CleanTable,{ChildKey},"Added Custom",JoinKind.Inner),
+		            #"Removed Columns1" = Table.RemoveColumns(#"Merged Queries",{ParentKey}),
+		            #"Expanded Added Custom" = Table.ExpandTableColumn(#"Removed Columns1", "Added Custom", {ParentKey, LevelColumnName, LevelColumnName2, LevelColumnName3, LevelColumnName4}, {"ParentKey.1", "x.1", "y.1", "tabOrder.1", "z.1"}),
+		            #"Duplicated Column" = Table.DuplicateColumn(#"Expanded Added Custom", "ParentKey.1", ParentKey),
+		            #"Changed Type" = Table.TransformColumnTypes(#"Duplicated Column", {{"tabOrder.1", Int64.Type}}),
+		            #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type", {{"tabOrder.1", type text}}),
+		            #"Changed Type2" = Table.TransformColumns(#"Changed Type1", {{"tabOrder.1", each Text.PadStart(_, 5,"0")}}),
+		            #"Merged Columns" = Table.CombineColumns(#"Changed Type2",{"Path", "ParentKey.1"},Combiner.CombineTextByDelimiter("|", QuoteStyle.None),"Path"),
+		            #"Merged Columns2" = Table.CombineColumns( #"Merged Columns" ,{LevelColumnName, "x.1"},Combiner.CombineTextByDelimiter("|", QuoteStyle.None),LevelColumnName),
+		            #"Merged Columns3" = Table.CombineColumns( #"Merged Columns2" ,{LevelColumnName2, "y.1"},Combiner.CombineTextByDelimiter("|", QuoteStyle.None),LevelColumnName2),
+		            #"Merged Columns5" = Table.CombineColumns( #"Merged Columns3" ,{LevelColumnName4, "z.1"},Combiner.CombineTextByDelimiter("|", QuoteStyle.None),LevelColumnName4),
+		            #"Merged Columns4" = Table.CombineColumns( Table.TransformColumnTypes(#"Merged Columns5", {{LevelColumnName3, type text}, {"tabOrder.1", type text}}) ,{LevelColumnName3, "tabOrder.1"},Combiner.CombineTextByDelimiter("|", QuoteStyle.None),LevelColumnName3)            
+		          in
+		            #"Merged Columns4",
+		          Level = [Level]+1
+		        ]),
+		    ConvertToTable = Table.FromList(fnAllParents, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    ExpandLevel = Table.ExpandRecordColumn(ConvertToTable, "Column1", {"Result", "Level"}, {"Result", "Level"}),
+		    #"Expanded Result" = Table.ExpandTableColumn(ExpandLevel, "Result", {ChildKey, LevelColumnName, LevelColumnName2, LevelColumnName4, LevelColumnName3, ParentKey, "Path", "FirstName", "FirstParentKey"}, {"PageIDname", "x", "y", "z", "tabOrder", "ParentKey", "Path", "FirstName", "FirstParentKey"}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Expanded Result", each ([ParentKey] = null or [ParentKey] = "")),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows1",{"ParentKey", "FirstName", "FirstParentKey"}),
+		    #"Trimmed Text" = Table.TransformColumns(#"Removed Columns",{{"Path", each Text.Trim(_, "|")}}),
+		    #"Changed Type4" = Table.TransformColumnTypes(#"Trimmed Text",{{"tabOrder", type text}}),
+		    ReverseOrderPath = Table.TransformColumns(#"Changed Type4",{{"Path", each Text.Combine(List.Reverse(Text.Split(_, "|")), "|")}}),
+		    ReverseOrderPath2 = Table.TransformColumns(ReverseOrderPath,{{"tabOrder", each Text.Combine(List.Reverse(Text.Split(_, "|")), "|")}}),
+		    ReverseOrderPath3 = Table.TransformColumns(ReverseOrderPath2,{{"z", each Text.Combine(List.Reverse(Text.Split(_, "|")), "|")}}),
+		    #"Split Column by Delimiter" = Table.ExpandListColumn(Table.TransformColumns(ReverseOrderPath3, {{"x", Splitter.SplitTextByDelimiter("|", QuoteStyle.Csv), let itemType = (type nullable text) meta [Serialized.Text = true] in type {itemType}}}), "x"),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"x", type number}}),
+		    #"Grouped Rows" = Table.Group(#"Changed Type1", {"PageIDname", "y", "z", "Path", "Level", "tabOrder"}, {{"x", each List.Sum([x]), type number}}),
+		    #"Split Column by Delimiter1" = Table.ExpandListColumn(Table.TransformColumns(#"Grouped Rows", {{"y", Splitter.SplitTextByDelimiter("|", QuoteStyle.Csv), let itemType = (type nullable text) meta [Serialized.Text = true] in type {itemType}}}), "y"),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Split Column by Delimiter1",{{"y", type number}}),
+		    #"Grouped Rows1" = Table.Group(#"Changed Type2", {"PageIDname", "Path", "Level", "tabOrder", "x", "z"}, {{"y", each List.Sum([y]), type number}}),
+		    #"Changed Type3" = Table.TransformColumnTypes(#"Grouped Rows1",{{"PageIDname", type text}, {"Path", type text}, {"Level", Int64.Type}, {"tabOrder", type text}, {"z", type text}}),
+		    #"Added Custom1" = Table.AddColumn(#"Changed Type3", "Custom", each Number.ToText(Number.FromText(Text.BeforeDelimiter([tabOrder], "|")), "D5")),
+		    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "PageID", each Text.BeforeDelimiter([PageIDname], "_"), Int64.Type)
+		in
+		    #"Added Custom2"
+		```
+	lineageTag: 3a5a66fc-daef-4c00-b6bd-ad4a1d9cf065
+	queryGroup: 'Page Visuals'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Page Visuals Starter' = ```
+		let
+		    Source = Pages,
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Report Key", "PageID", "Page Name", "visualContainers", "width", "height"}),
+		    #"Expanded visualContainers" = Table.ExpandListColumn(#"Removed Other Columns", "visualContainers"),
+		    #"Added Index" = Table.AddIndexColumn(#"Expanded visualContainers", "VisualID", 1, 1),
+		    #"Changed Type3" = Table.TransformColumnTypes(#"Added Index",{{"VisualID", Int64.Type}}),
+		    #"Reordered Columns" = Table.ReorderColumns(#"Changed Type3",{"PageID", "VisualID", "visualContainers"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"height", "pageHeight"}, {"width", "pageWidth"}}),
+		    #"Expanded visualContainers1" = Table.ExpandRecordColumn(#"Renamed Columns", "visualContainers", {"x", "y", "z", "width", "height", "config", "tabOrder"}, {"x", "y", "z", "width", "height", "config", "tabOrder"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Expanded visualContainers1", each ([config] <> null)),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows",{{"config", type text}}),
+		    #"Added config json" = Table.AddColumn(#"Changed Type", "config json", each Json.Document([config])),
+		    #"Expanded config json" = Table.ExpandRecordColumn(#"Added config json", "config json", {"name", "parentGroupName", "singleVisual", "singleVisualGroup", "layouts"}, {"name", "parentName", "singleVisual", "singleVisualGroup", "layouts"}),
+		    #"Expanded singleVisual" = Table.ExpandRecordColumn(#"Expanded config json", "singleVisual", {"visualType", "objects", "vcObjects"}, {"singleVisual.visualType", "singleVisual.objects", "singleVisual.vcObjects"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Expanded singleVisual",{{"pageHeight", type number}, {"x", type number}, {"y", type number}, {"width", type number}, {"height", type number}, {"z", type number}, {"singleVisual.visualType", type text}, {"pageWidth", type number}, {"Page Name", type text}, {"tabOrder", Int64.Type}}),
+		    #"Inserted Merged Column" = Table.AddColumn(#"Changed Type1", "PageIDname", each Text.Combine({Text.From([PageID], "en-US"), "_", [name]}), type text),
+		    #"Added Conditional Column" = Table.AddColumn(#"Inserted Merged Column", "PageIDparentName", each if [parentName] = null then null else Text.From([PageID]) & "_" & [parentName], type text),
+		    #"Expanded layouts" = Table.ExpandListColumn(#"Added Conditional Column", "layouts"),
+		    #"Expanded layouts1" = Table.ExpandRecordColumn(#"Expanded layouts", "layouts", {"id", "position"}, {"layouts.id", "layouts.position"}),
+		    #"Grouped Rows" = Table.Group(#"Expanded layouts1", {"VisualID"}, {{"AllRows", each Table.AddIndexColumn(
+		        Table.Sort(_,{{"layouts.id", 
+		        Order.Descending}}), "Row Rank",1,1), type table [Report Key=number, PageID=nullable number, Page Name=nullable text, VisualID=nullable number, pageWidth=nullable number, pageHeight=nullable number, x=nullable number, y=nullable number, z=nullable number, width=nullable number, height=nullable number, config=nullable text, tabOrder=nullable number, name=text, parentName=nullable text, singleVisual.visualType=nullable text, singleVisual.objects=nullable record, singleVisual.vcObjects=nullable record, singleVisualGroup=nullable record, layouts.id=number, layouts.position=record, PageIDname=text, PageIDparentName=text, Row Rank=nullable number]}}),
+		    #"Expanded AllRows" = Table.ExpandTableColumn(#"Grouped Rows", "AllRows", {"Report Key", "PageID", "Page Name", "pageWidth", "pageHeight", "x", "y", "z", "width", "height", "config", "tabOrder", "name", "parentName", "singleVisual.visualType", "singleVisual.objects", "singleVisual.vcObjects", "singleVisualGroup", "layouts.id", "layouts.position", "PageIDname", "PageIDparentName", "Row Rank"}, {"Report Key", "PageID", "Page Name", "pageWidth", "pageHeight", "x", "y", "z", "width", "height", "config", "tabOrder", "name", "parentName", "singleVisual.visualType", "singleVisual.objects", "singleVisual.vcObjects", "singleVisualGroup", "layouts.id", "layouts.position", "PageIDname", "PageIDparentName", "Row Rank"}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Expanded AllRows", each ([Row Rank] = 1)),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows1",{"Row Rank"}),
+		    #"Expanded layouts.position" = Table.ExpandRecordColumn(#"Removed Columns", "layouts.position", {"tabOrder"}, {"layouts.position.tabOrder"}),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Expanded layouts.position",{{"layouts.position.tabOrder", Int64.Type}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type2",null,0,Replacer.ReplaceValue,{"tabOrder"})
+		in
+		    #"Replaced Value"
+		```
+	lineageTag: 308e3ca0-471d-48c1-84d1-7faf3c41aeed
+	queryGroup: 'Page Visuals'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Report Contents' =
+		let
+		    Source = #"Reports",
+		    #"Invoked Custom Function" = Table.AddColumn(Source, "ExportReportInGroup", each try fnExportReportInGroup([Workspace ID], [Report ID], "LiveConnect", null) otherwise null),
+		    #"Invoked Custom Function1" = Table.AddColumn(#"Invoked Custom Function", "OpenZipFile", each fnOpenZipFile([ExportReportInGroup])),
+		    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Invoked Custom Function1"),
+		    #"Expanded OpenZipFile" = Table.ExpandTableColumn(#"Removed Errors", "OpenZipFile", {"FileName", "Content"}, {"FileName", "Content"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Expanded OpenZipFile",{"ExportReportInGroup"})
+		in
+		    #"Removed Columns"
+	lineageTag: c8d6baf3-0932-4c8c-ba3a-92ef4c3d8c7d
+	queryGroup: 'Report Layout'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Report Active Theme' =
+		let
+		    Source = #"Report Contents",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([FileName] = "Report/Layout")),
+		    #"Added Custom0" = Table.AddColumn(#"Filtered Rows", "Custom", each Table.FromColumns({Lines.FromBinary([Content], null, null, TextEncoding.Utf16)})),
+		    #"Expanded Custom" = Table.ExpandTableColumn(#"Added Custom0", "Custom", {"Column1"}, {"Column1"}),
+		    #"Added Custom1" = Table.AddColumn(#"Expanded Custom", "json", each Json.Document([Column1])),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom1",{"Report Key", "json"}),
+		    #"Expanded Custom.2" = Table.ExpandRecordColumn(#"Removed Other Columns", "json", {"theme", "resourcePackages"}, {"theme", "resourcePackages"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Custom.2",{{"theme", type text}}),
+		    #"Expanded resourcePackages" = Table.ExpandListColumn(#"Changed Type", "resourcePackages"),
+		    #"Expanded resourcePackages1" = Table.ExpandRecordColumn(#"Expanded resourcePackages", "resourcePackages", {"resourcePackage"}, {"resourcePackage"}),
+		    #"Expanded resourcePackage" = Table.ExpandRecordColumn(#"Expanded resourcePackages1", "resourcePackage", {"name", "type", "items", "disabled"}, {"Resource folder name", "Resource type", "items", "Resource disabled"}),
+		    #"Expanded items" = Table.ExpandListColumn(#"Expanded resourcePackage", "items"),
+		    #"Expanded items1" = Table.ExpandRecordColumn(#"Expanded items", "items", {"type", "path", "name"}, {"type", "path", "name"}),
+		    #"Added Custom" = Table.AddColumn(#"Expanded items1", "Active Theme", each if [theme] = [name] then 1 else 0),
+		    #"Filtered Rows1" = Table.SelectRows(#"Added Custom", each ([Active Theme] = 1))
+		in
+		    #"Filtered Rows1"
+	lineageTag: d545f259-91a6-4adb-9b1a-8d19c7adb25a
+	queryGroup: 'Report Layout'
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'Report Themes' =
+		let
+		    Source = #"Report Contents",
+		    #"Filtered Rows1" = Table.SelectRows(Source, each Text.StartsWith([FileName], "Report/StaticResources")),
+		    #"Split Column by Delimiter" = Table.SplitColumn(#"Filtered Rows1", "FileName", Splitter.SplitTextByEachDelimiter({"/"}, QuoteStyle.Csv, true), {"Theme Path", "Theme Name"}),
+		    #"Merged Queries" = Table.NestedJoin(#"Split Column by Delimiter", {"Report Key", "Theme Name"}, #"Report Active Theme", {"Report Key", "theme"}, "Report Active Theme", JoinKind.Inner),
+		    #"Added Custom" = Table.AddColumn(#"Merged Queries", "Custom", each Json.Document([Content])),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom",{"Report Key", "Theme Path", "Theme Name", "Custom"}),
+		    #"Expanded Custom" = Table.ExpandRecordColumn(#"Removed Other Columns", "Custom", {"name", "backgroundLight", "backgroundNeutral", "foregroundNeutralSecondary", "foregroundNeutralTertiary", "background", "foreground", "tableAccent", "good", "neutral", "bad", "maximum", "center", "minimum", "null", "textClasses", "visualStyles", "hyperlink", "visitedHyperlink"}, {"name", "backgroundLight", "backgroundNeutral", "foregroundNeutralSecondary", "foregroundNeutralTertiary", "background", "foreground", "tableAccent", "good", "neutral", "bad", "maximum", "center", "minimum", "null", "textClasses", "visualStyles", "hyperlink", "visitedHyperlink"})
+		in
+		    #"Expanded Custom"
+	lineageTag: c2409c3f-8de3-4a41-8842-c767291f95ed
+	queryGroup: 'Report Layout'
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'Report Theme Data Colors' =
+		let
+		    Source = #"Report Contents",
+		    #"Filtered Rows1" = Table.SelectRows(Source, each Text.StartsWith([FileName], "Report/StaticResources") and Text.EndsWith([FileName], ".json")),
+		    #"Split Column by Delimiter" = Table.SplitColumn(#"Filtered Rows1", "FileName", Splitter.SplitTextByEachDelimiter({"/"}, QuoteStyle.Csv, true), {"Theme Path", "Theme File Name"}),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Split Column by Delimiter",{"Report Key", "Theme File Name", "Content"}),
+		    #"Merged Queries" = Table.NestedJoin(#"Removed Other Columns1", {"Report Key", "Theme File Name"}, #"Report Active Theme", {"Report Key", "theme"}, "Report Active Theme", JoinKind.Inner),
+		    #"Removed Columns" = Table.RemoveColumns(#"Merged Queries",{"Report Active Theme"}),
+		    #"Invoked Custom Function" = Table.AddColumn(#"Removed Columns", "Custom.1", each fnExpandJSONImkeFeldman([Content])),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Invoked Custom Function",{"Content"}),
+		    #"Expanded Custom.1" = Table.ExpandTableColumn(#"Removed Columns1", "Custom.1", {"Value", "Level", "Sort", "Name"}, {"Value", "Level", "Sort", "Name"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Expanded Custom.1", each ([Name] = "dataColors")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Report Key", "Theme File Name", "Value", "Sort"}),
+		    #"Split Column by Delimiter1" = Table.SplitColumn(#"Removed Other Columns", "Sort", Splitter.SplitTextByEachDelimiter({"."}, QuoteStyle.Csv, true), {"Sort.1", "Sort.2"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Delimiter1",{{"Sort.2", Int64.Type}}),
+		    #"Grouped Rows" = Table.Group(#"Changed Type1", {"Report Key", "Theme File Name"}, {{"AllRowsGrouped", each Table.AddIndexColumn(Table.Sort(_,{{"Sort.2", Order.Ascending}}), "RowRank",2,1), type table [Report Key=number, Theme File Name=nullable text, Value=text, Sort=text, RowRank=nullable number]}}),
+		    #"Expanded AllRowsGrouped" = Table.ExpandTableColumn(#"Grouped Rows", "AllRowsGrouped", {"Value", "RowRank"}, {"Value", "Theme Color Id"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded AllRowsGrouped",{{"Theme Color Id", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: b29263b6-614b-4719-ac30-13ffe13d0bbe
+	queryGroup: 'Report Layout'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression fnExpandJSONImkeFeldman = ```
+		//https://www.thebiccountant.com/2018/06/17/automatically-expand-all-fields-from-a-json-document-in-power-bi-and-power-query/
+		let
+		    func = (JSON) =>
+		        let
+		            Source = JSON, 
+		            ParseJSON = try Json.Document(Source) otherwise Source, 
+		            TransformForTable = 
+		                if Value.Is(ParseJSON, type record) then
+		                    Record.ToTable(ParseJSON)
+		                else
+		                    #table(
+		                        {"Name", "Value"}, 
+		                        List.Zip({List.Repeat({0}, List.Count(ParseJSON)), ParseJSON})
+		                    ), 
+		            AddSort = Table.Buffer(Table.AddColumn(TransformForTable, "Sort", each 0)), 
+		            LG = List.Skip(
+		                List.Generate(
+		                    () => [Next = AddSort, Counter = 1, AddIndex = #table({"Sort"}, {{""}})], 
+		                    each [AddIndex]{0}[Sort] <> "End", 
+		                    each [
+		                        AddIndex = Table.AddIndexColumn([Next], "Index", 0, 1), 
+		                        MergeSort = Table.CombineColumns(
+		                            Table.TransformColumnTypes(
+		                                AddIndex, 
+		                                {{"Sort", type text}, {"Index", type text}}, 
+		                                "en-GB"
+		                            ), 
+		                            {"Sort", "Index"}, 
+		                            Combiner.CombineTextByDelimiter(".", QuoteStyle.None), 
+		                            "Sort"
+		                        ), 
+		                        PJson = Table.TransformColumns(
+		                            MergeSort, 
+		                            {{"Value", each try Json.Document(_) otherwise _}}
+		                        ), 
+		                        AddType = Table.AddColumn(
+		                            PJson, 
+		                            "Type", 
+		                            each 
+		                                if Value.Is([Value], type record) then
+		                                    "Record"
+		                                else if Value.Is([Value], type list) then
+		                                    "List"
+		                                else if Value.Is([Value], type table) then
+		                                    "Table"
+		                                else
+		                                    "other"
+		                        ), 
+		                        AddStatus = Table.AddColumn(
+		                            AddType, 
+		                            "Status", 
+		                            each if [Type] = "other" then "Finished" else "Unfinished"
+		                        ), 
+		                        Finished = Table.SelectRows(AddStatus, each ([Status] = "Finished")), 
+		                        Unfinished = Table.SelectRows(AddStatus, each ([Status] = "Unfinished")), 
+		                        AddNext = Table.AddColumn(
+		                            Unfinished, 
+		                            "Next", 
+		                            each if [Type] = "Record" then {[Value]} else [Value]
+		                        ), 
+		                        RemoveCols = Table.RemoveColumns(AddNext, {"Value", "Type", "Status"}), 
+		                        ExpandNext = Table.ExpandListColumn(RemoveCols, "Next"), 
+		                        AddIndex2 = Table.AddIndexColumn(ExpandNext, "Index", 0, 1), 
+		                        MergeSort2 = Table.CombineColumns(
+		                            Table.TransformColumnTypes(
+		                                AddIndex2, 
+		                                {{"Sort", type text}, {"Index", type text}}, 
+		                                "en-GB"
+		                            ), 
+		                            {"Sort", "Index"}, 
+		                            Combiner.CombineTextByDelimiter(".", QuoteStyle.None), 
+		                            "Sort"
+		                        ), 
+		                        TransformRecord = Table.TransformColumns(
+		                            MergeSort2, 
+		                            {
+		                                {
+		                                    "Next", 
+		                                    each try
+		                                        Record.ToTable(_)
+		                                    otherwise
+		                                        try
+		                                            
+		                                                if Value.Is(Text.From(_), type text) then
+		                                                    #table({"Value"}, {{_}})
+		                                                else
+		                                                    _
+		                                        otherwise
+		                                            _
+		                                }
+		                            }
+		                        ), 
+		                        FilterOutNulls = Table.SelectRows(TransformRecord, each [Next] <> null), 
+		                        Next = 
+		                            if Table.IsEmpty(FilterOutNulls) then
+		                                #table({"Sort"}, {{"End"}})
+		                            else if Value.Is(FilterOutNulls[Next]{0}, type table) = true then
+		                                Table.ExpandTableColumn(
+		                                    FilterOutNulls, 
+		                                    "Next", 
+		                                    {"Name", "Value"}, 
+		                                    {"Name." & Text.From([Counter]), "Value"}
+		                                )
+		                            else
+		                                Table.RenameColumns(FilterOutNulls, {{"Next", "Value"}}), 
+		                        Counter = [Counter] + 1
+		                    ], 
+		                    each Table.AddColumn([Finished], "Level", (x) => _[Counter] - 2)
+		                )
+		            ), 
+		            Check = LG{2}, 
+		            Combine = Table.Combine(LG), 
+		            Clean = Table.RemoveColumns(Combine, {"Status", "Type"}), 
+		            Trim = Table.TransformColumns(Clean, {{"Sort", each Text.Trim(_, "."), type text}}), 
+		            // Dynamic Padding for the sort-column so that it sorts by number in text strings
+		            SelectSort = Table.SelectColumns(Trim, {"Sort"}), 
+		            SplitSort = Table.AddColumn(
+		                SelectSort, 
+		                "Custom", 
+		                each List.Transform(try Text.Split([Sort], ".") otherwise {}, Number.From)
+		            ), 
+		            ToTable = Table.AddColumn(
+		                SplitSort, 
+		                "Splitted", 
+		                each Table.AddIndexColumn(Table.FromColumns({[Custom]}), "Pos", 1, 1)
+		            ), 
+		            ExpandTable = Table.ExpandTableColumn(ToTable, "Splitted", {"Column1", "Pos"}), 
+		            GroupPos = Table.Group(
+		                ExpandTable, 
+		                {"Pos"}, 
+		                {{"All", each _, type table}, {"Max", each List.Max([Column1]), type text}}
+		            ), 
+		            Digits = Table.AddColumn(GroupPos, "Digits", each Text.Length(Text.From([Max]))), 
+		            FilteredDigits = List.Buffer(Table.SelectRows(Digits, each ([Digits] <> null))[Digits]), 
+		            SortNew = Table.AddColumn(
+		                Trim, 
+		                "SortBy", 
+		                each Text.Combine(
+		                    List.Transform(
+		                        List.Zip({Text.Split([Sort], "."), List.Positions(Text.Split([Sort], "."))}), 
+		                        each Text.PadStart(_{0}, FilteredDigits{_{1}}, "0")
+		                    ), 
+		                    "."
+		                )
+		            ), 
+		            FilterNotNull = Table.SelectRows(SortNew, each ([Value] <> null)), 
+		            Reorder = Table.ReorderColumns(
+		                FilterNotNull, 
+		                {"Value", "Level", "Sort", "SortBy"}
+		                    & List.Difference(
+		                        Table.ColumnNames(FilterNotNull), 
+		                        {"Value", "Level", "Sort", "SortBy"}
+		                    )
+		            ), 
+		            Dots = Table.AddColumn(
+		                #"Reorder", 
+		                "Dots", 
+		                each List.Select(Table.ColumnNames(#"Reorder"), (l) => Text.StartsWith(l, "Name"))
+		            ), 
+		            // This sort is just to view in the query editor. When loaded to the data model it will not be kept. Use "Sort by column" in the data model instead.
+		            Sort = Table.Sort(Dots, {{"SortBy", Order.Ascending}})
+		        in
+		            Sort, 
+		    documentation = [
+		        Documentation.Name = " Table.JsonExpandAll ", 
+		        Documentation.Description
+		            = " Dynamically expands the <Json> Record and returns values in one column and additional columns to navigate. ", 
+		        Documentation.LongDescription
+		            = " Dynamically expands the <Json> Record and returns values in one column and additional columns to navigate. Input can be JSON in binary format or the already parsed JSON. ", 
+		        Documentation.Category = " Table ", 
+		        Documentation.Source = " . https://wp.me/p6lgsG-Ur . ", 
+		        Documentation.Version = " 1.2: Added column [Dots] (22/02/2019)", 
+		        Documentation.Author = " Imke Feldmann: www.TheBIccountant.com . ", 
+		        Documentation.Examples = {[Description = "  ", Code = "  ", Result = "  "]}
+		    ]
+		in
+		    Value.ReplaceType(func, Value.ReplaceMetadata(Value.Type(func), documentation))
+		```
+	lineageTag: 53b0955c-7ac2-4c2c-b75d-fa561441b069
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fnHexToRGB =
+		(hexColor as text) as table =>
+		let
+		    Source = hexColor,
+		    #"Converted to Table" = #table(1, {{Source}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "hexColor"}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"hexColor", type text}}),
+		    #"Added Custom1" = Table.AddColumn(#"Changed Type", "hexColor - Copy", each Text.Lower(Text.Replace([hexColor], "#", "")), type text),
+		    #"Split Column by Position" = Table.SplitColumn(#"Added Custom1", "hexColor - Copy", Splitter.SplitTextByRepeatedLengths(2), {"r", "g", "b"}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Split Column by Position", {"hexColor"}, "Attribute", "Value"),
+		    #"Added Custom" = Table.AddColumn(#"Unpivoted Other Columns", "color value", each (Text.PositionOf("0123456789abcdef", Text.Start([Value], 1)) * 16 + Text.PositionOf("0123456789abcdef", Text.End([Value], 1))), Int64.Type),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"Value"}),
+		    #"Pivoted Column" = Table.Pivot(#"Removed Columns1", List.Distinct(#"Removed Columns1"[Attribute]), "Attribute", "color value")
+		in
+		    #"Pivoted Column"
+	lineageTag: 7730326f-afa3-4a65-bc37-bb680d4580d9
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fnChangeHexColorByXPct =
+		(hexColor as text, pctChange as number) as table =>
+		let
+		    Source = hexColor,
+		    #"Converted to Table" = #table(1, {{Source}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "hexColor"}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"hexColor", type text}}),
+		    #"Invoked Custom Function" = Table.AddColumn(#"Changed Type", "rgb", each fnHexToRGB([hexColor])),
+		    #"Expanded rgb" = Table.ExpandTableColumn(#"Invoked Custom Function", "rgb", {"r", "g", "b"}, {"r", "g", "b"}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Expanded rgb", {"hexColor"}, "rgb", "color value"),
+		    #"Added Custom2" = Table.AddColumn(#"Unpivoted Other Columns", "pctChanged color value", each if pctChange = 0 then [color value]
+		else if pctChange > 0 then Number.Round([color value] * (1 - pctChange), 0, RoundingMode.AwayFromZero) + Number.Round(255 * pctChange, 0, RoundingMode.AwayFromZero)
+		else Number.Round([color value] * (1 + pctChange), 0, RoundingMode.AwayFromZero)),
+		    #"Added Custom3" = Table.AddColumn(#"Added Custom2", "pctChanged hex val", each if [pctChanged color value] > 255 then 255 else [pctChanged color value]),
+		    #"Added Custom4" = Table.AddColumn(#"Added Custom3", "pctChanged hexColor", each Text.PadStart(Number.ToText([pctChanged color value], "X"), 2, "0")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom4",{"hexColor", "pctChanged hexColor"}),
+		    #"Grouped Rows" = Table.Group(#"Removed Other Columns", {"hexColor"}, {{"combined", each Text.Combine([pctChanged hexColor], ""), type nullable text}}),
+		    #"Added Custom" = Table.AddColumn(#"Grouped Rows", "hexColorChangedByPct", each "#" & [combined], type text),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Custom",{"combined"})
+		in
+		    #"Removed Columns"
+	lineageTag: 39aadd4d-3848-4f73-85b8-98b792516caf
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fnGetLuminance =
+		(hexColor as text) as table =>
+		let
+		    Source = hexColor,
+		    #"Converted to Table" = #table(1, {{Source}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "hexColor"}}),
+		    #"Invoked Custom Function" = Table.AddColumn(#"Renamed Columns", "fnHexToRGB", each fnHexToRGB([hexColor])),
+		    #"Expanded fnHexToRGB" = Table.ExpandTableColumn(#"Invoked Custom Function", "fnHexToRGB", {"r", "g", "b"}, {"r", "g", "b"}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Expanded fnHexToRGB", {"hexColor"}, "Attribute", "Value"),
+		    #"Added Custom" = Table.AddColumn(#"Unpivoted Other Columns", "luminance", each if [Value]/255 <= 0.03928 then ([Value]/255)/12.92 else Number.Power( (([Value]/255)+0.055)/1.055, 2.4)),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Custom",{"Value"}),
+		    #"Pivoted Column" = Table.Pivot(#"Removed Columns", List.Distinct(#"Removed Columns"[Attribute]), "Attribute", "luminance"),
+		    #"Added Custom1" = Table.AddColumn(#"Pivoted Column", "luminance", each [r]*0.2126 + [g]*0.7152 + [b]*0.0722, type number),
+		    //#"Added dispForeColor" = Table.AddColumn(#"Added Custom1", "dispForeColor", each if [r]*0.299 + [g]*0.587 + [b]*0.114 > 186 then "#000000" else "#ffffff", type text)
+		    #"Added dispForeColor" = Table.AddColumn(#"Added Custom1", "dispForeColor", each if [luminance] > 0.5 then "#000000" else "#ffffff", type text)
+		in
+		    #"Added dispForeColor"
+	lineageTag: e5106d87-033a-43ba-a3d1-575525105ed4
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fnRankFunction =
+		let  RankFunction = (tabletorank as table, sortcolumn as text, newcolumn as text) as table =>
+		  let
+		    NullRows = Table.SelectRows(tabletorank, each (Table.Column(_, sortcolumn) = null)),
+		    NullWithIndex = Table.AddColumn(NullRows, newcolumn, each null, Int64.Type),
+		
+		    NotNullRows =Table.SelectRows(tabletorank, each (Table.Column(_, sortcolumn) <> null)),
+		    DenseGrouping = Table.Group(NotNullRows, {sortcolumn}, {{"Groupedrows", each _, type table}}),
+		    SortRows = Table.Sort(DenseGrouping,{{sortcolumn, Order.Descending}}),
+		
+		    AddIndex = Table.AddIndexColumn(SortRows, newcolumn, 1, 1),
+		    //ChangedType = Table.TransformColumnTypes(AddIndex,{{"Employer Rate Rank", Int64.Type}}),
+		
+		    DenseUngrouping = Table.ExpandTableColumn(AddIndex,"Groupedrows",
+		        List.RemoveMatchingItems(Table.ColumnNames(NotNullRows), {sortcolumn})),
+		
+		    AggregateRows =  Table.Combine( { NullWithIndex, DenseUngrouping } )
+		  in
+		    AggregateRows
+		in RankFunction
+		
+		// from https://www.imaginet.com/2017/power-query-function-dense-ranking/
+	lineageTag: 953cc2db-4694-4d89-a835-74bdd30dfdec
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression 'Page Visual Tab Order' =
+		let
+		    Source = #"Page Visual Actual Coordinates",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"PageIDname", "PageID", "tabOrder"}),
+		    #"Duplicated Column" = Table.DuplicateColumn(#"Removed Other Columns", "tabOrder", "tabOrder.full"),
+		    #"Split Column by Delimiter" = Table.SplitColumn(#"Duplicated Column", "tabOrder", Splitter.SplitTextByDelimiter("|", QuoteStyle.Csv), {"tabOrder.1", "tabOrder.2", "tabOrder.3", "tabOrder.4", "tabOrder.5"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"tabOrder.1", Int64.Type}, {"tabOrder.2", Int64.Type}, {"tabOrder.3", Int64.Type}, {"tabOrder.4", type text}, {"tabOrder.5", type text}}),
+		    #"Grouped Rows" = Table.Group(#"Changed Type", {"PageID"}, {{"All Rows", each _, type table [PageIDname=nullable text, PageID=number, tabOrder.1=nullable number, tabOrder.2=nullable number, tabOrder.3=nullable number, tabOrder.4=nullable text, tabOrder.5=nullable text, tabOrder.full=nullable text]}}),
+		    #"Invoked Custom Function4" = Table.AddColumn(#"Grouped Rows", "taborder", each fnRankFunction([All Rows], "tabOrder.1", "Tab Order 1")),
+		    #"Removed Columns4" = Table.RemoveColumns(#"Invoked Custom Function4",{"All Rows"}),
+		    #"Expanded taborder" = Table.ExpandTableColumn(#"Removed Columns4", "taborder", {"PageIDname", "tabOrder.1", "tabOrder.2", "tabOrder.3", "tabOrder.4", "tabOrder.5", "tabOrder.full", "Tab Order 1"}, {"PageIDname", "tabOrder.1", "tabOrder.2", "tabOrder.3", "tabOrder.4", "tabOrder.5", "tabOrder.full", "Tab Order 1"}),
+		    #"Grouped Rows1" = Table.Group(#"Expanded taborder", {"PageID", "Tab Order 1"}, {{"allRows", each _, type table [PageID=number, PageIDname=text, tabOrder.1=number, tabOrder.2=nullable number, tabOrder.3=nullable number, tabOrder.4=any, tabOrder.5=any, tabOrder.full=text, Tab Order 1=number]}}),
+		    #"Invoked Custom Function" = Table.AddColumn(#"Grouped Rows1", "tab2", each fnRankFunction([allRows], "tabOrder.2", "Tab Order 2")),
+		    #"Removed Columns" = Table.RemoveColumns(#"Invoked Custom Function",{"allRows"}),
+		    #"Expanded tab2" = Table.ExpandTableColumn(#"Removed Columns", "tab2", {"PageIDname", "tabOrder.full", "tabOrder.3", "tabOrder.4", "tabOrder.5", "Tab Order 2"}, {"PageIDname", "tabOrder.full", "tabOrder.3", "tabOrder.4", "tabOrder.5", "Tab Order 2"}),
+		    #"Grouped Rows2" = Table.Group(#"Expanded tab2", {"PageID", "Tab Order 1", "Tab Order 2"}, {{"allRows", each _, type table [PageID=number, Tab Order 1=number, PageIDname=text, tabOrder.full=text, tabOrder.3=nullable number, tabOrder.4=any, tabOrder.5=any, Tab Order 2=nullable number]}}),
+		    #"Invoked Custom Function1" = Table.AddColumn(#"Grouped Rows2", "tab3", each fnRankFunction([allRows], "tabOrder.3", "Tab Order 3")),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Invoked Custom Function1",{"allRows"}),
+		    #"Expanded tab3" = Table.ExpandTableColumn(#"Removed Columns1", "tab3", {"PageIDname", "tabOrder.full", "tabOrder.4", "tabOrder.5", "Tab Order 3"}, {"PageIDname", "tabOrder.full", "tabOrder.4", "tabOrder.5", "Tab Order 3"}),
+		    #"Grouped Rows3" = Table.Group(#"Expanded tab3", {"PageID", "Tab Order 1", "Tab Order 2", "Tab Order 3"}, {{"allRows", each _, type table [PageID=number, Tab Order 1=number, Tab Order 2=nullable number, PageIDname=text, tabOrder.full=text, tabOrder.4=any, tabOrder.5=any, Tab Order 3=nullable number]}}),
+		    #"Invoked Custom Function2" = Table.AddColumn(#"Grouped Rows3", "tab4", each fnRankFunction([allRows], "tabOrder.4", "Tab Order 4")),
+		    #"Removed Columns2" = Table.RemoveColumns(#"Invoked Custom Function2",{"allRows"}),
+		    #"Expanded tab4" = Table.ExpandTableColumn(#"Removed Columns2", "tab4", {"PageIDname", "tabOrder.full", "tabOrder.5", "Tab Order 4"}, {"PageIDname", "tabOrder.full", "tabOrder.5", "Tab Order 4"}),
+		    #"Grouped Rows4" = Table.Group(#"Expanded tab4", {"PageID", "Tab Order 1", "Tab Order 2", "Tab Order 3", "Tab Order 4"}, {{"allRows", each _, type table [PageID=number, Tab Order 1=number, Tab Order 2=nullable number, Tab Order 3=nullable number, PageIDname=text, tabOrder.full=text, tabOrder.5=any, Tab Order 4=any]}}),
+		    #"Invoked Custom Function3" = Table.AddColumn(#"Grouped Rows4", "tab5", each fnRankFunction([allRows], "tabOrder.5", "Tab Order 5")),
+		    #"Removed Columns3" = Table.RemoveColumns(#"Invoked Custom Function3",{"allRows"}),
+		    #"Expanded tab5" = Table.ExpandTableColumn(#"Removed Columns3", "tab5", {"PageIDname", "tabOrder.full", "Tab Order 5"}, {"PageIDname", "tabOrder.full", "Tab Order 5"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Expanded tab5",{{"Tab Order 1", Int64.Type}, {"Tab Order 2", Int64.Type}, {"Tab Order 3", Int64.Type}, {"Tab Order 4", Int64.Type}, {"Tab Order 5", Int64.Type}}),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type1", "Tab Order", each Text.Combine({Text.Combine({Text.Combine({Text.Combine({ Text.From([Tab Order 1])
+		, if [Tab Order 2] <> null then "." & Text.From([Tab Order 2]) else ""})
+		, if [Tab Order 3] <> null then "." & Text.From([Tab Order 3]) else ""})
+		, if [Tab Order 4] <> null then "." & Text.From([Tab Order 4]) else ""})
+		, if [Tab Order 5] <> null then "." & Text.From([Tab Order 5]) else ""})),
+		    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Tab Order Sort", each Text.Combine({Text.Combine({Text.Combine({Text.Combine({ Number.ToText([Tab Order 1], "00")
+		, if [Tab Order 2] <> null then "." & Number.ToText([Tab Order 2], "00") else ""})
+		, if [Tab Order 3] <> null then "." & Number.ToText([Tab Order 3], "00") else ""})
+		, if [Tab Order 4] <> null then "." & Number.ToText([Tab Order 4], "00") else ""})
+		, if [Tab Order 5] <> null then "." & Number.ToText([Tab Order 5], "00") else ""})),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom1",{{"Tab Order", type text}, {"Tab Order Sort", type text}, {"PageIDname", type text}, {"tabOrder.full", type text}})
+		in
+		    #"Changed Type2"
+	lineageTag: bdb21766-7f26-4074-abef-d16cd09bc98e
+	queryGroup: 'Page Visuals'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Color to compare' = "000000" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 76f1f63c-4800-416e-96da-0dc2181c9f60
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+expression Workspaces =
+		let
+		    Source = fnGetGroups(#"Workspace Query",null,null),
+		    #"Parsed JSON" = Json.Document(Source),
+		    value = #"Parsed JSON"[value],
+		    #"Converted to Table" = Table.FromList(value, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table", "Column1", {"id", "name"}, {"id", "name"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded Column1",{{"id", "Workspace ID"}, {"name", "Workspace Name"}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Workspace Name", type text}, {"Workspace ID", type text}})
+		in
+		    #"Changed Type"
+	lineageTag: d88a44dd-6625-4b63-a082-db591717c31b
+	queryGroup: 'Report Layout'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Workspace Query' = "name eq 'Demonstration'" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: f23ced8a-cb18-4124-9776-81fb0c6b914e
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression fnGetGroups =
+		let
+		    Source = PBIRESTAPIComm.FunctionCatalog(),
+		    GetGroups1 = Source{[Key="GetGroups"]}[Data]
+		in
+		    GetGroups1
+	lineageTag: 1c686156-609e-416f-a1fc-b9e64c1bccdd
+	queryGroup: Functions\PBI
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fnGetReportsInGroup =
+		let
+		    Source = PBIRESTAPIComm.FunctionCatalog(),
+		    GetReportsInGroup1 = Source{[Key="GetReportsInGroup"]}[Data]
+		in
+		    GetReportsInGroup1
+	lineageTag: 0e0116f2-1269-4668-8552-11f9088243b0
+	queryGroup: Functions\PBI
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fnExportReportInGroup =
+		let
+		    Source = PBIRESTAPIComm.FunctionCatalog(),
+		    ExportReportInGroup1 = Source{[Key="ExportReportInGroup"]}[Data]
+		in
+		    ExportReportInGroup1
+	lineageTag: 66475bfa-e88c-494e-b2e8-6de3da992f80
+	queryGroup: Functions\PBI
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fnOpenZipFile = ```
+		//2019-09-01:  Function added by Marco Russo (https://twitter.com/marcorus/status/1167486794990084096)
+		let
+		    Source = (ZIPFile) =>
+		let
+		    Header = BinaryFormat.Record([
+		        MiscHeader = BinaryFormat.Binary(14),
+		        BinarySize = BinaryFormat.ByteOrder(BinaryFormat.UnsignedInteger32, ByteOrder.LittleEndian),
+		        FileSize   = BinaryFormat.ByteOrder(BinaryFormat.UnsignedInteger32, ByteOrder.LittleEndian),
+		        FileNameLen= BinaryFormat.ByteOrder(BinaryFormat.UnsignedInteger16, ByteOrder.LittleEndian),
+		        ExtrasLen  = BinaryFormat.ByteOrder(BinaryFormat.UnsignedInteger16, ByteOrder.LittleEndian)    
+		    ]),
+		 
+		    HeaderChoice = BinaryFormat.Choice(
+		        BinaryFormat.ByteOrder(BinaryFormat.UnsignedInteger32, ByteOrder.LittleEndian),
+		        each if _ <> 67324752             // not the IsValid number? then return a dummy formatter
+		            then BinaryFormat.Record([IsValid = false, Filename=null, Content=null])
+		            else BinaryFormat.Choice(
+		                    BinaryFormat.Binary(26),      // Header payload - 14+4+4+2+2
+		                    each BinaryFormat.Record([
+		                        IsValid  = true,
+		                        Filename = BinaryFormat.Text(Header(_)[FileNameLen]),
+		                        Extras   = BinaryFormat.Text(Header(_)[ExtrasLen]),
+		                        Content  = BinaryFormat.Transform(
+		                            BinaryFormat.Binary(Header(_)[BinarySize]),
+		                            (x) => try Binary.Buffer(Binary.Decompress(x, Compression.Deflate)) otherwise null
+		                        )
+		                        ]),
+		                        type binary                   // enable streaming
+		                )
+		    ),
+		 
+		    ZipFormat = BinaryFormat.List(HeaderChoice, each _[IsValid] = true),
+		 
+		    Entries = List.Transform(
+		        List.RemoveLastN( ZipFormat(ZIPFile), 1),
+		        (e) => [FileName = e[Filename], Content = e[Content] ]
+		    )
+		in
+		    Table.FromRecords(Entries)
+		in
+		    Source
+		```
+	lineageTag: a11ca909-86c7-44c8-9fce-a1124b294ee4
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression 'Report Filter' = "*No Report Filter*" meta [IsParameterQuery=true, ExpressionIdentifier=#"Report List", Type="Any", IsParameterQueryRequired=true]
+	lineageTag: 9b8ce258-9115-49f5-9016-cbdb08486d90
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression 'Report List' =
+		let
+		    Source = #"Reports Selection",
+		    #"Report Name" = List.Combine({{"*No Report Filter*"},Source[Report Name]})
+		in
+		    #"Report Name"
+	lineageTag: 9bb64dff-fa4d-4b87-8e6f-c1afb349c519
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = List
+
+expression 'Reports Selection' =
+		let
+		    Source = Workspaces,
+		    #"Invoked Custom Function" = Table.AddColumn(Source, "GetReportsInGroup", each fnGetReportsInGroup([Workspace ID])),
+		    #"Parsed JSON" = Table.TransformColumns(#"Invoked Custom Function",{{"GetReportsInGroup", Json.Document}}),
+		    #"Expanded GetReportsInGroup" = Table.ExpandRecordColumn(#"Parsed JSON", "GetReportsInGroup", {"value"}, {"value"}),
+		    #"Expanded value" = Table.ExpandListColumn(#"Expanded GetReportsInGroup", "value"),
+		    #"Expanded value1" = Table.ExpandRecordColumn(#"Expanded value", "value", {"id", "name", "reportType"}, {"Report ID", "Report Name", "Report Type"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded value1",{{"Report ID", type text}, {"Report Name", type text}, {"Report Type", type text}}),
+		    #"Added Index" = Table.AddIndexColumn(#"Changed Type", "Index", 1, 1, Int64.Type),
+		    #"Reordered Columns" = Table.ReorderColumns(#"Added Index",{"Index", "Workspace ID", "Workspace Name", "Report ID", "Report Name", "Report Type"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"Index", "Report Key"}}),
+		    #"Filter For Power BI Reports" = Table.SelectRows(#"Renamed Columns", each ([Report Type] = "PowerBIReport"))
+		in
+		    #"Filter For Power BI Reports"
+	lineageTag: 4d7e1d97-8d29-4463-a73a-da0f390fa90e
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

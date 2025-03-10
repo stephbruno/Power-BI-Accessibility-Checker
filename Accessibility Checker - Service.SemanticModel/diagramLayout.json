@@ -1,0 +1,135 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 31.85185114542643
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 682.02222222222213,
+            "y": 38.688888888889061
+          },
+          "nodeIndex": "Page Visual Types",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 611.811111111111,
+            "y": 450.83333333333331
+          },
+          "nodeIndex": "Page Visuals",
+          "nodeLineageTag": "22f470c9-88c3-48c4-bf59-3477192f5c8a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 370.23333333333329,
+            "y": 0
+          },
+          "nodeIndex": "Pages",
+          "nodeLineageTag": "4934b1fd-7766-4742-bbed-25fe718a15cc",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 268.87777777777757,
+            "y": 480.55555555555566
+          },
+          "nodeIndex": "Page Visuals Alt Text",
+          "nodeLineageTag": "b2c23323-0602-4228-994a-93626955f203",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Reports",
+          "nodeLineageTag": "475c393c-4376-47b5-b20a-801a8c1241b6",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 545.33333333333337
+          },
+          "nodeIndex": "Page Visual Titles",
+          "nodeLineageTag": "59d26d2b-80ab-4f1b-9aac-9d1c743529a5",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1204.8888854980469,
+            "y": 334.4444444444444
+          },
+          "nodeIndex": "Comparison Color",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 914.51110093858563,
+            "y": 525.55555555555543
+          },
+          "nodeIndex": "Page Visual Colors",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1203.3333333333333,
+            "y": 4.4444444444444464
+          },
+          "nodeIndex": "_Measures",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 90,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

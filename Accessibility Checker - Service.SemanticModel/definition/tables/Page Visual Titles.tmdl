@@ -1,0 +1,118 @@
+table 'Page Visual Titles'
+	lineageTag: 59d26d2b-80ab-4f1b-9aac-9d1c743529a5
+
+	column PageID
+		dataType: int64
+		formatString: 0
+		lineageTag: b9e90077-7f55-47c1-a2bd-bce3c89d8857
+		summarizeBy: none
+		sourceColumn: PageID
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column VisualID
+		dataType: int64
+		formatString: 0
+		lineageTag: 51eefe96-ff1e-4f00-93cb-f3bd31c128b3
+		summarizeBy: none
+		sourceColumn: VisualID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Title Show Type'
+		dataType: string
+		lineageTag: f0520b13-eae5-4937-bd18-dd4c6a95e4af
+		summarizeBy: none
+		sourceColumn: Title Show Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Title Show Value'
+		dataType: string
+		lineageTag: 7590719c-bce7-4107-9f27-6ec5f9ef8586
+		summarizeBy: none
+		sourceColumn: Title Show Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Title Text Type'
+		dataType: string
+		lineageTag: e0163c1d-1065-47f9-a347-93c3a5391ad8
+		summarizeBy: none
+		sourceColumn: Title Text Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Title Text Value'
+		dataType: string
+		lineageTag: 98136877-4560-4a09-9c7b-1db2673bfffa
+		summarizeBy: none
+		sourceColumn: Title Text Value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Page Visual Titles-4998d5e0-d81c-40fa-806f-e8f1dbf84e06' = m
+		mode: import
+		queryGroup: 'Page Visuals'
+		source =
+				// Load the initial data from the 'Page Visuals Starter' table
+				let
+					#"Loaded Page Visuals Starter" = #"Page Visuals Starter",
+				
+				// Select specific columns from the source table
+					#"Removed Other Columns" = Table.SelectColumns(#"Loaded Page Visuals Starter", {"Report Key", "PageID", "Page Name", "VisualID", "name", "config", "singleVisual.vcObjects"}),
+				
+				// Expand the 'singleVisual.vcObjects' column to include 'title'
+					#"Expanded Single Visual VC Objects" = Table.ExpandRecordColumn(#"Removed Other Columns", "singleVisual.vcObjects", {"title"}, {"singleVisual.vcObjects.title"}),
+				
+				// Expand the 'singleVisual.vcObjects.title' column to include its list items
+					#"Expanded Single Visual VC Objects Title" = Table.ExpandListColumn(#"Expanded Single Visual VC Objects", "singleVisual.vcObjects.title"),
+				
+				// Add a new column 'titlePropertiesText' by converting JSON to text
+					#"Added Title Properties Text" = Table.AddColumn(#"Expanded Single Visual VC Objects Title", "titlePropertiesText", each Text.FromBinary(Json.FromValue([singleVisual.vcObjects.title]))),
+				
+				// Invoke a custom function to expand JSON in 'titlePropertiesText' column
+					#"Invoked Expand JSON Function" = Table.AddColumn(#"Added Title Properties Text", "expandedJSON", each fnExpandJSONImkeFeldman([titlePropertiesText])),
+				
+				// Replace errors in the 'expandedJSON' column with null values
+					#"Replaced Errors" = Table.ReplaceErrorValues(#"Invoked Expand JSON Function", {{"expandedJSON", null}}),
+				
+				// Expand the 'expandedJSON' column to include specific fields
+					#"Expanded Expanded JSON" = Table.ExpandTableColumn(#"Replaced Errors", "expandedJSON", {"Value", "Level", "Sort", "SortBy", "Name", "Name.1", "Name.2", "Name.3", "Name.4", "Name.5", "Name.6", "Dots"}, {"Value", "Level", "Sort", "SortBy", "Name", "Name.1", "Name.2", "Name.3", "Name.4", "Name.5", "Name.6", "Dots"}),
+				
+				// Filter rows to keep only those with 'Name.1' equal to 'text' or 'show'
+					#"Filtered Rows" = Table.SelectRows(#"Expanded Expanded JSON", each [Name.1] = "text" or [Name.1] = "show"),
+				
+				// Select specific columns from the filtered table
+					#"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows", {"Report Key", "PageID", "Page Name", "VisualID", "name", "Name.1", "Value", "Name.3"}),
+				
+				// Change the data type of specific columns
+					#"Changed Type1" = Table.TransformColumnTypes(#"Removed Other Columns1", {{"Value", type text}, {"Name.1", type text}, {"Name.3", type text}, {"name", type text}}),
+				
+				// Group rows by specific columns and combine 'Value' column
+					#"Grouped Rows" = Table.Group(#"Changed Type1", {"Report Key", "PageID", "Page Name", "VisualID", "name", "Name.1", "Name.3"}, {{"Value", each Text.Combine([Value], " - "), type nullable text}}),
+				
+				// Merge 'Name.3' and 'Value' columns into a single column
+					#"Merged Columns" = Table.CombineColumns(#"Grouped Rows", {"Name.3", "Value"}, Combiner.CombineTextByDelimiter(":", QuoteStyle.None), "Value"),
+				
+				// Pivot the 'Name.1' column to create new columns from its values
+					#"Pivoted Column" = Table.Pivot(#"Merged Columns", List.Distinct(#"Merged Columns"[Name.1]), "Name.1", "Value"),
+				
+				// Split the 'show' column into 'Title Show Type' and 'Title Show Value'
+					#"Split Column by Delimiter" = Table.SplitColumn(#"Pivoted Column", "show", Splitter.SplitTextByEachDelimiter({":"}, QuoteStyle.Csv, false), {"Title Show Type", "Title Show Value"}),
+				
+				// Split the 'text' column into 'Title Text Type' and 'Title Text Value'
+					#"Split Column by Delimiter1" = Table.SplitColumn(#"Split Column by Delimiter", "text", Splitter.SplitTextByEachDelimiter({":"}, QuoteStyle.Csv, false), {"Title Text Type", "Title Text Value"}),
+				
+				// Sort rows by 'VisualID' in ascending order
+					#"Sorted Rows" = Table.Sort(#"Split Column by Delimiter1", {{"VisualID", Order.Ascending}}),
+				    #"Removed Other Columns2" = Table.SelectColumns(#"Sorted Rows",{"PageID", "VisualID", "Title Show Type", "Title Show Value", "Title Text Type", "Title Text Value"})
+				in
+					#"Removed Other Columns2"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

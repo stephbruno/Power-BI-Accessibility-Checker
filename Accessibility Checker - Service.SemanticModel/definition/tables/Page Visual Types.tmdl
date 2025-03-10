@@ -1,0 +1,48 @@
+table 'Page Visual Types'
+	lineageTag: c72b52d8-540d-40c9-9435-c3ee16a8bdba
+
+	column hexColor
+		dataType: string
+		lineageTag: fcda8441-46d0-4420-94fa-9f21e8ca9955
+		summarizeBy: none
+		sourceColumn: hexColor
+
+		annotation SummarizationSetBy = Automatic
+
+	column foreColor
+		dataType: string
+		lineageTag: 16656770-643d-49b2-9d44-cf36d2a9293d
+		summarizeBy: none
+		sourceColumn: foreColor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Visual Type'
+		dataType: string
+		lineageTag: 90ab811d-7b60-4c82-8bd4-5d5bb35fca44
+		summarizeBy: none
+		sourceColumn: Visual Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Page Visual Types-17d8b2c6-04b0-41b1-a074-bcfc3d94be1f' = m
+		mode: import
+		queryGroup: 'Page Visuals'
+		source =
+				let
+				    Source = #"Page Visuals",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Visual Type"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Duplicates", "Index", 1, 1),
+				    #"Merged Queries" = Table.NestedJoin(#"Added Index", {"Index"}, #"Page Visual Type Colors", {"Index"}, "visual colors", JoinKind.LeftOuter),
+				    #"Expanded visual colors" = Table.ExpandTableColumn(#"Merged Queries", "visual colors", {"ColorName", "foreColor", "hexColor"}, {"ColorName", "foreColor", "hexColor"}),
+				    #"Removed Other Columns1" = Table.SelectColumns(#"Expanded visual colors",{"Visual Type", "foreColor", "hexColor"})
+				in
+				    #"Removed Other Columns1"
+
+	annotation PBI_QueryRelationships = {"columnCount":5,"keyColumnNames":[],"queryRelationships":[{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Section1/Page Visual type colors/Pivoted Column.{Index,0}","KeyColumnCount":1}],"columnIdentities":["Section1/Page Visual Types/Added Index.{Visual Type,0}","Section1/Page Visual Types/Added Index.{Index,1}","Section1/Page Visual type colors/Pivoted Column.{ColorName,1}","Section1/Page Visual type colors/Added Custom1.{foreColor,6}","Section1/Page Visual type colors/Pivoted Column.{hexColor,2}"],"ColumnCount":5,"KeyColumnNames":[],"ColumnIdentities":["Section1/Page Visual Types/Added Index.{Visual Type,0}","Section1/Page Visual Types/Added Index.{Index,1}","Section1/Page Visual type colors/Pivoted Column.{ColorName,1}","Section1/Page Visual type colors/Added Custom1.{foreColor,6}","Section1/Page Visual type colors/Pivoted Column.{hexColor,2}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Section1/Page Visual type colors/Pivoted Column.{Index,0}","KeyColumnCount":1}]}
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

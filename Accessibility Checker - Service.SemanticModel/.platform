@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Accessibility Checker - Service"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "98a1b7f5-e835-46ad-a1ab-aa4dd3e879d8"
+  }
+}
