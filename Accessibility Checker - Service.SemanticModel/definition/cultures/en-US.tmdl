@@ -9,7 +9,7 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "svg Image URL"
+			          "ConceptualProperty": "SVG Image URL"
 			        }
 			      },
 			      "State": "Generated",

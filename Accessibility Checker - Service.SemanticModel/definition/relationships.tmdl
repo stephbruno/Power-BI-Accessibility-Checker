@@ -26,13 +26,3 @@ relationship cd4e95a0-652d-a2b4-cb2d-4dbf21c574a8
 	fromColumn: Pages.'Report Key'
 	toColumn: Reports.'Report Key'
 
-relationship 2a9c2d86-ec2c-cc6b-f5c3-1a78414c8778
-	isActive: false
-	fromColumn: 'Page Visual Titles'.PageID
-	toColumn: Pages.PageID
-
-relationship c193b4f1-296e-631f-7fa3-766c3a576300
-	isActive: false
-	fromColumn: 'Page Visual Colors'.PageID
-	toColumn: Pages.PageID
-

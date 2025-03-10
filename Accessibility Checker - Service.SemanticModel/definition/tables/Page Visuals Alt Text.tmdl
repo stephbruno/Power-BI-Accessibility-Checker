@@ -4,23 +4,26 @@ table 'Page Visuals Alt Text'
 	column 'Report Key'
 		dataType: double
 		formatString: 0
+		isAvailableInMdx: false
 		lineageTag: e21a0d1f-f8b8-4cd2-9591-3d6cc15b59f6
 		summarizeBy: none
 		sourceColumn: Report Key
 
 		annotation SummarizationSetBy = Automatic
 
-	column PageID
+	column 'Page ID'
 		dataType: double
 		formatString: 0
+		isAvailableInMdx: false
 		lineageTag: bf57931e-d461-489c-8b94-5e1584f1e8ac
 		summarizeBy: none
-		sourceColumn: PageID
+		sourceColumn: Page ID
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Page Name'
 		dataType: string
+		isAvailableInMdx: false
 		lineageTag: 6e87d186-a680-4661-930a-879b49ea5df0
 		summarizeBy: none
 		sourceColumn: Page Name
@@ -29,23 +32,29 @@ table 'Page Visuals Alt Text'
 
 	column VisualID
 		dataType: int64
+		isHidden
 		formatString: 0
+		isAvailableInMdx: false
 		lineageTag: 79ddf2ac-040d-4857-9247-d500ad194133
 		summarizeBy: none
 		sourceColumn: VisualID
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
-	column name
+	column Name
 		dataType: string
+		isAvailableInMdx: false
 		lineageTag: f34553c5-fb98-48ba-8b76-7acb8ed38c65
 		summarizeBy: none
-		sourceColumn: name
+		sourceColumn: Name
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'AltText Type'
 		dataType: string
+		isAvailableInMdx: false
 		lineageTag: 78de84ff-6abe-40ca-b266-dc8067aa6a16
 		summarizeBy: none
 		sourceColumn: AltText Type
@@ -54,6 +63,7 @@ table 'Page Visuals Alt Text'
 
 	column 'AltText Value'
 		dataType: string
+		isAvailableInMdx: false
 		lineageTag: 10552c82-9359-4ed3-9bd7-3ef8ab8e5bd5
 		summarizeBy: none
 		sourceColumn: AltText Value
@@ -64,56 +74,59 @@ table 'Page Visuals Alt Text'
 		mode: import
 		queryGroup: 'Page Visuals'
 		source =
-				// Load the initial data from the 'Page Visuals Starter' table
 				let
-					#"Loaded Page Visuals Starter" = #"Page Visuals Starter",
+				    // Load the initial data from the 'Page Visuals Starter' table
+				    #"Loaded Page Visuals Starter" = #"Page Visuals Starter",
 				
-				// Select specific columns from the source table
-					#"Removed Other Columns" = Table.SelectColumns(#"Loaded Page Visuals Starter", {"Report Key", "PageID", "Page Name", "VisualID", "name", "config", "singleVisual.vcObjects"}),
+				    // Select specific columns from the source table
+				    #"Removed Unnecessary Columns" = Table.SelectColumns(#"Loaded Page Visuals Starter", {"Report Key", "PageID", "Page Name", "VisualID", "name", "config", "singleVisual.vcObjects"}),
 				
-				// Expand the 'singleVisual.vcObjects' column to include 'general'
-					#"Expanded Single Visual VC Objects" = Table.ExpandRecordColumn(#"Removed Other Columns", "singleVisual.vcObjects", {"general"}, {"singleVisual.vcObjects.general"}),
+				    // Expand the 'singleVisual.vcObjects' column to include 'general'
+				    #"Expanded VC Objects General" = Table.ExpandRecordColumn(#"Removed Unnecessary Columns", "singleVisual.vcObjects", {"general"}, {"singleVisual.vcObjects.general"}),
 				
-				// Expand the 'singleVisual.vcObjects.general' column to include its list items
-					#"Expanded Single Visual VC Objects General" = Table.ExpandListColumn(#"Expanded Single Visual VC Objects", "singleVisual.vcObjects.general"),
+				    // Expand the 'singleVisual.vcObjects.general' column to include its list items
+				    #"Expanded VC Objects General List" = Table.ExpandListColumn(#"Expanded VC Objects General", "singleVisual.vcObjects.general"),
 				
-				// Add a new column 'generalPropertiesText' by converting JSON to text
-					#"Added General Properties Text" = Table.AddColumn(#"Expanded Single Visual VC Objects General", "generalPropertiesText", each Text.FromBinary(Json.FromValue([singleVisual.vcObjects.general]))),
+				    // Add a new column 'generalPropertiesText' by converting JSON to text
+				    #"Added General Properties Text Column" = Table.AddColumn(#"Expanded VC Objects General List", "generalPropertiesText", each Text.FromBinary(Json.FromValue([singleVisual.vcObjects.general]))),
 				
-				// Invoke a custom function to expand JSON in 'generalPropertiesText' column
-					#"Invoked Expand JSON Function" = Table.AddColumn(#"Added General Properties Text", "expandedJSON", each fnExpandJSONImkeFeldman([generalPropertiesText])),
+				    // Invoke a custom function to expand JSON in 'generalPropertiesText' column
+				    #"Invoked Expand JSON Function" = Table.AddColumn(#"Added General Properties Text Column", "expandedJSON", each fnExpandJSONImkeFeldman([generalPropertiesText])),
 				
-				// Replace errors in the 'expandedJSON' column with null values
-					#"Replaced Errors" = Table.ReplaceErrorValues(#"Invoked Expand JSON Function", {{"expandedJSON", null}}),
+				    // Replace errors in the 'expandedJSON' column with null values
+				    #"Replaced JSON Errors" = Table.ReplaceErrorValues(#"Invoked Expand JSON Function", {{"expandedJSON", null}}),
 				
-				// Expand the 'expandedJSON' column to include specific fields
-					#"Expanded Expanded JSON" = Table.ExpandTableColumn(#"Replaced Errors", "expandedJSON", {"Value", "Level", "Sort", "SortBy", "Name", "Name.1", "Name.2", "Name.3", "Name.4", "Name.5", "Name.6", "Dots"}, {"Value", "Level", "Sort", "SortBy", "Name", "Name.1", "Name.2", "Name.3", "Name.4", "Name.5", "Name.6", "Dots"}),
+				    // Expand the 'expandedJSON' column to include specific fields
+				    #"Expanded JSON Fields" = Table.ExpandTableColumn(#"Replaced JSON Errors", "expandedJSON", {"Value", "Level", "Sort", "SortBy", "Name", "Name.1", "Name.2", "Name.3", "Name.4", "Name.5", "Name.6", "Dots"}, {"Value", "Level", "Sort", "SortBy", "Name", "Name.1", "Name.2", "Name.3", "Name.4", "Name.5", "Name.6", "Dots"}),
 				
-				// Filter rows to keep only those with 'Name.1' equal to 'altText'
-					#"Filtered Rows" = Table.SelectRows(#"Expanded Expanded JSON", each [Name.1] = "altText"),
+				    // Filter rows to keep only those with 'Name.1' equal to 'altText'
+				    #"Filtered Relevant Rows" = Table.SelectRows(#"Expanded JSON Fields", each [Name.1] = "altText"),
 				
-				// Select specific columns from the filtered table
-					#"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows", {"Report Key", "PageID", "Page Name", "VisualID", "name", "Value", "Name.3"}),
+				    // Select specific columns from the filtered table
+				    #"Removed Unnecessary Columns Again" = Table.SelectColumns(#"Filtered Relevant Rows", {"Report Key", "PageID", "Page Name", "VisualID", "name", "Value", "Name.3"}),
 				
-				// Change the data type of specific columns
-					#"Changed Type1" = Table.TransformColumnTypes(#"Removed Other Columns1", {{"Value", type text}, {"Name.3", type text}, {"name", type text}}),
+				    // Change the data type of specific columns
+				    #"Changed Column Types" = Table.TransformColumnTypes(#"Removed Unnecessary Columns Again", {{"Value", type text}, {"Name.3", type text}, {"name", type text}}),
 				
-				// Group rows by specific columns and combine 'Value' column
-					#"Grouped Rows" = Table.Group(#"Changed Type1", {"Report Key", "PageID", "Page Name", "VisualID", "name", "Name.3"}, {{"Value", each Text.Combine([Value], " - "), type nullable text}}),
+				    // Group rows by specific columns and combine 'Value' column
+				    #"Grouped Rows by Columns" = Table.Group(#"Changed Column Types", {"Report Key", "PageID", "Page Name", "VisualID", "name", "Name.3"}, {{"Value", each Text.Combine([Value], " - "), type nullable text}}),
 				
-				// Merge 'Name.3' and 'Value' columns into a single column
-					#"Merged Columns" = Table.CombineColumns(#"Grouped Rows", {"Name.3", "Value"}, Combiner.CombineTextByDelimiter(":", QuoteStyle.None), "altText"),
+				    // Merge 'Name.3' and 'Value' columns into a single column
+				    #"Merged Name and Value Columns" = Table.CombineColumns(#"Grouped Rows by Columns", {"Name.3", "Value"}, Combiner.CombineTextByDelimiter(":", QuoteStyle.None), "altText"),
 				
-				// Split the 'altText' column into 'AltText Type' and 'AltText Value'
-					#"Split Column by Delimiter1" = Table.SplitColumn(#"Merged Columns", "altText", Splitter.SplitTextByEachDelimiter({":"}, QuoteStyle.Csv, false), {"AltText Type", "AltText Value"}),
+				    // Split the 'altText' column into 'AltText Type' and 'AltText Value'
+				    #"Split AltText Column" = Table.SplitColumn(#"Merged Name and Value Columns", "altText", Splitter.SplitTextByEachDelimiter({":"}, QuoteStyle.Csv, false), {"AltText Type", "AltText Value"}),
 				
-				// Sort rows by 'VisualID' in ascending order
-					#"Sorted Rows" = Table.Sort(#"Split Column by Delimiter1", {{"VisualID", Order.Ascending}}),
+				    // Sort rows by 'VisualID' in ascending order
+				    #"Sorted Rows by VisualID" = Table.Sort(#"Split AltText Column", {{"VisualID", Order.Ascending}}),
 				
-				// Filter rows to keep only those with non-empty 'AltText Value'
-					#"Filtered Rows1" = Table.SelectRows(#"Sorted Rows", each ([AltText Value] <> "''"))
+				    // Filter rows to keep only those with non-empty 'AltText Value'
+				    #"Filtered Non-Empty AltText Rows" = Table.SelectRows(#"Sorted Rows by VisualID", each ([AltText Value] <> "''")),
+				
+				    // Rename specific columns
+				    #"Renamed Columns" = Table.RenameColumns(#"Filtered Non-Empty AltText Rows", {{"name", "Name"}, {"PageID", "Page ID"}})
 				in
-					#"Filtered Rows1"
+				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
 

@@ -10,7 +10,7 @@ table 'Comparison Color'
 			    VAR output = IF(objectLum > compareLum, DIVIDE(compareLum + 0.05, objectLum + 0.05), DIVIDE(objectLum + 0.05, compareLum + 0.05))
 			    RETURN IF(doCalc = 1, output, BLANK())
 			```
-		formatString: 0.0000
+		formatString: #,0
 		lineageTag: 1f8ab4f5-1a3d-446e-ab53-ea58406d8bde
 
 	measure 'Pass Level' =
@@ -45,16 +45,18 @@ table 'Comparison Color'
 			))
 		lineageTag: bc19d55a-a471-44d6-bb9d-a7c45c352864
 
-	column CompareColor
+	column 'Compare Color'
 		dataType: string
+		isAvailableInMdx: false
 		lineageTag: 15041e8c-3dd5-42d1-8ea6-22aecd5340f6
 		summarizeBy: none
-		sourceColumn: CompareColor
+		sourceColumn: Compare Color
 
 		annotation SummarizationSetBy = Automatic
 
 	column Luminance
 		dataType: double
+		isAvailableInMdx: false
 		lineageTag: dcb2f156-ce1a-4a5f-95fd-83f319ce13a5
 		summarizeBy: none
 		sourceColumn: Luminance
@@ -63,11 +65,12 @@ table 'Comparison Color'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column dispForeColor
+	column 'Display Forecolor'
 		dataType: string
+		isAvailableInMdx: false
 		lineageTag: 42133e8b-9013-4397-a557-6f4848b953c4
 		summarizeBy: none
-		sourceColumn: dispForeColor
+		sourceColumn: Display Forecolor
 
 		annotation SummarizationSetBy = Automatic
 
@@ -104,9 +107,10 @@ table 'Comparison Color'
 				
 				// Rename 'luminance.1' column to 'Luminance'
 					#"Renamed Columns1" = Table.RenameColumns(#"Changed Type1", {{"luminance.1", "Luminance"}}),
-				    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns1",{"CompareColor", "Luminance", "dispForeColor"})
+				    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns1",{"CompareColor", "Luminance", "dispForeColor"}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Removed Other Columns",{{"CompareColor", "Compare Color"}, {"dispForeColor", "Display Forecolor"}})
 				in
-					#"Removed Other Columns"
+					#"Renamed Columns2"
 
 	annotation PBI_ResultType = Table
 

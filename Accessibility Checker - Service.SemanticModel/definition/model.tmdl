@@ -31,9 +31,9 @@ annotation PBIDesktopVersion = 2.139.1678.0 (24.12)+2a034ab280bddf891eb7bb9ebfe6
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["Workspaces","Reports","Report Contents","Report Layout","Pages","Page Config","Report Active Theme","Page Visuals Starter","Page Visual Actual Coordinates","Page Visual Tab Order","Page Visual Type Colors","Page Visual Titles","Page Visuals","Page Visuals Alt Text","Comparison Color","fnExpandJSONImkeFeldman","fnRankFunction","fnHexToRGB","fnChangeHexColorByXPct","fnGetLuminance","Color to compare","Workspace Query","Report Filter","Reports Selection","Report List","Report Themes","Report Theme Data Colors","Page Visual Types","Page Visual Colors","fnGetGroups","fnGetReportsInGroup","fnExportReportInGroup","fnOpenZipFile"]
+annotation PBI_QueryOrder = ["Workspaces","Reports","Report Contents","Report Layout","Pages","Page Config","Report Active Theme","Page Visuals Starter","Page Visual Actual Coordinates","Page Visual Tab Order","Page Visual Type Colors","Page Visual Titles","Page Visuals","Page Visuals Alt Text","Comparison Color","fnExpandJSONImkeFeldman","fnAllParents","fnChangeHexColorByXPct","fnGetLuminance","fnHexToRGB","fnOpenZipFile","fnRankFunction","Workspace Name","Report Filter","Color to compare","Reports Selection","Report List","Report Themes","Report Theme Data Colors","Page Visual Types","Page Visual Colors","fnExportReportInGroup","fnGetGroups","fnGetReportsInGroup"]
 
-annotation PBI_ProTooling = ["DevMode"]
+annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop"]
 
 annotation __TEdtr = 1
 

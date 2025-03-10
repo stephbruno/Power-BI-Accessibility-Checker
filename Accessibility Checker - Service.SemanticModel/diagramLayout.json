@@ -5,15 +5,16 @@
       "ordinal": 0,
       "scrollPosition": {
         "x": 0,
-        "y": 31.85185114542643
+        "y": 0
       },
       "nodes": [
         {
           "location": {
-            "x": 682.02222222222213,
-            "y": 38.688888888889061
+            "x": 857.57777777777767,
+            "y": 6.466666666666832
           },
           "nodeIndex": "Page Visual Types",
+          "nodeLineageTag": "c72b52d8-540d-40c9-9435-c3ee16a8bdba",
           "size": {
             "height": 200,
             "width": 234
@@ -22,8 +23,8 @@
         },
         {
           "location": {
-            "x": 611.811111111111,
-            "y": 450.83333333333331
+            "x": 509.58888888888873,
+            "y": 347.5
           },
           "nodeIndex": "Page Visuals",
           "nodeLineageTag": "22f470c9-88c3-48c4-bf59-3477192f5c8a",
@@ -31,11 +32,11 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 8
+          "zIndex": 9
         },
         {
           "location": {
-            "x": 370.23333333333329,
+            "x": 510.23333333333329,
             "y": 0
           },
           "nodeIndex": "Pages",
@@ -44,12 +45,12 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 6
+          "zIndex": 7
         },
         {
           "location": {
-            "x": 268.87777777777757,
-            "y": 480.55555555555566
+            "x": 2.2111111111109381,
+            "y": 360.55555555555566
           },
           "nodeIndex": "Page Visuals Alt Text",
           "nodeLineageTag": "b2c23323-0602-4228-994a-93626955f203",
@@ -70,12 +71,12 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 5
+          "zIndex": 8
         },
         {
           "location": {
             "x": 0,
-            "y": 545.33333333333337
+            "y": 629.77777777777783
           },
           "nodeIndex": "Page Visual Titles",
           "nodeLineageTag": "59d26d2b-80ab-4f1b-9aac-9d1c743529a5",
@@ -83,7 +84,7 @@
             "height": 296,
             "width": 234
           },
-          "zIndex": 7
+          "zIndex": 5
         },
         {
           "location": {
@@ -99,15 +100,16 @@
         },
         {
           "location": {
-            "x": 914.51110093858563,
-            "y": 525.55555555555543
+            "x": 894.51110093858563,
+            "y": 623.33333333333314
           },
           "nodeIndex": "Page Visual Colors",
+          "nodeLineageTag": "a140a2f4-4d62-4d6f-8e5d-ac2e127108ed",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 9
+          "zIndex": 6
         },
         {
           "location": {
