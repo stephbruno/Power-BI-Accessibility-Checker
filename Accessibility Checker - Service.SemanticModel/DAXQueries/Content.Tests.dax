@@ -1,0 +1,22 @@
+DEFINE
+
+VAR _TabOrderNullCount = COUNTROWS('Page Visuals') - COUNT('Page Visuals'[Tab Order])
+VAR _TabOrderSortNullCount = COUNTROWS('Page Visuals') - COUNT('Page Visuals'[Tab Order Sort])
+	
+/*Run Tests*/
+VAR _Tests =               
+UNION (
+    ROW (
+        "TestName", "Column: Tab Order has no nulls",
+        "ExpectedValue", 0,
+        "ActualValue", _TabOrderNullCount
+    ),
+    ROW (
+        "TestName", "Column: Tab Order Sort has no nulls",
+        "ExpectedValue", 0,
+        "ActualValue", _TabOrderSortNullCount
+    )
+)
+
+/*Output Pass/Fail*/
+EVALUATE ADDCOLUMNS(_Tests,"Passed",[ExpectedValue] = [ActualValue])

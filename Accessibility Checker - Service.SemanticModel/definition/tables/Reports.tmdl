@@ -99,11 +99,11 @@ table Reports
 				    #"Filtered Power BI Reports" = Table.SelectRows(#"Renamed Report Index", each ([Report Type] = "PowerBIReport")),
 				
 				    // Apply an additional filter based on 'Report Filter' if it is not null or '*No Report Filter*'
-				    #"Filtered Reports by Name" = if #"Report Filter" = null or #"Report Filter" = "*No Report Filter*" then #"Filtered Power BI Reports" else Table.SelectRows(#"Filtered Power BI Reports", each [Report Name] = #"Report Filter")
+				    #"Filtered Reports by Name" = if Override_Filter = "TRUE" or #"Report Filter" = null or #"Report Filter" = "*No Report Filter*" then #"Filtered Power BI Reports" else Table.SelectRows(#"Filtered Power BI Reports", each [Report Name] = #"Report Filter")
 				in
 				    #"Filtered Reports by Name"
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 
 	annotation PBI_NavigationStepName = Navigation
 

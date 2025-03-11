@@ -3,7 +3,6 @@
   "datasetReference": {
     "byPath": {
       "path": "../Accessibility Checker - Service.SemanticModel"
-    },
-    "byConnection": null
+    }
   }
 }

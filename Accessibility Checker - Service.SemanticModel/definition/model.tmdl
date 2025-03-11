@@ -3,35 +3,34 @@ model Model
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	sourceQueryCulture: en-US
 	dataAccessOptions
-		fastCombine
 		legacyRedirects
 		returnErrorValuesAsNull
 
 queryGroup 'Report Layout'
 
-	annotation PBI_QueryGroupOrder = 2
+	annotation PBI_QueryGroupOrder = 0
 
 queryGroup Parameters
 
-	annotation PBI_QueryGroupOrder = 0
+	annotation PBI_QueryGroupOrder = 1
 
 queryGroup 'Page Visuals'
 
-	annotation PBI_QueryGroupOrder = 3
+	annotation PBI_QueryGroupOrder = 2
 
 queryGroup Functions
 
-	annotation PBI_QueryGroupOrder = 1
+	annotation PBI_QueryGroupOrder = 3
 
 queryGroup Functions\PBI
 
 	annotation PBI_QueryGroupOrder = 0
 
-annotation PBIDesktopVersion = 2.139.1678.0 (24.12)+2a034ab280bddf891eb7bb9ebfe6996f9c3a3196
+annotation PBIDesktopVersion = 2.140.1078.0 (25.02)+2cce24fb16e8b71ba835921d23e7ffc1fab909df
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["Workspaces","Reports","Report Contents","Report Layout","Pages","Page Config","Report Active Theme","Page Visuals Starter","Page Visual Actual Coordinates","Page Visual Tab Order","Page Visual Type Colors","Page Visual Titles","Page Visuals","Page Visuals Alt Text","Comparison Color","fnExpandJSONImkeFeldman","fnAllParents","fnChangeHexColorByXPct","fnGetLuminance","fnHexToRGB","fnOpenZipFile","fnRankFunction","Workspace Name","Report Filter","Color to compare","Reports Selection","Report List","Report Themes","Report Theme Data Colors","Page Visual Types","Page Visual Colors","fnExportReportInGroup","fnGetGroups","fnGetReportsInGroup"]
+annotation PBI_QueryOrder = ["Workspaces","Reports","Report Contents","Report Layout","Pages","Page Config","Report Active Theme","Page Visuals Starter","Page Visual Actual Coordinates","Page Visual Tab Order","Page Visual Type Colors","Page Visual Titles","Page Visuals","Page Visuals Alt Text","Comparison Color","fnExpandJSONImkeFeldman","fnAllParents","fnChangeHexColorByXPct","fnGetLuminance","fnHexToRGB","fnOpenZipFile","fnRankFunction","Workspace Name(s)","Report Filter","Color to compare","Workspace Filter","Reports Selection","Report List","Report Themes","Report Theme Data Colors","Page Visual Types","Page Visual Colors","fnExportReportInGroup","fnGetGroups","fnGetReportsInGroup","Override_Filter"]
 
 annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop"]
 

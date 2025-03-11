@@ -914,16 +914,18 @@ expression 'Page Visual Tab Order' =
 
 	annotation PBI_ResultType = Table
 
-expression 'Color to compare' = "000000" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+expression 'Color to compare' = "#000000" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 76f1f63c-4800-416e-96da-0dc2181c9f60
 	queryGroup: Parameters
 
 	annotation PBI_ResultType = Text
 
+	annotation PBI_NavigationStepName = Navigation
+
 expression Workspaces =
 		let
 		    // Fetched groups from the Workspace Query
-		    #"Fetched Groups from Workspace Query" = fnGetGroups("name eq '" & #"Workspace Name" & "'", null, null),
+		    #"Fetched Groups from Workspace Query" = fnGetGroups(#"Workspace Filter", null, null),
 		
 		    // Parsed JSON data from the API response
 		    #"Parsed JSON Data" = Json.Document(#"Fetched Groups from Workspace Query"),
@@ -951,8 +953,8 @@ expression Workspaces =
 
 	annotation PBI_ResultType = Table
 
-/// Identify the name of the workspace
-expression 'Workspace Name' = "Sample Workspace" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+/// Identify the name of the workspace or workspaces.  For multiple workspaces, provide as comma delimited string.
+expression 'Workspace Name(s)' = "visual-error-testing" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: f23ced8a-cb18-4124-9776-81fb0c6b914e
 	queryGroup: Parameters
 
@@ -1125,4 +1127,31 @@ expression fnAllParents = ```
 	annotation PBI_NavigationStepName = Navigation
 
 	annotation PBI_ResultType = Function
+
+expression Override_Filter = "FALSE" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 1d87dde5-8521-4fc4-8295-69fd297e8bf9
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression 'Workspace Filter' =
+		let
+		    Source = #"Workspace Name(s)",
+		    #"Split Text" = Text.Split(Source, ","),
+		    #"Converted to Table" = Table.FromList(#"Split Text", Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Cleaned Text" = Table.TransformColumns(#"Converted to Table",{{"Column1", Text.Clean, type text}}),
+		    #"Trimmed Text" = Table.TransformColumns(#"Cleaned Text",{{"Column1", Text.Trim, type text}}),
+		    #"Added Custom" = Table.AddColumn(#"Trimmed Text", "Argument", each "name eq '" & [Column1] & "'"),
+		    #"Grouped Rows" = Table.Group(#"Added Custom", {}, {{"Filters", each Text.Combine([Argument]," or "), type text}}),
+		    Filters = #"Grouped Rows"{0}[Filters]
+		in
+		    Filters
+	lineageTag: acd18979-f68c-43de-a042-7812872d9115
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
 
