@@ -986,7 +986,7 @@ expression fnGetReportsInGroup =
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Function
+	annotation PBI_ResultType = Exception
 
 expression fnExportReportInGroup =
 		let
@@ -999,7 +999,7 @@ expression fnExportReportInGroup =
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Function
+	annotation PBI_ResultType = Exception
 
 expression fnOpenZipFile = ```
 		//2019-09-01:  Function added by Marco Russo (https://twitter.com/marcorus/status/1167486794990084096)
@@ -1128,7 +1128,7 @@ expression fnAllParents = ```
 
 	annotation PBI_ResultType = Function
 
-expression Override_Filter = "FALSE" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+expression Override_Filter = "TRUE" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 1d87dde5-8521-4fc4-8295-69fd297e8bf9
 	queryGroup: Parameters
 

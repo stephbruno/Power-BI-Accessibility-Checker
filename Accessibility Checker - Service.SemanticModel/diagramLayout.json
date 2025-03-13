@@ -5,7 +5,7 @@
       "ordinal": 0,
       "scrollPosition": {
         "x": 0,
-        "y": 0
+        "y": 222.22222222222223
       },
       "nodes": [
         {
@@ -19,12 +19,12 @@
             "height": 200,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 2
         },
         {
           "location": {
-            "x": 509.58888888888873,
-            "y": 347.5
+            "x": 344.03333333333313,
+            "y": 345.27777777777777
           },
           "nodeIndex": "Page Visuals",
           "nodeLineageTag": "22f470c9-88c3-48c4-bf59-3477192f5c8a",
@@ -32,7 +32,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 9
+          "zIndex": 7
         },
         {
           "location": {
@@ -45,7 +45,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 7
+          "zIndex": 5
         },
         {
           "location": {
@@ -58,7 +58,7 @@
             "height": 248,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 8
         },
         {
           "location": {
@@ -71,7 +71,7 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 8
+          "zIndex": 6
         },
         {
           "location": {
@@ -84,7 +84,7 @@
             "height": 296,
             "width": 234
           },
-          "zIndex": 5
+          "zIndex": 3
         },
         {
           "location": {
@@ -100,8 +100,8 @@
         },
         {
           "location": {
-            "x": 894.51110093858563,
-            "y": 623.33333333333314
+            "x": 507.844434271919,
+            "y": 662.22222222222206
           },
           "nodeIndex": "Page Visual Colors",
           "nodeLineageTag": "a140a2f4-4d62-4d6f-8e5d-ac2e127108ed",
@@ -109,7 +109,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 6
+          "zIndex": 4
         },
         {
           "location": {
@@ -121,7 +121,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 2
+          "zIndex": 9
         }
       ],
       "name": "All tables",

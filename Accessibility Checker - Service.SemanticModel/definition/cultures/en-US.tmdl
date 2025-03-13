@@ -2,6 +2,8 @@ cultureInfo en-US
 
 	linguisticMetadata =
 			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
 			  "Entities": {
 			    "measures.svg_image_url": {
 			      "Definition": {
@@ -14,19 +16,17 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "Page Thumbnail": {
-			            "Source": {
-			              "Agent": "PowerBI.VisualColumnRename",
-			              "Type": "External"
-			            },
 			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
 			            "Weight": 0.9
 			          }
 			        }
 			      ]
 			    }
-			  },
-			  "Language": "en-US",
-			  "Version": "2.0.0"
+			  }
 			}
 		contentType: json
 

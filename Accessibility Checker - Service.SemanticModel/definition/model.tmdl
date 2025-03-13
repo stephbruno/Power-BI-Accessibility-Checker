@@ -36,6 +36,10 @@ annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop"]
 
 annotation __TEdtr = 1
 
+annotation BestPracticeAnalyzer_IgnoreRules = {"RuleIDs":[]}
+
+annotation BestPracticeAnalyzer_ExternalRuleFiles = ["C:\\Users\\VACOKerskJ\\Git\\VALOR-Folders\\Peer-Review-Support\\BPARules.json"]
+
 ref table Pages
 ref table 'Page Visuals'
 ref table _Measures

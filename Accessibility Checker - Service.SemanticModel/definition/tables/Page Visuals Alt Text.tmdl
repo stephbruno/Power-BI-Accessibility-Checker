@@ -2,24 +2,24 @@ table 'Page Visuals Alt Text'
 	lineageTag: b2c23323-0602-4228-994a-93626955f203
 
 	column 'Report Key'
-		dataType: double
+		dataType: decimal
 		formatString: 0
 		isAvailableInMdx: false
 		lineageTag: e21a0d1f-f8b8-4cd2-9591-3d6cc15b59f6
 		summarizeBy: none
 		sourceColumn: Report Key
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column 'Page ID'
-		dataType: double
+		dataType: decimal
 		formatString: 0
 		isAvailableInMdx: false
 		lineageTag: bf57931e-d461-489c-8b94-5e1584f1e8ac
 		summarizeBy: none
 		sourceColumn: Page ID
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column 'Page Name'
 		dataType: string
@@ -124,9 +124,10 @@ table 'Page Visuals Alt Text'
 				    #"Filtered Non-Empty AltText Rows" = Table.SelectRows(#"Sorted Rows by VisualID", each ([AltText Value] <> "''")),
 				
 				    // Rename specific columns
-				    #"Renamed Columns" = Table.RenameColumns(#"Filtered Non-Empty AltText Rows", {{"name", "Name"}, {"PageID", "Page ID"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Filtered Non-Empty AltText Rows", {{"name", "Name"}, {"PageID", "Page ID"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Report Key", Currency.Type}, {"Page ID", Currency.Type}})
 				in
-				    #"Renamed Columns"
+				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
 

@@ -51,15 +51,6 @@ table Reports
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Report Type'
-		dataType: string
-		isAvailableInMdx: false
-		lineageTag: b747d89a-cd86-4e3b-aa2c-61a73ccf383c
-		summarizeBy: none
-		sourceColumn: Report Type
-
-		annotation SummarizationSetBy = Automatic
-
 	partition Reports-d5d3e579-22d9-4076-8ad8-cc321f1843cf = m
 		mode: import
 		queryGroup: 'Report Layout'
@@ -99,11 +90,12 @@ table Reports
 				    #"Filtered Power BI Reports" = Table.SelectRows(#"Renamed Report Index", each ([Report Type] = "PowerBIReport")),
 				
 				    // Apply an additional filter based on 'Report Filter' if it is not null or '*No Report Filter*'
-				    #"Filtered Reports by Name" = if Override_Filter = "TRUE" or #"Report Filter" = null or #"Report Filter" = "*No Report Filter*" then #"Filtered Power BI Reports" else Table.SelectRows(#"Filtered Power BI Reports", each [Report Name] = #"Report Filter")
+				    #"Filtered Reports by Name" = if Override_Filter = "TRUE" or #"Report Filter" = null or #"Report Filter" = "*No Report Filter*" then #"Filtered Power BI Reports" else Table.SelectRows(#"Filtered Power BI Reports", each [Report Name] = #"Report Filter"),
+				    #"Selected Relevant Columns" = Table.SelectColumns(#"Filtered Reports by Name",{"Workspace ID", "Report Key", "Workspace Name", "Report ID", "Report Name"})
 				in
-				    #"Filtered Reports by Name"
+				    #"Selected Relevant Columns"
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 
 	annotation PBI_NavigationStepName = Navigation
 

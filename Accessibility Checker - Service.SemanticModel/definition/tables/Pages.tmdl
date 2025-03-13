@@ -37,18 +37,6 @@ table Pages
 
 		annotation SummarizationSetBy = Automatic
 
-	column filters
-		dataType: string
-		isHidden
-		isAvailableInMdx: false
-		lineageTag: 5328f704-7a2d-49fc-91e1-951104bd3775
-		summarizeBy: none
-		sourceColumn: filters
-
-		changedProperty = IsHidden
-
-		annotation SummarizationSetBy = Automatic
-
 	column Ordinal
 		dataType: int64
 		formatString: 0
@@ -82,18 +70,8 @@ table Pages
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Display Option'
-		dataType: int64
-		formatString: 0
-		isAvailableInMdx: false
-		lineageTag: 266f74f5-4c64-4e3f-ae14-89a972405464
-		summarizeBy: none
-		sourceColumn: Display Option
-
-		annotation SummarizationSetBy = Automatic
-
 	column Width
-		dataType: double
+		dataType: decimal
 		formatString: 0
 		isAvailableInMdx: false
 		lineageTag: d596bc8a-dcd8-4f03-94a7-0e49313d68cf
@@ -105,7 +83,7 @@ table Pages
 		annotation PBI_FormatHint = {"isDecimal":true}
 
 	column Height
-		dataType: double
+		dataType: decimal
 		formatString: 0
 		isAvailableInMdx: false
 		lineageTag: 215aeea0-471d-4cb2-95b1-2cc5a319bacc
@@ -160,12 +138,13 @@ table Pages
 					#"Reordered Columns" = Table.ReorderColumns(#"Added PageID Index", {"Report Key", "PageID", "name", "displayName", "filters", "ordinal", "visualContainers", "config", "displayOption", "width", "height"}),
 				
 				// Change the data type of specific columns
-					#"Changed Column Types" = Table.TransformColumnTypes(#"Reordered Columns", {{"ordinal", Int64.Type}, {"name", type text}, {"displayName", type text}, {"filters", type text}, {"config", type text}, {"height", type number}, {"width", type number}, {"displayOption", Int64.Type}, {"PageID", Int64.Type}}),
+					#"Changed Column Types" = Table.TransformColumnTypes(#"Reordered Columns",{{"ordinal", Int64.Type}, {"name", type text}, {"displayName", type text}, {"filters", type text}, {"config", type text}, {"height", Currency.Type}, {"width", Currency.Type}, {"displayOption", Int64.Type}, {"PageID", Int64.Type}}),
 				
 				// Rename the 'displayName' column to 'Page Name'
-					#"Renamed Columns" = Table.RenameColumns(#"Changed Column Types",{{"displayName", "Page Name"}, {"displayOption", "Display Option"}, {"height", "Height"}, {"ordinal", "Ordinal"}, {"width", "Width"}})
+					#"Renamed Columns" = Table.RenameColumns(#"Changed Column Types",{{"displayName", "Page Name"}, {"displayOption", "Display Option"}, {"height", "Height"}, {"ordinal", "Ordinal"}, {"width", "Width"}}),
+				    #"Selected Relevant Columns" = Table.SelectColumns(#"Renamed Columns",{"Report Key", "Height", "Width", "config", "visualContainers", "Ordinal", "Page Name", "name", "PageID"})
 				in
-					#"Renamed Columns"
+					#"Selected Relevant Columns"
 
 	annotation PBI_QueryRelationships = {"columnCount":11,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/Pages/Added Index.{ReportName,0}","Section1/Pages/Added Index.{PageID,10}","Section1/Pages/Changed Type.{name,2}","Section1/Pages/Changed Type.{displayName,3}","Section1/Pages/Changed Type.{filters,4}","Section1/Pages/Changed Type.{ordinal,5}","Section1/Pages/Added Index.{visualContainers,5}","Section1/Pages/Changed Type.{config,7}","Section1/Pages/Changed Type.{displayOption,8}","Section1/Pages/Changed Type.{width,9}","Section1/Pages/Changed Type.{height,10}"],"ColumnCount":11,"KeyColumnNames":[],"ColumnIdentities":["Section1/Pages/Added Index.{ReportName,0}","Section1/Pages/Added Index.{PageID,10}","Section1/Pages/Changed Type.{name,2}","Section1/Pages/Changed Type.{displayName,3}","Section1/Pages/Changed Type.{filters,4}","Section1/Pages/Changed Type.{ordinal,5}","Section1/Pages/Added Index.{visualContainers,5}","Section1/Pages/Changed Type.{config,7}","Section1/Pages/Changed Type.{displayOption,8}","Section1/Pages/Changed Type.{width,9}","Section1/Pages/Changed Type.{height,10}"],"RelationshipInfo":[]}
 

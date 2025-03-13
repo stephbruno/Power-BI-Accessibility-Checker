@@ -60,11 +60,11 @@ table _Measures
 		formatString: 0
 		isAvailableInMdx: false
 		lineageTag: 7e9dd849-81dd-4593-9e88-a0b2271b8060
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Value]
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	partition _Measures-a03490ab-c89a-4e57-bb13-1241198639c6 = calculated
 		mode: import

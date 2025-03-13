@@ -15,18 +15,6 @@ table 'Page Visual Colors'
 			```
 		lineageTag: e626fd87-2e09-4862-b7ba-88bd9511e844
 
-	column 'Page ID'
-		dataType: int64
-		formatString: 0
-		isAvailableInMdx: false
-		lineageTag: c37b58ee-8769-42ae-ae15-79af675f2a07
-		summarizeBy: none
-		sourceColumn: Page ID
-
-		changedProperty = DataType
-
-		annotation SummarizationSetBy = Automatic
-
 	column VisualID
 		dataType: int64
 		isHidden
@@ -68,7 +56,7 @@ table 'Page Visual Colors'
 		annotation SummarizationSetBy = Automatic
 
 	column Luminance
-		dataType: double
+		dataType: decimal
 		isAvailableInMdx: false
 		lineageTag: 96e70926-3032-4eb5-bad1-ae4c142e9d0c
 		summarizeBy: none
@@ -161,17 +149,17 @@ table 'Page Visual Colors'
 				    #"Removed Final Unnecessary Columns" = Table.RemoveColumns(#"Changed Luminance and ForeColor Types", {"ColorId", "Percent", "hexColorChangedByPct"}),
 				
 				    // Change the data type of the 'Luminance' column to number
-				    #"Changed Luminance Type to Number" = Table.TransformColumnTypes(#"Removed Final Unnecessary Columns", {{"Luminance", type number}}),
+				    #"Changed Luminance Type to Number" = Table.TransformColumnTypes(#"Removed Final Unnecessary Columns",{{"Luminance", Currency.Type}}),
 				
 				    // Select specific columns from the table
-				    #"Selected Relevant Columns" = Table.SelectColumns(#"Changed Luminance Type to Number", {"PageID", "ColorValue", "Luminance", "Name.1", "Name.2", "VisualID"}),
+				    #"Selected Relevant Columns" = Table.SelectColumns(#"Changed Luminance Type to Number",{"VisualID", "Name.1", "Name.2", "ColorValue", "Luminance"}),
 				
 				    // Rename specific columns
-				    #"Renamed Columns" = Table.RenameColumns(#"Selected Relevant Columns", {{"ColorValue", "Color Value"}, {"PageID", "Page ID"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Selected Relevant Columns", {{"ColorValue", "Color Value"}})
 				in
 				    #"Renamed Columns"
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 
 	annotation PBI_NavigationStepName = Navigation
 

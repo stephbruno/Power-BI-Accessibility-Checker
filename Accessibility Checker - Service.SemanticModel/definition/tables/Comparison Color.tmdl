@@ -55,7 +55,7 @@ table 'Comparison Color'
 		annotation SummarizationSetBy = Automatic
 
 	column Luminance
-		dataType: double
+		dataType: decimal
 		isAvailableInMdx: false
 		lineageTag: dcb2f156-ce1a-4a5f-95fd-83f319ce13a5
 		summarizeBy: none
@@ -103,7 +103,7 @@ table 'Comparison Color'
 					#"Expanded Luminance" = Table.ExpandTableColumn(#"Invoked Custom Function", "Luminance", {"r", "g", "b", "luminance", "dispForeColor"}, {"r", "g", "b", "luminance.1", "dispForeColor"}),
 				
 				// Change the type of 'r', 'g', 'b', 'luminance.1', and 'dispForeColor' columns
-					#"Changed Type1" = Table.TransformColumnTypes(#"Expanded Luminance", {{"r", type number}, {"g", type number}, {"b", type number}, {"luminance.1", type number}, {"dispForeColor", type text}}),
+					#"Changed Type1" = Table.TransformColumnTypes(#"Expanded Luminance",{{"r", type number}, {"g", type number}, {"b", type number}, {"luminance.1", Currency.Type}, {"dispForeColor", type text}}),
 				
 				// Rename 'luminance.1' column to 'Luminance'
 					#"Renamed Columns1" = Table.RenameColumns(#"Changed Type1", {{"luminance.1", "Luminance"}}),
