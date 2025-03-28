@@ -1,0 +1,101 @@
+table Reports
+	lineageTag: 475c393c-4376-47b5-b20a-801a8c1241b6
+
+	column 'Report Key'
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: 8cffc94e-2f82-4e20-bdd9-754e9a2d19a7
+		summarizeBy: none
+		sourceColumn: Report Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workspace ID'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: 9e90ca0f-e2fe-420e-8345-5a81df73e639
+		summarizeBy: none
+		sourceColumn: Workspace ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workspace Name'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: 4760a9df-4f0f-4588-a9cd-6d037769ec8d
+		summarizeBy: none
+		sourceColumn: Workspace Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report ID'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: ff476a44-7370-48ec-8a27-df412716dcf9
+		summarizeBy: none
+		sourceColumn: Report ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report Name'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: a161c70a-80ac-4c29-9e1c-5e781fd5abec
+		summarizeBy: none
+		sourceColumn: Report Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Reports-d5d3e579-22d9-4076-8ad8-cc321f1843cf = m
+		mode: import
+		queryGroup: 'Report Layout'
+		source =
+				let
+				    // Load the initial data from the 'Workspaces' table
+				    #"Loaded Workspaces" = Workspaces,
+				
+				    // Add a column by invoking a custom function to get reports in each group
+				    #"Invoked Get Reports Function" = Table.AddColumn(#"Loaded Workspaces", "GetReportsInGroup", each fnGetReportsInGroup([Workspace ID])),
+				
+				    // Parse the JSON in the 'GetReportsInGroup' column
+				    #"Parsed Reports JSON" = Table.TransformColumns(#"Invoked Get Reports Function", {{"GetReportsInGroup", Json.Document}}),
+				
+				    // Expand the 'GetReportsInGroup' column to include its records
+				    #"Expanded Reports Records" = Table.ExpandRecordColumn(#"Parsed Reports JSON", "GetReportsInGroup", {"value"}, {"value"}),
+				
+				    // Expand the 'value' column to include its list items
+				    #"Expanded Reports List" = Table.ExpandListColumn(#"Expanded Reports Records", "value"),
+				
+				    // Expand the 'value' column to include specific fields
+				    #"Expanded Reports Fields" = Table.ExpandRecordColumn(#"Expanded Reports List", "value", {"id", "name", "reportType"}, {"Report ID", "Report Name", "Report Type"}),
+				
+				    // Change the data type of specific columns
+				    #"Changed Reports Column Types" = Table.TransformColumnTypes(#"Expanded Reports Fields", {{"Report ID", type text}, {"Report Name", type text}, {"Report Type", type text}}),
+				
+				    // Add an index column starting from 1
+				    #"Added Report Index" = Table.AddIndexColumn(#"Changed Reports Column Types", "Index", 1, 1, Int64.Type),
+				
+				    // Reorder columns to a specific order
+				    #"Reordered Report Columns" = Table.ReorderColumns(#"Added Report Index", {"Index", "Workspace ID", "Workspace Name", "Report ID", "Report Name", "Report Type"}),
+				
+				    // Rename the 'Index' column to 'Report Key'
+				    #"Renamed Report Index" = Table.RenameColumns(#"Reordered Report Columns", {{"Index", "Report Key"}}),
+				
+				    // Filter rows to keep only those with 'Report Type' equal to 'PowerBIReport'
+				    #"Filtered Power BI Reports" = Table.SelectRows(#"Renamed Report Index", each ([Report Type] = "PowerBIReport")),
+				
+				    // Apply an additional filter based on 'Report Filter' if it is not null or '*No Report Filter*'
+				    #"Filtered Reports by Name" = if Override_Filter = "TRUE" or #"Report Filter" = null or #"Report Filter" = "*No Report Filter*" then #"Filtered Power BI Reports" else Table.SelectRows(#"Filtered Power BI Reports", each [Report Name] = #"Report Filter"),
+				    #"Selected Relevant Columns" = Table.SelectColumns(#"Filtered Reports by Name",{"Workspace ID", "Report Key", "Workspace Name", "Report ID", "Report Name"})
+				in
+				    #"Selected Relevant Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

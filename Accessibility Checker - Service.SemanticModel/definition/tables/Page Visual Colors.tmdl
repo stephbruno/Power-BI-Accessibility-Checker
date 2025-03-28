@@ -1,0 +1,165 @@
+table 'Page Visual Colors'
+	lineageTag: a140a2f4-4d62-4d6f-8e5d-ac2e127108ed
+
+	measure 'Contrast Color Value' = ```
+			
+			    VAR doCalc = DISTINCTCOUNTNOBLANK('Page Visual Colors'[VisualID])
+			    VAR vizID = MIN('Page Visual Colors'[VisualID])
+			    VAR thisProperty = MIN('Page Visual Colors'[Name.1])
+			    VAR thisColorType = MIN('Page Visual Colors'[Name.2])
+			    VAR behindVal = SWITCH(thisProperty
+			        , "title", IF(thisColorType = "fontColor", "background")
+			        , "x"
+			    )
+			    RETURN IF(doCalc = 1, behindVal, BLANK())
+			```
+		lineageTag: e626fd87-2e09-4862-b7ba-88bd9511e844
+
+	column VisualID
+		dataType: int64
+		isHidden
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: 895c604a-c1c4-44c8-8704-70a993483083
+		summarizeBy: none
+		sourceColumn: VisualID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Name.1'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: 537e7d6e-85f8-4301-88a1-b0c3936aa7a0
+		summarizeBy: none
+		sourceColumn: Name.1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Name.2'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: cfcb2150-3693-4bfd-9f6a-7aa9ea55c524
+		summarizeBy: none
+		sourceColumn: Name.2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Color Value'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: 3ffd311a-c2a5-423c-9e93-98c2bee6353e
+		summarizeBy: none
+		sourceColumn: Color Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Luminance
+		dataType: decimal
+		isAvailableInMdx: false
+		lineageTag: 96e70926-3032-4eb5-bad1-ae4c142e9d0c
+		summarizeBy: none
+		sourceColumn: Luminance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Page Visual Colors-b0eedac7-45c3-4209-9b20-df4000c6b07d' = m
+		mode: import
+		queryGroup: 'Page Visuals'
+		source =
+				let
+				    // Load the initial data from the 'Page Visuals Starter' table
+				    #"Loaded Page Visuals Starter" = #"Page Visuals Starter",
+				
+				    // Select specific columns from the source table
+				    #"Removed Unnecessary Columns" = Table.SelectColumns(#"Loaded Page Visuals Starter", {"Report Key", "PageID", "Page Name", "VisualID", "config", "name", "singleVisual.visualType", "singleVisual.objects", "singleVisual.vcObjects"}),
+				
+				    // Unpivot columns to transform the table structure
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Removed Unnecessary Columns", {"Report Key", "PageID", "Page Name", "VisualID", "name", "singleVisual.visualType", "config"}, "section", "json"),
+				
+				    // Add a new column by invoking a custom function to expand JSON
+				    #"Expanded JSON" = Table.AddColumn(#"Unpivoted Columns", "objects", each fnExpandJSONImkeFeldman([json])),
+				
+				    // Replace errors in the 'objects' column with null values
+				    #"Replaced Errors in Objects" = Table.ReplaceErrorValues(#"Expanded JSON", {{"objects", null}}),
+				
+				    // Remove unnecessary columns from the table
+				    #"Removed More Unnecessary Columns" = Table.RemoveColumns(#"Replaced Errors in Objects", {"json", "config"}),
+				
+				    // Expand the 'objects' column to include specific fields
+				    #"Expanded Objects" = Table.ExpandTableColumn(#"Removed More Unnecessary Columns", "objects", {"Value", "Level", "Sort", "SortBy", "Name", "Name.1", "Name.2", "Name.3", "Name.4", "Name.5", "Name.6", "Name.7"}, {"Value", "Level", "Sort", "SortBy", "Name.1", "Name.1.1", "Name.2", "Name.3", "Name.4", "Name.5", "Name.6", "Name.7"}),
+				
+				    // Remove duplicate rows based on specific columns
+				    #"Removed Duplicate Rows" = Table.Distinct(#"Expanded Objects", {"Report Key", "VisualID", "singleVisual.visualType", "section", "Name.1", "Name.1.1", "Name.2", "Name.3", "Name.4", "Name.5", "Name.6", "Name.7"}),
+				
+				    // Filter rows to keep only those containing 'color' in specific columns
+				    #"Filtered Rows by Color" = Table.SelectRows(#"Removed Duplicate Rows", each Text.Contains(Text.Lower([Name.2]), "color") or Text.Contains(Text.Lower([Name.3]), "color") or Text.Contains(Text.Lower([Name.4]), "color") or Text.Contains(Text.Lower([Name.5]), "color") or Text.Contains(Text.Lower([Name.6]), "color") or Text.Contains(Text.Lower([Name.7]), "color")),
+				
+				    // Remove additional unnecessary columns from the table
+				    #"Removed Additional Unnecessary Columns" = Table.RemoveColumns(#"Filtered Rows by Color", {"Name.1.1", "Name.3", "Name.4", "Name.5", "section", "Level", "Sort", "SortBy"}),
+				
+				    // Filter rows to exclude specific values in 'Name.6' and 'Name.2' columns
+				    #"Filtered Rows Excluding Values" = Table.SelectRows(#"Removed Additional Unnecessary Columns", each ([Name.6] <> "FillRule") and ([Name.2] <> "matchLineColor")),
+				
+				    // Replace null values in 'Name.6' column with 'Literal'
+				    #"Replaced Nulls in Name.6" = Table.ReplaceValue(#"Filtered Rows Excluding Values", null, "Literal", Replacer.ReplaceValue, {"Name.6"}),
+				
+				    // Replace null values in 'Name.7' column with 'Value'
+				    #"Replaced Nulls in Name.7" = Table.ReplaceValue(#"Replaced Nulls in Name.6", null, "Value", Replacer.ReplaceValue, {"Name.7"}),
+				    // Pivot the 'Name.7' column to create new columns from its values
+				    #"Pivoted Name.7 Column" = Table.Pivot(#"Replaced Nulls in Name.7", List.Distinct(#"Replaced Nulls in Name.7"[Name.7]), "Name.7", "Value"),
+				
+				    // Merge with 'Report Theme Data Colors' table based on 'Report Key' and 'ColorId'
+				    #"Merged with Theme Data Colors" = Table.NestedJoin(#"Pivoted Name.7 Column", {"Report Key", "ColorId"}, #"Report Theme Data Colors", {"Report Key", "Theme Color Id"}, "Report Theme Data Colors", JoinKind.LeftOuter),
+				
+				    // Expand the merged 'Report Theme Data Colors' table to include 'Value' column
+				    #"Expanded Theme Data Colors" = Table.ExpandTableColumn(#"Merged with Theme Data Colors", "Report Theme Data Colors", {"Value"}, {"Report Theme Data Colors.Value"}),
+				
+				    // Add a new column 'Theme Color by Pct' by invoking a custom function
+				    #"Added Theme Color by Pct" = Table.AddColumn(#"Expanded Theme Data Colors", "Theme Color by Pct", each fnChangeHexColorByXPct([Report Theme Data Colors.Value], [Percent])),
+				
+				    // Replace errors in the 'Theme Color by Pct' column with null values
+				    #"Replaced Errors in Theme Color by Pct" = Table.ReplaceErrorValues(#"Added Theme Color by Pct", {{"Theme Color by Pct", null}}),
+				
+				    // Expand the 'Theme Color by Pct' column to include 'hexColorChangedByPct'
+				    #"Expanded Theme Color by Pct" = Table.ExpandTableColumn(#"Replaced Errors in Theme Color by Pct", "Theme Color by Pct", {"hexColorChangedByPct"}, {"hexColorChangedByPct"}),
+				
+				    // Change the data type of the 'Value' column to text
+				    #"Changed Value Type to Text" = try Table.TransformColumnTypes(#"Expanded Theme Color by Pct", {{"Value", type text}}) otherwise #"Expanded Theme Color by Pct",
+				
+				    // Add a new column 'ColorValue' based on conditions in 'Name.6'
+				    #"Added ColorValue" = Table.AddColumn(#"Changed Value Type to Text", "ColorValue", each if [Name.6] = "Literal" then Text.TrimEnd(Text.TrimStart([Value], "'"), "'") else if [Name.6] = "ThemeDataColor" then [hexColorChangedByPct] else null, type text),
+				
+				    // Filter rows to keep only those with non-null 'ColorValue'
+				    #"Filtered Non-Null ColorValue Rows" = Table.SelectRows(#"Added ColorValue", each ([ColorValue] <> null)),
+				
+				    // Add a new column 'Luminance' by invoking a custom function
+				    #"Added Luminance" = Table.AddColumn(#"Filtered Non-Null ColorValue Rows", "Luminance", each fnGetLuminance([ColorValue])),
+				
+				    // Expand the 'Luminance' column to include 'luminance' and 'dispForeColor'
+				    #"Expanded Luminance" = Table.ExpandTableColumn(#"Added Luminance", "Luminance", {"luminance", "dispForeColor"}, {"Luminance", "dispForeColor"}),
+				
+				    // Change the data type of 'Luminance' and 'dispForeColor' columns to text
+				    #"Changed Luminance and ForeColor Types" = Table.TransformColumnTypes(#"Expanded Luminance", {{"Luminance", type text}, {"dispForeColor", type text}}),
+				
+				    // Remove unnecessary columns from the table
+				    #"Removed Final Unnecessary Columns" = Table.RemoveColumns(#"Changed Luminance and ForeColor Types", {"ColorId", "Percent", "hexColorChangedByPct"}),
+				
+				    // Change the data type of the 'Luminance' column to number
+				    #"Changed Luminance Type to Number" = Table.TransformColumnTypes(#"Removed Final Unnecessary Columns",{{"Luminance", Currency.Type}}),
+				
+				    // Select specific columns from the table
+				    #"Selected Relevant Columns" = Table.SelectColumns(#"Changed Luminance Type to Number",{"VisualID", "Name.1", "Name.2", "ColorValue", "Luminance"}),
+				
+				    // Rename specific columns
+				    #"Renamed Columns" = Table.RenameColumns(#"Selected Relevant Columns", {{"ColorValue", "Color Value"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,352 @@
+{
+  "config": "{\"version\":\"5.37\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY18SU07\",\"version\":\"5.1\",\"type\":2},\"customTheme\":{\"name\":\"Field_Finder_~_created_by_powerbi.tips_~_v1.09306241585443187.json\",\"version\":\"5.6\",\"type\":1}},\"activeSectionIndex\":0,\"bookmarks\":[{\"displayName\":\"Field Finder - Base\",\"name\":\"Bookmark228caa4009047934b6b4\",\"explorationState\":{\"version\":\"1.3\",\"activeSection\":\"ReportSectiondd4389dc2ea1af6bd24f\",\"sections\":{\"ReportSectiondd4389dc2ea1af6bd24f\":{\"visualContainers\":{\"0f39afad6655449e9a9d\":{\"singleVisual\":{\"visualType\":\"textbox\",\"objects\":{}}},\"1637f7e7c004751c12da\":{\"singleVisual\":{\"visualType\":\"actionButton\",\"objects\":{}}},\"a2faead06b4d8607dcec\":{\"singleVisual\":{\"visualType\":\"textbox\",\"objects\":{}}},\"fac15ef58500a097b37c\":{\"singleVisual\":{\"visualType\":\"textbox\",\"objects\":{},\"display\":{\"mode\":\"hidden\"}}},\"8b2e6e9866201b110684\":{\"singleVisual\":{\"visualType\":\"textbox\",\"objects\":{}}},\"1e1a9d5f07310e834e4d\":{\"singleVisual\":{\"visualType\":\"actionButton\",\"objects\":{},\"display\":{\"mode\":\"hidden\"}}}}}},\"objects\":{\"merge\":{\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}},\"options\":{\"targetVisualNames\":[],\"suppressData\":true}},{\"displayName\":\"Field Finder - Icon\",\"name\":\"Bookmark08a1e7e3de52ce147b8b\",\"explorationState\":{\"version\":\"1.3\",\"activeSection\":\"ReportSectiondd4389dc2ea1af6bd24f\",\"sections\":{\"ReportSectiondd4389dc2ea1af6bd24f\":{\"visualContainers\":{\"0f39afad6655449e9a9d\":{\"singleVisual\":{\"visualType\":\"textbox\",\"objects\":{}}},\"1637f7e7c004751c12da\":{\"singleVisual\":{\"visualType\":\"actionButton\",\"objects\":{}}},\"a2faead06b4d8607dcec\":{\"singleVisual\":{\"visualType\":\"textbox\",\"objects\":{}}},\"fac15ef58500a097b37c\":{\"singleVisual\":{\"visualType\":\"textbox\",\"objects\":{}}},\"8b2e6e9866201b110684\":{\"singleVisual\":{\"visualType\":\"textbox\",\"objects\":{}}}}}},\"objects\":{\"merge\":{\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}},\"options\":{\"targetVisualNames\":[]}}],\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"allowDataPointLassoSelect\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "ReportSection29ecf310e01999696e30",
+      "config": "{}",
+      "name": "Pod"
+    },
+    {
+      "boundSection": "ReportSectiondd4389dc2ea1af6bd24f",
+      "config": "{}",
+      "name": "Pod2"
+    },
+    {
+      "boundSection": "ReportSection8d795879f84309e540f1",
+      "config": "{}",
+      "name": "Pod3"
+    },
+    {
+      "boundSection": "ReportSection47cfbf9779b0550e70c9",
+      "config": "{}",
+      "name": "Pod5"
+    }
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "Artboard_1_copy_3@2x6374843066150278.png",
+            "path": "Artboard_1_copy_3@2x6374843066150278.png",
+            "type": 100
+          },
+          {
+            "name": "Artboard_1_copy_3@2x7363774382801938.png",
+            "path": "Artboard_1_copy_3@2x7363774382801938.png",
+            "type": 100
+          },
+          {
+            "name": "Field_Finder_~_created_by_powerbi.tips_~_v1.09306241585443187.json",
+            "path": "Field_Finder_~_created_by_powerbi.tips_~_v1.09306241585443187.json",
+            "type": 201
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY18SU07",
+            "path": "BaseThemes/CY18SU07.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "htmlContent443BE3AD55E043BF878BED274D3A6855.pbiviz.json",
+            "path": "htmlContent443BE3AD55E043BF878BED274D3A6855.pbiviz.json",
+            "type": 5
+          }
+        ],
+        "name": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+        "type": 0
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Artboard 1 copy 3@2x.png'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Artboard_1_copy_3@2x6374843066150278.png\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}",
+      "displayName": "Helpful Resources",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection29ecf310e01999696e30",
+      "ordinal": 3,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"697b4ceddcc68b47e79e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":184.493041749503,\"y\":111.96819085487078,\"z\":1000,\"width\":912,\"height\":496.2226640159046,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Helpful tools for your data model:\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"13.5pt\"}}]},{\"textRuns\":[{\"value\":\"Power BI Helper:  \",\"textStyle\":{\"fontSize\":\"13.5pt\"}},{\"value\":\"https://radacad.com/power-bi-helper\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://radacad.com/power-bi-helper\"}]},{\"textRuns\":[{\"value\":\"Power BI Assistant:  \",\"textStyle\":{\"fontSize\":\"13.5pt\"}},{\"value\":\"https://github.com/didierterrien/Power-BI-assistant\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://github.com/didierterrien/Power-BI-assistant\"}]},{\"textRuns\":[{\"value\":\"All the SQL BI tools:  \",\"textStyle\":{\"fontSize\":\"13.5pt\"}},{\"value\":\"https://www.sqlbi.com/tools/\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://www.sqlbi.com/tools/\"}]},{\"textRuns\":[{\"value\":\"\"}]},{\"textRuns\":[{\"value\":\"What makes up a pbix file:\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"13.5pt\"}}]},{\"textRuns\":[{\"value\":\"https://www.fourmoo.com/2017/05/02/what-makes-up-a-power-bi-desktop-pbix-file/\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://www.fourmoo.com/2017/05/02/what-makes-up-a-power-bi-desktop-pbix-file/\"}]},{\"textRuns\":[{\"value\":\"https://radacad.com/exposing-m-code-and-query-metadata-of-power-bi-pbix-file\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://radacad.com/exposing-m-code-and-query-metadata-of-power-bi-pbix-file\"}]},{\"textRuns\":[{\"value\":\"\"}]},{\"textRuns\":[{\"value\":\"SVG images in Power BI:\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"13.5pt\"}}]},{\"textRuns\":[{\"value\":\"https://visualbi.com/blogs/microsoft/creating-svg-images-in-power-bi/\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://visualbi.com/blogs/microsoft/creating-svg-images-in-power-bi/\"}]},{\"textRuns\":[{\"value\":\"https://dataveld.com/2018/01/13/use-svg-images-in-power-bi-part-1/\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://dataveld.com/2018/01/13/use-svg-images-in-power-bi-part-1/\"}]},{\"textRuns\":[{\"value\":\"https://jesepowerbi.wordpress.com/2019/07/23/how-to-use-svg-images-in-powerbi/\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://jesepowerbi.wordpress.com/2019/07/23/how-to-use-svg-images-in-powerbi/\"}]},{\"textRuns\":[{\"value\":\"\"}]},{\"textRuns\":[{\"value\":\"20 distinct colors to use:\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"13.5pt\"}}]},{\"textRuns\":[{\"value\":\"https://sashat.me/2017/01/11/list-of-20-simple-distinct-colors/\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://sashat.me/2017/01/11/list-of-20-simple-distinct-colors/\"}]},{\"textRuns\":[{\"value\":\"\"}]},{\"textRuns\":[{\"value\":\"Understanding RGB vs Hex colors, and when to use a light or dark font color:\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"13.5pt\"}}]},{\"textRuns\":[{\"value\":\"https://appendto.com/2017/02/rgb-to-hex-understanding-the-major-web-color-codes/\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://appendto.com/2017/02/rgb-to-hex-understanding-the-major-web-color-codes/\"}]},{\"textRuns\":[{\"value\":\"https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color\"}]},{\"textRuns\":[{\"value\":\"\"}]},{\"textRuns\":[{\"value\":\"Recursive functions in PowerQuery to flatten hierarchies (used here to deal with groups of visuals):\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"13.5pt\"}}]},{\"textRuns\":[{\"value\":\"https://www.thebiccountant.com/2017/02/14/dynamically-flatten-parent-child-hierarchies-in-dax-and-powerbi/\",\"textStyle\":{\"fontSize\":\"13.5pt\"},\"url\":\"https://www.thebiccountant.com/2017/02/14/dynamically-flatten-parent-child-hierarchies-in-dax-and-powerbi/\"}]},{\"textRuns\":[{\"value\":\"\"}]}]}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Informational Links'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Table of links to additional resources'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 496.22,
+          "width": 912.00,
+          "x": 184.49,
+          "y": 111.97,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"a965d1589349104e0472\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1228.2392586352148,\"y\":32.35046335299073,\"z\":0,\"width\":37.74220724515585,\"height\":33.428812131423754,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'information'\"}}}},\"selector\":{\"id\":\"default\"}}],\"text\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}},{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}},\"selector\":{\"id\":\"default\"}},{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}},\"selector\":{\"id\":\"hover\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Bookmark'\"}}},\"bookmark\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}},\"tooltip\":{\"expr\":{\"Literal\":{\"Value\":\"'Icon made by Freepik from www.flaticon.com is licensed by CC 3.0 BY'\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Information Button'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'This goes to a web page for the Accessibility Checker'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 33.43,
+          "width": 37.74,
+          "x": 1228.24,
+          "y": 32.35,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"d00ff129a9358dc09472\",\"layouts\":[{\"id\":0,\"position\":{\"x\":196,\"y\":16,\"z\":2000,\"width\":888,\"height\":80,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Helpful Resources\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontFamily\":\"Segoe UI\",\"fontSize\":\"30pt\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Helpful Resources Section'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Title of Page'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 80.00,
+          "width": 888.00,
+          "x": 196.00,
+          "y": 16.00,
+          "z": 2000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}},\"url\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#E0E5E5'\"}}}}}}}]}}",
+      "displayName": "Color Contrast",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection47cfbf9779b0550e70c9",
+      "ordinal": 2,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"0944bd39cb6364c01417\",\"layouts\":[{\"id\":0,\"position\":{\"x\":26.150030693677103,\"y\":12.069244935543278,\"z\":2000,\"width\":349.0023327194598,\"height\":63.36353591160221,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Color Contrast\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontFamily\":\"Segoe UI\",\"fontSize\":\"24pt\",\"color\":\"#013c3d\"}}]}]}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Color Contrast Section'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Title for Page'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 63.36,
+          "width": 349.00,
+          "x": 26.15,
+          "y": 12.07,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"0abd4391093ca0567bb9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":936.3691198782103,\"y\":1.3365818209773006,\"z\":1000,\"width\":314.8061387354205,\"height\":475.7294045426642,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"htmlContent443BE3AD55E043BF878BED274D3A6855\",\"projections\":{\"content\":[{\"queryRef\":\" Measures.svg Code\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\" \",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\" \"}},\"Property\":\"SVG Code\"},\"Name\":\" Measures.svg Code\"}]},\"drillFilterOtherVisuals\":true,\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Pages\"}},\"Property\":\"Page Info\"}},\"Function\":3}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Table identifying each visual and their contrast ratio.'\"}}}}}]}},\"parentGroupName\":\"38bc4b9440d02c52ada8\"}",
+          "filters": "[]",
+          "height": 475.73,
+          "width": 314.81,
+          "x": 936.37,
+          "y": 1.34,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"38bc4b9440d02c52ada8\",\"layouts\":[{\"id\":0,\"position\":{\"height\":477.74094536525473,\"width\":1251.1752586136308,\"x\":11.000017975191819,\"y\":226.99813524363094,\"z\":3000,\"tabOrder\":0}}],\"singleVisualGroup\":{\"displayName\":\"Color Contrast Group\",\"groupMode\":0,\"objects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}}}",
+          "height": 477.74,
+          "width": 1251.18,
+          "x": 11.00,
+          "y": 227.00,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"414aea8e36668ec2dba0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":26.606942889137738,\"y\":75.78947368421052,\"z\":1000,\"width\":349.11534154535275,\"height\":83.04591265397536,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Reports.Workspace Name\",\"active\":true},{\"queryRef\":\"Reports.Report Name\",\"active\":true},{\"queryRef\":\"Pages.displayName\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"Pages\",\"Type\":0},{\"Name\":\"r\",\"Entity\":\"Reports\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Page Name\"},\"Name\":\"Pages.displayName\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Report Name\"},\"Name\":\"Reports.Report Name\",\"NativeReferenceName\":\"Report Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Workspace Name\"},\"Name\":\"Reports.Workspace Name\",\"NativeReferenceName\":\"Workspace Name\"}]},\"expansionStates\":[{\"roles\":[\"Values\"],\"levels\":[{\"queryRefs\":[\"Reports.Workspace Name\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Reports\"}},\"Property\":\"Workspace Name\"}}],\"isPinned\":true},{\"queryRefs\":[\"Reports.Report Name\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Reports\"}},\"Property\":\"Report Name\"}}],\"isPinned\":true},{\"queryRefs\":[\"Pages.displayName\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'BIR Reporting [Development]'\"}}],\"isToggled\":true,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'DevSecOps Portal'\"}}],\"isToggled\":true}]}]}}],\"syncGroup\":{\"groupName\":\"Page Name\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Reports\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Workspace Name\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'visual-error-testing'\"}}]]}}}]}},\"selfFilterEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"header\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0}}}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Select a single page from a report'\"}}}}}],\"items\":[{\"properties\":{\"background\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0}}}}}}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Workspace->Report->Page Slicer'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Slicer to select workspace, report, and page.'\"}}}}}]},\"cachedFilterDisplayItems\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Reports\"}},\"Property\":\"Workspace Name\"}},\"Right\":{\"Literal\":{\"Value\":\"'visual-error-testing'\"}}}}},\"displayName\":\"visual-error-testing\"}]}}",
+          "filters": "[]",
+          "height": 83.05,
+          "width": 349.12,
+          "x": 26.61,
+          "y": 75.79,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"7ffe4dcae0892d3ac42a\",\"layouts\":[{\"id\":0,\"position\":{\"height\":130.75015346838552,\"width\":170.98096992019643,\"x\":400.29662369551875,\"y\":21.121178637200735,\"z\":6001,\"tabOrder\":3000}}],\"singleVisualGroup\":{\"displayName\":\"Comparison Color Group\",\"groupMode\":0}}",
+          "height": 130.75,
+          "width": 170.98,
+          "x": 400.30,
+          "y": 21.12,
+          "z": 6001.00
+        },
+        {
+          "config": "{\"name\":\"d3527bd237090dd49d09\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":2000,\"width\":937.3780233271946,\"height\":477.74094536525473,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Page Visual Types.Visual Type\"},{\"queryRef\":\"Page Visuals.Title Text Value\"},{\"queryRef\":\"Page Visuals.Tab Order\"},{\"queryRef\":\"Page Visual Colors (2).Name.1\"},{\"queryRef\":\"Page Visual Colors (2).Name.2\"},{\"queryRef\":\"Page Visual Colors (2).ColorValue\"},{\"queryRef\":\"Comparison Color.Sample\"},{\"queryRef\":\"Comparison Color.Contrast Ratio\"},{\"queryRef\":\"Comparison Color.Pass Level Icon\"},{\"queryRef\":\"Comparison Color.Pass Level\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p1\",\"Entity\":\"Page Visual Types\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Page Visuals\",\"Type\":0},{\"Name\":\"p2\",\"Entity\":\"Page Visual Colors\",\"Type\":0},{\"Name\":\"c\",\"Entity\":\"Comparison Color\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p1\"}},\"Property\":\"Visual Type\"},\"Name\":\"Page Visual Types.Visual Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Title Text Value\"},\"Name\":\"Page Visuals.Title Text Value\",\"NativeReferenceName\":\"Title Text Value\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p2\"}},\"Property\":\"Name.1\"},\"Name\":\"Page Visual Colors (2).Name.1\",\"NativeReferenceName\":\"Name.1\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p2\"}},\"Property\":\"Name.2\"},\"Name\":\"Page Visual Colors (2).Name.2\",\"NativeReferenceName\":\"Name.2\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p2\"}},\"Property\":\"Color Value\"},\"Name\":\"Page Visual Colors (2).ColorValue\",\"NativeReferenceName\":\"Color\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Pass Level\"},\"Name\":\"Comparison Color.Pass Level\",\"NativeReferenceName\":\"Pass Level\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Tab Order\"},\"Name\":\"Page Visuals.Tab Order\",\"NativeReferenceName\":\"Tab Order\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Contrast Ratio\"},\"Name\":\"Comparison Color.Contrast Ratio\",\"NativeReferenceName\":\"Contrast Ratio\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Sample\"},\"Name\":\"Comparison Color.Sample\",\"NativeReferenceName\":\"Comparison Sample\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Pass Level Icon\"},\"Name\":\"Comparison Color.Pass Level Icon\",\"NativeReferenceName\":\" \"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Tab Order\"}}}]},\"columnProperties\":{\"Page Visual Colors (2).ColorValue\":{\"displayName\":\"Color\"},\"Comparison Color.Sample\":{\"displayName\":\"Comparison Sample\"},\"Comparison Color.Pass Level Icon\":{\"displayName\":\" \"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"values\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}},\"backColorSecondary\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":5,\"Percent\":0.6}}}}}}},{\"properties\":{\"backColor\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Page Visual Types\"}},\"Property\":\"Hex Color\"}},\"Function\":3}}}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Page Visual Types\"}},\"Property\":\"Forecolor\"}},\"Function\":3}}}}}},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}],\"metadata\":\"Page Visual Types.Visual Type\"}},{\"properties\":{\"backColor\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Page Visual Colors\"}},\"Property\":\"Color Value\"}},\"Function\":3}}}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Page Visual Colors\"}},\"Property\":\"dispForeColor\"}},\"Function\":3}}}}}},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}],\"metadata\":\"Page Visual Colors (2).ColorValue\"}},{\"properties\":{},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}],\"metadata\":\"Comparison Color.Pass Level\"}},{\"properties\":{\"backColor\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Page Visual Colors\"}},\"Property\":\"Color Value\"}},\"Function\":3}}}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Comparison Color\"}},\"Property\":\"Compare Color\"}},\"Function\":3}}}}}},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}],\"metadata\":\"Comparison Color.Sample\"}}],\"columnHeaders\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"'10'\"}}}}}],\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"87.44446768900265D\"}}}},\"selector\":{\"metadata\":\"Page Visual Types.Visual Type\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"231.59131625103D\"}}}},\"selector\":{\"metadata\":\"Page Visuals.Title Text Value\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48.614545143825175D\"}}}},\"selector\":{\"metadata\":\"Page Visuals.Tab Order\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"104.3617570226078D\"}}}},\"selector\":{\"metadata\":\"Page Visual Colors (2).Name.1\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"63.555487470571165D\"}}}},\"selector\":{\"metadata\":\"Comparison Color.Contrast Ratio\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"84.76013587983893D\"}}}},\"selector\":{\"metadata\":\"Comparison Color.Sample\"}}],\"total\":[{\"properties\":{\"totals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"grid\":[{\"properties\":{\"outlineColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0}}}}},\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"columnFormatting\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Right'\"}}}},\"selector\":{\"metadata\":\"Comparison Color.Contrast Ratio\"}},{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}}},\"selector\":{\"metadata\":\"Page Visual Colors (2).ColorValue\"}},{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}}},\"selector\":{\"metadata\":\"Comparison Color.Sample\"}},{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Right'\"}}}},\"selector\":{\"metadata\":\"Page Visuals.Tab Order\"}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Visuals Legend'\"}}},\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0.2}}}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"'12'\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"stylePreset\":[{\"properties\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Default'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'SVG representing tab order for the page'\"}}}}}]}},\"parentGroupName\":\"38bc4b9440d02c52ada8\"}",
+          "filters": "[]",
+          "height": 477.74,
+          "width": 937.38,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"d4b72a1320615dde63a4\",\"layouts\":[{\"id\":0,\"position\":{\"x\":591.3930018416206,\"y\":21.121178637200735,\"z\":4000,\"width\":670.8488643339472,\"height\":195.119459791283,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"This page provides information on the contrast between a single color you provide as a parameter (which is displayed in the box to the left) and the colors on your visuals. \",\"textStyle\":{\"fontSize\":\"11pt\",\"color\":\"#013c3d\"}},{\"value\":\"The higher the Contrast Ratio, the better!\",\"textStyle\":{\"fontSize\":\"14.6667px\",\"color\":\"#013c3d\"}},{\"value\":\" The Pass Level column gives the contrast in the Compare Color column a score based on WCAG standards.\",\"textStyle\":{\"fontSize\":\"11pt\",\"color\":\"#013c3d\"}}]},{\"textRuns\":[{\"value\":\"✅\",\"textStyle\":{\"fontSize\":\"11pt\",\"color\":\"#013c3d\"}}]},{\"textRuns\":[{\"value\":\"🆗\",\"textStyle\":{\"fontSize\":\"11pt\",\"color\":\"#013c3d\"}}]},{\"textRuns\":[{\"value\":\"⚠️\",\"textStyle\":{\"fontSize\":\"11pt\",\"color\":\"#013c3d\"}}]},{\"textRuns\":[{\"value\":\"❌\",\"textStyle\":{\"fontSize\":\"11pt\",\"color\":\"#013c3d\"}}]}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Instructions'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Instructions for Color Contrast'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 195.12,
+          "width": 670.85,
+          "x": 591.39,
+          "y": 21.12,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"f8579a460c649fce1feb\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":65.37507673419276,\"z\":5000,\"width\":170.98096992019643,\"height\":65.37507673419276,\"tabOrder\":-1}}],\"singleVisual\":{\"visualType\":\"shape\",\"drillFilterOtherVisuals\":true,\"objects\":{\"shape\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}}}}],\"rotation\":[{\"properties\":{\"shapeAngle\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}],\"fill\":[{\"properties\":{\"fillColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"50D\"}}}},\"selector\":{\"id\":\"default\"}}],\"outline\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Comparison Color Box'\"}}}}}]}},\"parentGroupName\":\"7ffe4dcae0892d3ac42a\"}",
+          "filters": "[]",
+          "height": 65.38,
+          "width": 170.98,
+          "x": 0.00,
+          "y": 65.38,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"f888d638329bd11e235c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":170.98096992019643,\"height\":64.36930632289749,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Color to compare (2).CompareColor)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Comparison Color\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Compare Color\"}},\"Function\":3},\"Name\":\"Min(Color to compare (2).CompareColor)\",\"NativeReferenceName\":\"Comparison Color\"}]},\"columnProperties\":{\"Min(Color to compare (2).CompareColor)\":{\"displayName\":\"Comparison Color\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"labels\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0}}}}}}}],\"categoryLabels\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Comparison Color\"}},\"Property\":\"Display Forecolor\"}},\"Function\":3}}}}},\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"50D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Comparison Color\"}},\"Property\":\"Display Forecolor\"}},\"Function\":3}}}}}}}],\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Comparison Color'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0}}}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Comparison Color as defined by parameter.'\"}}}}}]}},\"parentGroupName\":\"7ffe4dcae0892d3ac42a\"}",
+          "filters": "[]",
+          "height": 64.37,
+          "width": 170.98,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"ffebc025c0b08e622106\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.057704112952706,\"y\":70.87882136279927,\"z\":6000,\"width\":150.865561694291,\"height\":54.31160220994475,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"shape\",\"drillFilterOtherVisuals\":true,\"objects\":{\"shape\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}}}}],\"rotation\":[{\"properties\":{\"shapeAngle\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}],\"fill\":[{\"properties\":{\"fillColor\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Comparison Color\"}},\"Property\":\"Compare Color\"}},\"Function\":3}}}}}},\"selector\":{\"id\":\"default\"}}],\"outline\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Color'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Color box represented by Comparison Color'\"}}}}}]}},\"parentGroupName\":\"7ffe4dcae0892d3ac42a\"}",
+          "filters": "[]",
+          "height": 54.31,
+          "width": 150.87,
+          "x": 10.06,
+          "y": 70.88,
+          "z": 6000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}},\"url\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#E0E5E5'\"}}}}}}}]}}",
+      "displayName": "Tab Order and Alt Text",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection8d795879f84309e540f1",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"3d6215c2f1813b5019c9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":3000,\"width\":768.3762597984322,\"height\":533.7513997760358,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Pages.Page Name\"},{\"queryRef\":\"Page Visual Types.Visual Type\"},{\"queryRef\":\"Page Visuals.Title Text Value\"},{\"queryRef\":\"Page Visuals.Tab Order\"},{\"queryRef\":\"Page Visuals.AltText Type\"},{\"queryRef\":\"Page Visuals.AltText Value\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p1\",\"Entity\":\"Page Visual Types\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Page Visuals\",\"Type\":0},{\"Name\":\"p2\",\"Entity\":\"Pages\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p1\"}},\"Property\":\"Visual Type\"},\"Name\":\"Page Visual Types.Visual Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"AltText Type\"},\"Name\":\"Page Visuals.AltText Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"AltText Value\"},\"Name\":\"Page Visuals.AltText Value\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Tab Order\"},\"Name\":\"Page Visuals.Tab Order\",\"NativeReferenceName\":\"Tab Order\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Title Text Value\"},\"Name\":\"Page Visuals.Title Text Value\",\"NativeReferenceName\":\"Title\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p2\"}},\"Property\":\"Page Name\"},\"Name\":\"Pages.Page Name\",\"NativeReferenceName\":\"Page\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Tab Order\"}}}]},\"columnProperties\":{\"Pages.Page Name\":{\"displayName\":\"Page\"},\"Page Visuals.Title Text Value\":{\"displayName\":\"Title\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"values\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}},\"backColorSecondary\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":5,\"Percent\":0.6}}}}}}},{\"properties\":{\"backColor\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Page Visual Types\"}},\"Property\":\"Hex Color\"}},\"Function\":3}}}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Page Visual Types\"}},\"Property\":\"Forecolor\"}},\"Function\":3}}}}}},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}],\"metadata\":\"Page Visual Types.Visual Type\"}}],\"columnHeaders\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"'10'\"}}}}}],\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"110.02001514602848D\"}}}},\"selector\":{\"metadata\":\"Page Visual Types.Visual Type\"}}],\"total\":[{\"properties\":{\"totals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"grid\":[{\"properties\":{\"outlineColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0}}}}},\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Visuals Legend'\"}}},\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0.2}}}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"'12'\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"stylePreset\":[{\"properties\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Default'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Table defining the Tab Order and Alt text by Page'\"}}}}}]}},\"parentGroupName\":\"7dd2879884ea30942996\"}",
+          "filters": "[]",
+          "height": 533.75,
+          "width": 768.38,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"518c86fb25d098ce3bc1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":26.606942889137738,\"y\":12.094064949608063,\"z\":1000,\"width\":403.13549832026877,\"height\":63.69540873460246,\"tabOrder\":3500}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Tab Order and Alt Text\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontFamily\":\"Segoe UI\",\"fontSize\":\"24pt\",\"color\":\"#013c3d\"}}]}]}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Tab Order and Alt Text Section'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Title for Page'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 63.70,
+          "width": 403.14,
+          "x": 26.61,
+          "y": 12.09,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"7dd2879884ea30942996\",\"layouts\":[{\"id\":0,\"position\":{\"x\":7.755375193409463,\"y\":170.80644450476018,\"z\":2000,\"width\":1253.7513997760357,\"height\":535.5574972645567,\"tabOrder\":2000}}],\"singleVisualGroup\":{\"displayName\":\"Group 1\",\"groupMode\":0,\"objects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}}}",
+          "height": 535.56,
+          "width": 1253.75,
+          "x": 7.76,
+          "y": 170.81,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"8a32e8db32d3370d0a06\",\"layouts\":[{\"id\":0,\"position\":{\"x\":781.2765957446808,\"y\":0.19355549523982063,\"z\":2000,\"width\":472.47480403135495,\"height\":535.3639417693169,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"htmlContent443BE3AD55E043BF878BED274D3A6855\",\"projections\":{\"content\":[{\"queryRef\":\" Measures.svg Code\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\" \",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\" \"}},\"Property\":\"SVG Code\"},\"Name\":\" Measures.svg Code\",\"NativeReferenceName\":\"SVG Code\"}]},\"drillFilterOtherVisuals\":true,\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Pages\"}},\"Property\":\"Page Info\"}},\"Function\":3}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'SVG representing tab order for the visuals.'\"}}}}}]}},\"parentGroupName\":\"7dd2879884ea30942996\"}",
+          "filters": "[]",
+          "height": 535.36,
+          "width": 472.47,
+          "x": 781.28,
+          "y": 0.19,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"a786bdcb16aa85185163\",\"layouts\":[{\"id\":0,\"position\":{\"x\":26.606942889137738,\"y\":75.78947368421052,\"z\":0,\"width\":349.11534154535275,\"height\":83.04591265397536,\"tabOrder\":2500}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Reports.Workspace Name\",\"active\":true},{\"queryRef\":\"Reports.Report Name\",\"active\":true},{\"queryRef\":\"Pages.displayName\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"Pages\",\"Type\":0},{\"Name\":\"r\",\"Entity\":\"Reports\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Page Name\"},\"Name\":\"Pages.displayName\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Report Name\"},\"Name\":\"Reports.Report Name\",\"NativeReferenceName\":\"Report Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Workspace Name\"},\"Name\":\"Reports.Workspace Name\",\"NativeReferenceName\":\"Workspace Name\"}]},\"expansionStates\":[{\"roles\":[\"Values\"],\"levels\":[{\"queryRefs\":[\"Reports.Workspace Name\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Reports\"}},\"Property\":\"Workspace Name\"}}],\"isPinned\":true},{\"queryRefs\":[\"Reports.Report Name\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Reports\"}},\"Property\":\"Report Name\"}}],\"isPinned\":true},{\"queryRefs\":[\"Pages.displayName\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'BIR Reporting [Development]'\"}}],\"isToggled\":true,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'SampleModel'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'DevSecOps Portal'\"}}],\"isToggled\":true}]}]}}],\"syncGroup\":{\"groupName\":\"Page Name\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Reports\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Workspace Name\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'visual-error-testing'\"}}]]}}}]}},\"selfFilterEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"header\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0}}}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Select a single page from a report'\"}}}}}],\"items\":[{\"properties\":{\"background\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0}}}}}}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Workspace->Report->Page Slicer'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Slicer to select workspace, report, and page.'\"}}}}}]},\"cachedFilterDisplayItems\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Reports\"}},\"Property\":\"Workspace Name\"}},\"Right\":{\"Literal\":{\"Value\":\"'visual-error-testing'\"}}}}},\"displayName\":\"visual-error-testing\"}]}}",
+          "filters": "[]",
+          "height": 83.05,
+          "width": 349.12,
+          "x": 26.61,
+          "y": 75.79,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"bda5a8d2cbd3ab302ac0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":458.76819708846585,\"y\":20.963045912653975,\"z\":3000,\"width\":803.0459126539754,\"height\":137.87234042553192,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Tab Order\",\"textStyle\":{\"fontSize\":\"11pt\",\"color\":\"#1155cc\"},\"url\":\"https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-accessibility-creating-reports#tab-order\"},{\"value\":\" : Setting the tab order helps keyboard users navigate your report in an order that matches the way users visually process the report visuals. If you're including decorative shapes and images in your report, you should remove those from the tab order. Blog post by Meagan Longoria on the \",\"textStyle\":{\"fontSize\":\"11pt\"}},{\"value\":\"importance of Tab Order\",\"textStyle\":{\"fontSize\":\"11pt\",\"color\":\"#1155cc\"},\"url\":\"https://datasavvy.me/2018/12/26/tab-order-enhances-power-bi-report-accessibility/\"},{\"value\":\" .\",\"textStyle\":{\"fontSize\":\"11pt\"}}],\"listType\":\"bullet\"},{\"textRuns\":[{\"value\":\"Alt Text\",\"textStyle\":{\"fontSize\":\"11pt\",\"color\":\"#1155cc\"},\"url\":\"https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-accessibility-creating-reports#alt-text\"},{\"value\":\" : Make sure to include information about the insight that you'd like the report consumer to take away from a visual. Alt Text can be tested using a screen reader such as Microsoft Narrator, which is an app installed with Windows.\",\"textStyle\":{\"fontSize\":\"11pt\"}}],\"listType\":\"bullet\"},{\"textRuns\":[{\"value\":\"\"}]}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Instructions'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Instructions for tab order and alt text'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 137.87,
+          "width": 803.05,
+          "x": 458.77,
+          "y": 20.96,
+          "z": 3000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Artboard 1 copy 3@2x.png'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Artboard_1_copy_3@2x7363774382801938.png\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}",
+      "displayName": "Instructions",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSectiondd4389dc2ea1af6bd24f",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"0f39afad6655449e9a9d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":224,\"y\":16,\"z\":0,\"width\":832,\"height\":80,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Power BI Accessibility Checker - Service\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontFamily\":\"Segoe UI\",\"fontSize\":\"30pt\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Title of Instructions'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Power BI Accessibility Checker Title'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 80.00,
+          "width": 832.00,
+          "x": 224.00,
+          "y": 16.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"1637f7e7c004751c12da\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1228.2392586352148,\"y\":32.35046335299073,\"z\":1000,\"width\":37.74220724515585,\"height\":33.428812131423754,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'information'\"}}}},\"selector\":{\"id\":\"default\"}}],\"text\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}},{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}},\"selector\":{\"id\":\"default\"}},{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}},\"selector\":{\"id\":\"hover\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Bookmark'\"}}},\"bookmark\":{\"expr\":{\"Literal\":{\"Value\":\"'Bookmark08a1e7e3de52ce147b8b'\"}}},\"tooltip\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Info Button'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'This goes to a web page for the Accessibility Checker'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 33.43,
+          "width": 37.74,
+          "x": 1228.24,
+          "y": 32.35,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"1e1a9d5f07310e834e4d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1133.3791523482246,\"y\":5.86483390607102,\"z\":5000,\"width\":27.857961053837343,\"height\":30.790378006872853,\"tabOrder\":-1001}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"display\":{\"mode\":\"hidden\"},\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'reset'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Bookmark'\"}}},\"bookmark\":{\"expr\":{\"Literal\":{\"Value\":\"'Bookmark228caa4009047934b6b4'\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Button Hidden'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 30.79,
+          "width": 27.86,
+          "x": 1133.38,
+          "y": 5.86,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"8b2e6e9866201b110684\",\"layouts\":[{\"id\":0,\"position\":{\"x\":184.493041749503,\"y\":111.96819085487078,\"z\":4000,\"width\":912.2862823061631,\"height\":498.76739562624255,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Version 1.1\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"15pt\"}}]},{\"textRuns\":[{\"value\":\"Use the Power BI Accessibility Checker to understand if your Power BI report meets basic accessibility standards.  This tool provides information on three key areas of accessible report design:\",\"textStyle\":{\"fontSize\":\"15pt\"}}]},{\"textRuns\":[{\"value\":\"Tab Order\",\"textStyle\":{\"fontSize\":\"15pt\"}}],\"listType\":\"bullet\"},{\"textRuns\":[{\"value\":\"Alt Text\",\"textStyle\":{\"fontSize\":\"15pt\"}}],\"listType\":\"bullet\"},{\"textRuns\":[{\"value\":\"Color Contrast\",\"textStyle\":{\"fontSize\":\"15pt\"}}],\"listType\":\"bullet\"},{\"textRuns\":[{\"value\":\"\"}]},{\"textRuns\":[{\"value\":\"Instructions\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"15pt\"}}]},{\"textRuns\":[{\"value\":\"1.  Change the parameter in this pbix file for \\\"PBIX filename\\\" to the folder path of your pbix file(s) (parameters can be found in the ribbon under Home/Edit Queries/Edit Parameters).  For example, if you your pbix file is saved in your C drive in a folder called \\\"test\\\", then the value for this parameter should be \\\"C:\\\\test\\\".\",\"textStyle\":{\"fontSize\":\"13.5pt\"}}]},{\"textRuns\":[{\"value\":\"\"}]},{\"textRuns\":[{\"value\":\"2.  Click the \\\"Apply Changes\\\" button, and find your results on the following pages!\",\"textStyle\":{\"fontSize\":\"13.5pt\"}}]},{\"textRuns\":[{\"value\":\"\"}]},{\"textRuns\":[{\"value\":\"3.  When you make changes to your source pbix file, re-save the pbix file and click the \\\"Refresh\\\" button on this report for updated results.\",\"textStyle\":{\"fontSize\":\"13.5pt\"}}]}]}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Version Instructions'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Instructions for using this tool'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 498.77,
+          "width": 912.29,
+          "x": 184.49,
+          "y": 111.97,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"a2faead06b4d8607dcec\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1.2723658051689861,\"y\":686.9184890656063,\"z\":2000,\"width\":1277.455268389662,\"height\":33.08151093439364,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Power BI Accessibility Checker Version 1.1 - developed by Stephanie Bruno, March 2023 | Twitter: \",\"textStyle\":{\"fontSize\":\"12pt\"}},{\"value\":\"@StephTBruno\",\"textStyle\":{\"fontSize\":\"12pt\"},\"url\":\"https://twitter.com/StephTBruno\"},{\"value\":\" | LinkedIn: \",\"textStyle\":{\"fontSize\":\"12pt\"}},{\"value\":\"brunostephanie\",\"textStyle\":{\"fontSize\":\"12pt\"},\"url\":\"https://www.linkedin.com/in/brunostephanie/\"},{\"value\":\" | \",\"textStyle\":{\"fontSize\":\"12pt\"}},{\"value\":\"data-witches.com\",\"textStyle\":{\"fontSize\":\"12pt\"},\"url\":\"https://data-witches.com/\"}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Footer'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"'Contact Information for authors'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 33.08,
+          "width": 1277.46,
+          "x": 1.27,
+          "y": 686.92,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"fac15ef58500a097b37c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":992.4453280318093,\"y\":7.634194831013917,\"z\":3000,\"width\":166.6799204771372,\"height\":76.34194831013917,\"tabOrder\":-1}}],\"singleVisual\":{\"visualType\":\"textbox\",\"display\":{\"mode\":\"hidden\"},\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Icon made by \"},{\"value\":\"Freepik\",\"textStyle\":{},\"url\":\"https://www.flaticon.com/authors/freepik\"},{\"value\":\" from \"},{\"value\":\"www.flaticon.com\",\"textStyle\":{},\"url\":\"https://www.flaticon.com/\"},{\"value\":\" is licensed by \"},{\"value\":\"CC 3.0 BY\",\"textStyle\":{},\"url\":\"http://creativecommons.org/licenses/by/3.0/\"}]}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Text box Hidden'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 76.34,
+          "width": 166.68,
+          "x": 992.45,
+          "y": 7.63,
+          "z": 3000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "Field_Finder_~_created_by_powerbi.tips_~_v1.09306241585443187.json"
+}

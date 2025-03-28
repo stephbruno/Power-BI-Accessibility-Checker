@@ -1,0 +1,72 @@
+table _Measures
+	lineageTag: ad52a4d3-87e2-4a15-958c-5fb2016f9753
+
+	measure 'Visual Count' = COUNTROWS('Page Visuals')
+		formatString: #,0
+		lineageTag: 0bfef708-5758-4e2b-bf18-5c3ac0304826
+
+	measure 'SVG Image URL' = IF(OR(ISBLANK([SVG Code]), NOT(HASONEVALUE('Pages'[Page Name]))), BLANK(), "data:image/svg+xml;utf8," & SUBSTITUTE([SVG Code No Text], "#", "%23"))
+		lineageTag: 6095e2aa-1bc5-49ae-8592-28ba031e6d10
+		dataCategory: ImageUrl
+
+	measure 'SVG Code' = ```
+			Var viewBox = IF(HASONEVALUE('Pages'[Page Name]), "viewBox='0 0 " & ROUND(AVERAGE('Pages'[Width])/10, 0) & " " & ROUND(AVERAGE('Pages'[Height])/10, 0) & "'", BLANK()) & ">"
+			        Var background = "<rect x='0' y = '0' width='" & ROUND(AVERAGE('Pages'[Width])/10, 0) & "' height='" & ROUND(AVERAGE('Pages'[Height])/10, 0) 
+			                        & "' fill='#dbdbdb' stroke='black' stroke-width='0.2'></rect>"
+			        Var rectangles = CONCATENATEX('Page Visuals', "<rect x='" & ROUND([Actual X]/10, 0) & "' y='" & ROUND([Actual Y]/10, 0) 
+			                        & "' width='" & ROUND([Width]/10, 0) & "' height='" & ROUND([Height]/10, 0)
+			                        & "' fill='" & RELATED('Page Visual types'[Hex Color])  & "'" & " stroke='black' stroke-width='0.2'" & "></rect>"
+			                        & "<text x='" & ROUND([Actual X]/10, 0) + 1 & "' y='" & ROUND([Actual Y]/10, 0) + 4 & "' font-size='30%"
+			                        & "' fill='" & RELATED('Page Visual Types'[Forecolor]) & "'>" & [Tab Order] & "</text>"
+			                        //, "/><", [z])
+			                        , "", [Layer Order], ASC)
+			        Var svgCode = IF(LEN(rectangles) > 0, "<svg xmlns='http://www.w3.org/2000/svg' " & viewBox & background & rectangles & "</svg>", BLANK())
+			    Return svgCode
+			```
+		lineageTag: 8c48c100-e147-4009-961b-a455c3014f3a
+		dataCategory: ImageUrl
+
+	measure 'SVG Code Length' = LEN([SVG Code])
+		formatString: #,0
+		lineageTag: d27632ef-3844-4ae5-a31c-b9072b2285fd
+
+	measure 'Visual Type Hex Color' = CALCULATE(MIN('Page Visual Types'[Hex Color]), CROSSFILTER('Page Visual Types'[Visual Type], 'Page Visuals'[Visual Type], Both))
+		lineageTag: a95b5da2-df1f-41f3-bc04-4652cda8de55
+
+	measure 'Visual Type Forecolor' = CALCULATE(MIN('Page Visual Types'[Forecolor]), CROSSFILTER('Page Visual Types'[Visual Type], 'Page Visuals'[Visual Type], Both))
+		lineageTag: 97b42a58-b330-4532-9db3-78eb61771e86
+
+	measure 'SVG Text' = [SVG Code]
+		lineageTag: a847992f-1b62-4b01-b3a8-4d483ba12493
+
+	measure 'SVG Code No Text' = ```
+			Var viewBox = IF(HASONEVALUE('Pages'[Page Name]), "viewBox='0 0 " & ROUND(AVERAGE('Pages'[Width])/10, 0) & " " & ROUND(AVERAGE('Pages'[Height])/10, 0) & "'", BLANK()) & ">"
+			        Var background = "<rect x='0' y = '0' width='" & ROUND(AVERAGE('Pages'[Width])/10, 0) & "' height='" & ROUND(AVERAGE('Pages'[Height])/10, 0) 
+			                        & "' fill='#dbdbdb' stroke='black' stroke-width='0.2'></rect>"
+			        Var rectangles = CONCATENATEX('Page Visuals', "<rect x='" & ROUND([Actual X]/10, 0) & "' y='" & ROUND([Actual Y]/10, 0) 
+			                        & "' width='" & ROUND([Width]/10, 0) & "' height='" & ROUND([Height]/10, 0)
+			                        & "' fill='" & RELATED('Page Visual types'[Hex Color])  & "'" & " stroke='black' stroke-width='0.2'" & "></rect>"
+			                        //& "<text x='" & ROUND([actual x]/10, 0) + 1 & "' y='" & ROUND([actual y]/10, 0) + 4 & "' font-size='30%"
+			                        //& "' fill='" & RELATED('Page Visual Types'[foreColor]) & "'>" & FORMAT([tabOrder], "####") & "</text>"
+			                        //, "/><", [z])
+			                        , "", [Layer Order], ASC)
+			        Var svgCode = IF(LEN(rectangles) > 0, "<svg xmlns='http://www.w3.org/2000/svg' " & viewBox & background & rectangles & "</svg>", BLANK())
+			    Return svgCode
+			```
+		lineageTag: f836f017-63d4-41fa-bb6f-bdd4eca10a1c
+
+	column Value
+		isHidden
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: 7e9dd849-81dd-4593-9e88-a0b2271b8060
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = User
+
+	partition _Measures-a03490ab-c89a-4e57-bb13-1241198639c6 = calculated
+		mode: import
+		source = {Blank()}
+

@@ -1,0 +1,118 @@
+table 'Comparison Color'
+	lineageTag: 6ef1ebdd-2816-40d2-b1e5-c36b38692fdd
+
+	measure 'Contrast Compare' = ```
+			
+			    VAR doCalc = DISTINCTCOUNTNOBLANK('Page Visual Colors'[VisualID])
+			    VAR vizID = MIN('Page Visual Colors'[VisualID])
+			    VAR objectLum = MIN('Page Visual Colors'[Luminance])
+			    VAR compareLum = MIN('Comparison Color'[Luminance])
+			    VAR output = IF(objectLum > compareLum, DIVIDE(compareLum + 0.05, objectLum + 0.05), DIVIDE(objectLum + 0.05, compareLum + 0.05))
+			    RETURN IF(doCalc = 1, output, BLANK())
+			```
+		formatString: #,0
+		lineageTag: 1f8ab4f5-1a3d-446e-ab53-ea58406d8bde
+
+	measure 'Pass Level' =
+			IF(NOT(ISBLANK([Contrast Compare])), SWITCH(TRUE()
+			    , [Contrast Compare] < 1/7, "AAA small text"
+			    , [Contrast Compare] < 1/4.5, "AA small text"
+			    , [Contrast Compare] < 1/3, "AA large text"
+			    , "Fails"
+			))
+		lineageTag: f6cc25c1-604f-4421-a4c8-16388d388d79
+
+	measure 'Contrast Ratio' = ```
+			
+			    VAR doCalc = DISTINCTCOUNTNOBLANK('Page Visual Colors'[VisualID])
+			    VAR vizID = MIN('Page Visual Colors'[VisualID])
+			    VAR objectLum = MIN('Page Visual Colors'[Luminance])
+			    VAR compareLum = MIN('Comparison Color'[Luminance])
+			    VAR ratio = IF(objectLum > compareLum, DIVIDE(objectLum + 0.05, compareLum + 0.05), DIVIDE(compareLum + 0.05, objectLum + 0.05))
+			    RETURN IF(doCalc = 1, FORMAT(ratio, "#.0") & ":1", BLANK())
+			```
+		lineageTag: 83778ded-f93f-4f8d-8ab0-0bd3e2a30bcf
+
+	measure Sample = IF(DISTINCTCOUNTNOBLANK('Page Visual Colors'[VisualID]) = 1, "Sample")
+		lineageTag: c9b51277-de81-49bd-8c2a-8697c5536b9b
+
+	measure 'Pass Level Icon' =
+			IF(NOT(ISBLANK([Contrast Compare])), SWITCH(TRUE()
+			    , [Contrast Compare] < 1/7, "✅"
+			    , [Contrast Compare] < 1/4.5, "🆗"
+			    , [Contrast Compare] < 1/3, "⚠️"
+			    , "❌"
+			))
+		lineageTag: bc19d55a-a471-44d6-bb9d-a7c45c352864
+
+	column 'Compare Color'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: 15041e8c-3dd5-42d1-8ea6-22aecd5340f6
+		summarizeBy: none
+		sourceColumn: Compare Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column Luminance
+		dataType: decimal
+		isAvailableInMdx: false
+		lineageTag: dcb2f156-ce1a-4a5f-95fd-83f319ce13a5
+		summarizeBy: none
+		sourceColumn: Luminance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Display Forecolor'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: 42133e8b-9013-4397-a557-6f4848b953c4
+		summarizeBy: none
+		sourceColumn: Display Forecolor
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Comparison Color-3b80f276-c0ec-47cf-aca9-c6d42cc3e60a' = m
+		mode: import
+		source =
+				// Load the initial data from the 'Color to compare' table
+				let
+					Source = #"Color to compare",
+				
+				// Convert the source color to a table format
+					#"Converted to Table" = #table(1, {{Source}}),
+				
+				// Rename the column to 'CompareColor'
+					#"Renamed Columns" = Table.RenameColumns(#"Converted to Table", {{"Column1", "CompareColor"}}),
+				
+				// Change the type of 'CompareColor' column to text
+					#"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns", {{"CompareColor", type text}}),
+				
+				// Remove '#' characters from 'CompareColor' column
+					#"Replaced Value" = Table.ReplaceValue(#"Changed Type", "#", "", Replacer.ReplaceText, {"CompareColor"}),
+				
+				// Extract the first 6 characters and prepend '#' to 'CompareColor'
+					#"Extracted Last Characters" = Table.TransformColumns(#"Replaced Value", {{"CompareColor", each "#" & Text.Start(_, 6), type text}}),
+				
+				// Add a new column 'Luminance' by invoking a custom function
+					#"Invoked Custom Function" = Table.AddColumn(#"Extracted Last Characters", "Luminance", each fnGetLuminance([CompareColor])),
+				
+				// Expand the 'Luminance' column to include 'r', 'g', 'b', 'luminance', and 'dispForeColor'
+					#"Expanded Luminance" = Table.ExpandTableColumn(#"Invoked Custom Function", "Luminance", {"r", "g", "b", "luminance", "dispForeColor"}, {"r", "g", "b", "luminance.1", "dispForeColor"}),
+				
+				// Change the type of 'r', 'g', 'b', 'luminance.1', and 'dispForeColor' columns
+					#"Changed Type1" = Table.TransformColumnTypes(#"Expanded Luminance",{{"r", type number}, {"g", type number}, {"b", type number}, {"luminance.1", Currency.Type}, {"dispForeColor", type text}}),
+				
+				// Rename 'luminance.1' column to 'Luminance'
+					#"Renamed Columns1" = Table.RenameColumns(#"Changed Type1", {{"luminance.1", "Luminance"}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns1",{"CompareColor", "Luminance", "dispForeColor"}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Removed Other Columns",{{"CompareColor", "Compare Color"}, {"dispForeColor", "Display Forecolor"}})
+				in
+					#"Renamed Columns2"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

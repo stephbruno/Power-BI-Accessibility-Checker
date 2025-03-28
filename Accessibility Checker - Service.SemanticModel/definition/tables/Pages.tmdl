@@ -1,0 +1,154 @@
+table Pages
+	lineageTag: 4934b1fd-7766-4742-bbed-25fe718a15cc
+
+	column PageID
+		dataType: int64
+		isHidden
+		isKey
+		isAvailableInMdx: false
+		lineageTag: 1b4aade9-b046-4b35-8f8e-737b499871d7
+		summarizeBy: none
+		sourceColumn: PageID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column name
+		dataType: string
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: e9b99bc0-d48e-4a41-a050-794c82d2916a
+		summarizeBy: none
+		sourceColumn: name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Page Name'
+		dataType: string
+		lineageTag: 12e1fa87-6599-4642-b53e-797f56176449
+		summarizeBy: none
+		sourceColumn: Page Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		formatString: 0
+		lineageTag: c9f392c7-5a01-449f-8bf7-e25b2f6898d4
+		summarizeBy: none
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column visualContainers
+		dataType: string
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: f947a893-325c-4818-8d7e-716f9b8d4d24
+		summarizeBy: none
+		sourceColumn: visualContainers
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column config
+		dataType: string
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: e1b92532-e43d-4b91-be64-328e13ffbc42
+		summarizeBy: none
+		sourceColumn: config
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Width
+		dataType: decimal
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: d596bc8a-dcd8-4f03-94a7-0e49313d68cf
+		summarizeBy: none
+		sourceColumn: Width
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column Height
+		dataType: decimal
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: 215aeea0-471d-4cb2-95b1-2cc5a319bacc
+		summarizeBy: none
+		sourceColumn: Height
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column 'Page Info' = "Page: " & 'Pages'[Page Name] & " (width: " & 'Pages'[Width] & ", height: " & 'Pages'[Height] & ")"
+		isAvailableInMdx: false
+		lineageTag: 78bffc1a-e185-44d2-a2ab-73e16e1d623e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		isAvailableInMdx: false
+		lineageTag: ba39098d-52c9-4edc-9e87-c9e0c36e975e
+		summarizeBy: none
+		sourceColumn: Report Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Pages-5fa038a8-403a-4327-9fb3-565dee025537 = m
+		mode: import
+		queryGroup: 'Report Layout'
+		source =
+				// Load the initial data from the 'Report Layout' table
+				let
+					#"Loaded Report Layout" = #"Report Layout",
+				
+				// Select specific columns from the source table
+					#"Removed Other Columns" = Table.SelectColumns(#"Loaded Report Layout", {"Report Key", "sections"}),
+				
+				// Expand the 'sections' column to include its list items
+					#"Expanded Sections" = Table.ExpandListColumn(#"Removed Other Columns", "sections"),
+				
+				// Expand the 'sections' column to include specific fields
+					#"Expanded Section Fields" = Table.ExpandRecordColumn(#"Expanded Sections", "sections", {"name", "displayName", "filters", "ordinal", "visualContainers", "config", "displayOption", "width", "height"}, {"name", "displayName", "filters", "ordinal", "visualContainers", "config", "displayOption", "width", "height"}),
+				
+				// Add an index column starting from 1
+					#"Added PageID Index" = Table.AddIndexColumn(#"Expanded Section Fields", "PageID", 1, 1),
+				
+				// Reorder columns to a specific order
+					#"Reordered Columns" = Table.ReorderColumns(#"Added PageID Index", {"Report Key", "PageID", "name", "displayName", "filters", "ordinal", "visualContainers", "config", "displayOption", "width", "height"}),
+				
+				// Change the data type of specific columns
+					#"Changed Column Types" = Table.TransformColumnTypes(#"Reordered Columns",{{"ordinal", Int64.Type}, {"name", type text}, {"displayName", type text}, {"filters", type text}, {"config", type text}, {"height", Currency.Type}, {"width", Currency.Type}, {"displayOption", Int64.Type}, {"PageID", Int64.Type}}),
+				
+				// Rename the 'displayName' column to 'Page Name'
+					#"Renamed Columns" = Table.RenameColumns(#"Changed Column Types",{{"displayName", "Page Name"}, {"displayOption", "Display Option"}, {"height", "Height"}, {"ordinal", "Ordinal"}, {"width", "Width"}}),
+				    #"Selected Relevant Columns" = Table.SelectColumns(#"Renamed Columns",{"Report Key", "Height", "Width", "config", "visualContainers", "Ordinal", "Page Name", "name", "PageID"})
+				in
+					#"Selected Relevant Columns"
+
+	annotation PBI_QueryRelationships = {"columnCount":11,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/Pages/Added Index.{ReportName,0}","Section1/Pages/Added Index.{PageID,10}","Section1/Pages/Changed Type.{name,2}","Section1/Pages/Changed Type.{displayName,3}","Section1/Pages/Changed Type.{filters,4}","Section1/Pages/Changed Type.{ordinal,5}","Section1/Pages/Added Index.{visualContainers,5}","Section1/Pages/Changed Type.{config,7}","Section1/Pages/Changed Type.{displayOption,8}","Section1/Pages/Changed Type.{width,9}","Section1/Pages/Changed Type.{height,10}"],"ColumnCount":11,"KeyColumnNames":[],"ColumnIdentities":["Section1/Pages/Added Index.{ReportName,0}","Section1/Pages/Added Index.{PageID,10}","Section1/Pages/Changed Type.{name,2}","Section1/Pages/Changed Type.{displayName,3}","Section1/Pages/Changed Type.{filters,4}","Section1/Pages/Changed Type.{ordinal,5}","Section1/Pages/Added Index.{visualContainers,5}","Section1/Pages/Changed Type.{config,7}","Section1/Pages/Changed Type.{displayOption,8}","Section1/Pages/Changed Type.{width,9}","Section1/Pages/Changed Type.{height,10}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

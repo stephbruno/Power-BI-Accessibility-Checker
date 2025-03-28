@@ -1,0 +1,67 @@
+table 'Page Visual Types'
+	lineageTag: c72b52d8-540d-40c9-9435-c3ee16a8bdba
+
+	column 'Hex Color'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: fcda8441-46d0-4420-94fa-9f21e8ca9955
+		summarizeBy: none
+		sourceColumn: Hex Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column Forecolor
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: 16656770-643d-49b2-9d44-cf36d2a9293d
+		summarizeBy: none
+		sourceColumn: Forecolor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Visual Type'
+		dataType: string
+		isAvailableInMdx: false
+		lineageTag: 90ab811d-7b60-4c82-8bd4-5d5bb35fca44
+		summarizeBy: none
+		sourceColumn: Visual Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Page Visual Types-17d8b2c6-04b0-41b1-a074-bcfc3d94be1f' = m
+		mode: import
+		queryGroup: 'Page Visuals'
+		source =
+				let
+				    // Load the initial data from the 'Page Visuals' table
+				    #"Loaded Page Visuals" = #"Page Visuals",
+				
+				    // Select specific columns from the source table
+				    #"Removed Unnecessary Columns" = Table.SelectColumns(#"Loaded Page Visuals", {"Visual Type"}),
+				
+				    // Remove duplicate rows from the table
+				    #"Removed Duplicate Rows" = Table.Distinct(#"Removed Unnecessary Columns"),
+				
+				    // Add an index column starting from 1
+				    #"Added Index Column" = Table.AddIndexColumn(#"Removed Duplicate Rows", "Index", 1, 1),
+				
+				    // Merge with 'Page Visual Type Colors' table based on 'Index'
+				    #"Merged Visual Type Colors" = Table.NestedJoin(#"Added Index Column", {"Index"}, #"Page Visual Type Colors", {"Index"}, "visual colors", JoinKind.LeftOuter),
+				
+				    // Expand the 'visual colors' column to include specific fields
+				    #"Expanded Visual Colors" = Table.ExpandTableColumn(#"Merged Visual Type Colors", "visual colors", {"ColorName", "foreColor", "hexColor"}, {"ColorName", "foreColor", "hexColor"}),
+				
+				    // Select specific columns from the expanded table
+				    #"Removed Unnecessary Columns Again" = Table.SelectColumns(#"Expanded Visual Colors", {"Visual Type", "foreColor", "hexColor"}),
+				
+				    // Rename specific columns
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Unnecessary Columns Again", {{"foreColor", "Forecolor"}, {"hexColor", "Hex Color"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_QueryRelationships = {"columnCount":5,"keyColumnNames":[],"queryRelationships":[{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Section1/Page Visual type colors/Pivoted Column.{Index,0}","KeyColumnCount":1}],"columnIdentities":["Section1/Page Visual Types/Added Index.{Visual Type,0}","Section1/Page Visual Types/Added Index.{Index,1}","Section1/Page Visual type colors/Pivoted Column.{ColorName,1}","Section1/Page Visual type colors/Added Custom1.{foreColor,6}","Section1/Page Visual type colors/Pivoted Column.{hexColor,2}"],"ColumnCount":5,"KeyColumnNames":[],"ColumnIdentities":["Section1/Page Visual Types/Added Index.{Visual Type,0}","Section1/Page Visual Types/Added Index.{Index,1}","Section1/Page Visual type colors/Pivoted Column.{ColorName,1}","Section1/Page Visual type colors/Added Custom1.{foreColor,6}","Section1/Page Visual type colors/Pivoted Column.{hexColor,2}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Section1/Page Visual type colors/Pivoted Column.{Index,0}","KeyColumnCount":1}]}
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
