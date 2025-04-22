@@ -52,7 +52,7 @@ In order to access the Power BI Reports in the workspace, you'll need to install
 Because this is a custom data connector you have to choose this option in order to use it in Power BI Desktop.
 
 3. Close all Power BI Desktop instances on your local machine.  You are often prompted to do so by Power BI Desktop.
-4. Copy the [.mez file](https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial/releases/download/v.1.2.0-beta/powerquery-connector-pbi-rest-api-commercial.mez](https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial/releases/latest) to your folder "Documents\Power BI Desktop\Custom Connectors".  If the folder does not exist, create it first.
+4. Copy the <a href="https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial/releases/download/v.1.2.0-beta/powerquery-connector-pbi-rest-api-commercial.mez](https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial/releases/latest" target="_blank">.mez file</a> to your folder "Documents\Power BI Desktop\Custom Connectors".  If the folder does not exist, create it first.
 
 5. Download the latest release of Power BI Accessibility Checker - Service.pbit
     - Locate the latest release of the template file named `Power BI Accessibility Checker - Service.pbit` [at this link](https://github.com/stephbruno/Power-BI-Accessibility-Checker/releases).
@@ -92,7 +92,7 @@ In order to access the Power BI Reports in the workspace, you'll need to install
 Because this is a custom data connector you have to choose this option in order to use it in Power BI Desktop.
 
 3. Close all Power BI Desktop instances on your local machine.  You are often prompted to do so by Power BI Desktop.
-4. Copy the [.mez file](https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial/releases/download/v.1.2.0-beta/powerquery-connector-pbi-rest-api-commercial.mez](https://github.com/kerski/powerquery-connector-pbi-rest-api-gcc/releases/latest) to your folder "Documents\Power BI Desktop\Custom Connectors".  If the folder does not exist, create it first.
+4. Copy the <a href="https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial/releases/download/v.1.2.0-beta/powerquery-connector-pbi-rest-api-commercial.mez](https://github.com/kerski/powerquery-connector-pbi-rest-api-gcc/releases/latest" target="_blank">.mez file</a> to your folder "Documents\Power BI Desktop\Custom Connectors".  If the folder does not exist, create it first.
 
 5. Download the latest release of Power BI Accessibility Checker - Service (GCC).pbit
     - Locate the latest release of the template file named `Power BI Accessibility Checker - Service (GCC).pbit` [at this link](https://github.com/stephbruno/Power-BI-Accessibility-Checker/releases).
