@@ -13,15 +13,17 @@ There are two versions of the Power BI Accessibility Checker:
 
 # Table of Contents
 
-# Table of Contents
-
-1. [Introduction](#introduction)
-2. [Versions](#versions)
-3. [Instructions](#instructions)
-   - [Power BI Accessibility Checker.pbix Installation](#power-bi-accessibility-checkerpbix-installation)
-   - [Power BI Accessibility Checker - Service.pbit Installation](#power-bi-accessibility-checker---servicepbit)
-4. [Known Issues](#known-issues)
-5. [Latest Changes](#latest-changes)
+- [Power-BI-Accessibility-Checker](#power-bi-accessibility-checker)
+- [Table of Contents](#table-of-contents)
+- [Instructions](#instructions)
+  - [Power BI Accessibility Checker.pbix Installation](#power-bi-accessibility-checkerpbix-installation)
+  - [Power BI Accessibility Checker - Service.pbit](#power-bi-accessibility-checker---servicepbit)
+    - [Install Custom Connector](#install-custom-connector)
+  - [Power BI Accessibility Checker - Service (GCC).pbit](#power-bi-accessibility-checker---service-gccpbit)
+    - [Install Custom Connector (GCC)](#install-custom-connector-gcc)
+    - [Power BI Gateway](#power-bi-gateway)
+- [Known Issues](#known-issues)
+- [Latest Changes](#latest-changes)
 
 # Instructions
 
@@ -50,7 +52,7 @@ In order to access the Power BI Reports in the workspace, you'll need to install
 Because this is a custom data connector you have to choose this option in order to use it in Power BI Desktop.
 
 3. Close all Power BI Desktop instances on your local machine.  You are often prompted to do so by Power BI Desktop.
-4. Copy the [.mez file]([https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial/releases/download/v.1.2.0-beta/powerquery-connector-pbi-rest-api-commercial.mez](https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial/releases/latest)) to your folder "Documents\Power BI Desktop\Custom Connectors".  If the folder does not exist, create it first.
+4. Copy the <a href="https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial/releases/latest" target="_blank">.mez file</a> to your folder "Documents\Power BI Desktop\Custom Connectors".  If the folder does not exist, create it first.
 
 5. Download the latest release of Power BI Accessibility Checker - Service.pbit
     - Locate the latest release of the template file named `Power BI Accessibility Checker - Service.pbit` [at this link](https://github.com/stephbruno/Power-BI-Accessibility-Checker/releases).
@@ -58,6 +60,46 @@ Because this is a custom data connector you have to choose this option in order 
 
 6. Open the template file
     - Navigate to the location where you downloaded the `Power BI Accessibility Checker - Service.pbit` file.
+    - Double-click on the file to open it in Power BI Desktop.
+    - If Power BI Desktop is not set as the default application for `.pbit` files, right-click on the file, select "Open with", and choose Power BI Desktop from the list of applications.
+
+7. When the pop-up appears, enter the Workspace Name and select load.
+    - Upon opening the template file, a pop-up window will appear prompting you to enter specific information.
+        - Workspace Name(s) - Enter a comma delimited list of workspaces you wish to review.
+        - Report Filter - Enter a specific report name in the workspace(s) or you can enter `*No Report Filter*`.  Note: The higher number of reports you have in your workspace, the longer the refresh time for the Accessibility Checker to run the analysis.
+        - Color to compare - Enter `#000000`
+        - Override Filter - Enter `FALSE`
+    - After entering the workspace name, click the "Load" button to proceed.
+
+![PBIT popup](./documentation/images/pbit-popup.jpg)
+
+8. You may be prompted to log into Power BI, so please use your Microsoft 365 credentials.
+    - If you are not already logged into Power BI, a login prompt will appear.
+    - Enter your Microsoft 365 email address and password to log in.
+    - Once logged in, Power BI will load the template with the data from the specified workspace.
+
+## Power BI Accessibility Checker - Service (GCC).pbit
+
+### Install Custom Connector (GCC)
+
+In order to access the Power BI Reports in the workspace, you'll need to install the custom connector by following the instructions below.
+
+1. Open Power BI Desktop and navigate to File -> Options and Settings -> Options.
+2. Navigate to GLOBAL -> Security and under "Data Extensions" choose "Allow any extension..."
+
+![Allow extension](./documentation/images/options-update.png)
+
+Because this is a custom data connector you have to choose this option in order to use it in Power BI Desktop.
+
+3. Close all Power BI Desktop instances on your local machine.  You are often prompted to do so by Power BI Desktop.
+4. Copy the <a href="https://github.com/kerski/powerquery-connector-pbi-rest-api-gcc/releases/latest" target="_blank">.mez file</a> to your folder "Documents\Power BI Desktop\Custom Connectors".  If the folder does not exist, create it first.
+
+5. Download the latest release of Power BI Accessibility Checker - Service (GCC).pbit
+    - Locate the latest release of the template file named `Power BI Accessibility Checker - Service (GCC).pbit` [at this link](https://github.com/stephbruno/Power-BI-Accessibility-Checker/releases).
+    - Click on the download link to save the file to your local machine.
+
+6. Open the template file
+    - Navigate to the location where you downloaded the `Power BI Accessibility Checker - Service (GCC).pbit` file.
     - Double-click on the file to open it in Power BI Desktop.
     - If Power BI Desktop is not set as the default application for `.pbit` files, right-click on the file, select "Open with", and choose Power BI Desktop from the list of applications.
 
